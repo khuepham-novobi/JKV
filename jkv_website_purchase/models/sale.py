@@ -52,11 +52,11 @@ class SaleOrder(models.Model):
         tax_values = response['values']
 
         raise_warning = False
-        for line in self.order_line:
+        for index, line in enumerate(self.order_line):
             if not line.price_subtotal:
                 tax_rate = 0.0
             else:
-                tax_rate = tax_values[line.id] / line.price_subtotal * 100
+                tax_rate = tax_values[index] / line.price_subtotal * 100
             if float_compare(line.tax_id.amount, tax_rate, precision_digits=4):
                 raise_warning = True
                 tax = self.env['account.tax'].sudo().search([

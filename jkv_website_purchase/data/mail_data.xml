@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+        <record id="send_link" model="mail.template">
+            <field name="name">Mail Template: Send link</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="email_from"><![CDATA[${object.company_id.name} <${(object.company_id.email or user.email)|safe}>]]></field>
+            <field name="email_to">${ctx.get('email_to')}</field>
+            <field name="subject"><![CDATA[${ctx.get('subject')}]]></field>
+            <field name="body_html" type="xml">
+                <div>
+                    <head>
+                        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500&amp;display=swap" rel="stylesheet" />
+                        <style>
+                            .desktop-only {
+                                display: block !important;;
+                            }
+                            .mobile-only {
+                                display: none !important;
+                            }
+                            @media only screen and (max-device-width: 768px) {
+                                .desktop-only {
+                                    display: none !important;
+                                }
+                                .mobile-only {
+                                    display: block !important;
+                                }
+                                .paper {
+                                    height: 14in;
+                                    background-color:#152A31;
+                                }
+                            }
+                        </style>
+                    </head>
+                    <div class="paper" style="width:8.5in;margin:auto;background-color:#152A31;text-align:center;">
+                        <div class="header" />
+                        <div class="body" style="padding:0.5in 0.75in;font-family:'Montserrat',sans-serif;">
+                            <div class="body_header desktop-only" style="overflow:hidden;margin-bottom:6%;">
+                                <div style="width:50%;float:left;overflow:hidden;">
+                                    <img src="/jkv_website_purchase/static/src/img/mail_purchased_logo.png" alt="JK VIDEO" style="margin-left:9%;margin-top:13%;"/>
+                                </div>
+                                <div style="width:50%;float:right;">
+                                    <div style="color:#D7B982;font-size:24pt;line-height:1.75;font-weight:500;margin-top:27px;">
+                                        <br/>THANK<br/>YOU<br/>FOR<br/>YOUR<br/>PURCHASE!<br/>
+                                    </div>
+                                </div>
+                                <div style="clear:both;"/>
+                            </div>
+                            <div class="body_header mobile-only" style="overflow:hidden;margin-bottom:6%;display:none">
+                                <div>
+                                    <img src="/jkv_website_purchase/static/src/img/mail_purchased_logo.png" alt="JK VIDEO" style="width:50%" />
+                                    <div style="color:#D7B982;font-size:18pt;line-height:1.75;font-weight:500;margin-top:27px;">
+                                        THANK YOU FOR YOUR PURCHASE!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body_content" style="color:#F3F3E9;line-height:1.45;font-size:12pt;height:4.25in;">
+                                <div style="color:#826A44">
+                                    Please follow this link
+                                    <a href="/my/home" style="color:#1155CC">My Videos</a>
+                                    to retrieve your videos or subscription if you have not already done so.
+                                </div>
+                                <br />
+                                <div><b><u>iPhone/iPad Users</u></b></div>
+                                <br />
+                                <div>
+                                    Unfortunately, we have yet to develop a way to easily download from the website, directly to iOS devices.
+                                    This is due to Apple not allowing video downloads from websites.
+                                    There are 3 easy options to get you your video(s):
+                                </div>
+                                <ol style="margin-block-start:0;margin-block-end:0;margin-top:0;margin-bottom:0;">
+                                    <li style="list-style-position:inside;">
+                                        Download your videos using a laptop &amp; then AirDrop the video(s) to your iOS device.
+                                    </li>
+                                    <li style="list-style-position:inside;">
+                                        Email us at <a href="mailto:help@jkvideo.co" style="color:#1155CC">help@jkvideo.co</a> &amp; we will immediately send you a Google Drive link &amp; downloading instructions
+                                    </li>
+                                    <li style="list-style-position:inside;">
+                                        Karla can also Airdrop your video(s)
+                                        <em>while on the show grounds.</em>
+                                        <br />
+                                        Please text K at (512) 965-2633
+                                    </li>
+                                </ol>
+                                <br />
+                                <div style="color:#826A44">
+                                    Please note, videos can only be downloaded one time.
+                                    If you have any issues downloading video(s) or viewing your subscription(s), please contact us at
+                                    <br />
+                                    <a href="mailto:help@jkvideo.co" style="color:#1155CC">help@jkvideo.co</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer desktop-only" style="overflow:hidden;margin-top:4%;">
+                            <img src="/jkv_website_purchase/static/src/img/mail_purchased_footer.png" alt="footer" style="width:100%;"/>
+                        </div>
+                    </div>
+                </div>
+            </field>
+        </record>
+        <record id="sale.mail_template_data_notification_email_sale_order" model="mail.template">
+            <field name="subject">JK Order Confirmation</field>
+        </record>
+  </data>
+</odoo>

@@ -1,0 +1,206 @@
+<odoo>
+    <template id="jkv_service_view" name="Services">
+        <t t-set="additional_title">Services</t>
+        <t t-call="website.layout">
+            <div id="wrap">
+                <section class="top-content">
+                    <div class="main-banner"></div>
+                    <div class="container child-banner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="flex-col flex-auto">
+                                    <div class="flex-item">
+                                        <h4 class="breadcrumbs">
+                                            <a href="">HOME »</a>
+                                            <span>SERVICES</span>
+                                        </h4>
+                                        <h2>Services</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="tit-spacing">
+                                    <h3 class="page-tit">
+                                        <font style="font-size: 24px;">How we work</font>
+                                        <br/>
+                                        A TURN-KEY EXPERIENCE. <OVER></OVER>
+                                    </h3>
+                                </div>
+                                <div class="wrapper-cont">
+                                    <div class="cont">
+                                      <p>Every ring is equipped with a Panasonic UX90 4K camcorder, Newtek Tricaster Mini broadcasting system, SunBrite TV, and our horse-loving videographers.</p>
+                                      <p>At the completion of each round, the video is played immediately for the exhibitor as they exit the ring, followed by a looping ad.</p>
+                                      <p>Videos are individually named and then uploaded to our server. Videos are then uploaded to the website every 30 mins. Once on the website, videos can be viewed for free until the end of the show. Videos are available for purchase and download for editing and sharing thereafter.</p>
+                                      <h3 class="page-tit" style="color: rgb(51, 51, 51);">
+                                        <font style="font-size: 24px;">jOIN US IN ESTABLISHING A NEW STANDARD FOR EQUESTRIAN EVENTS AND SHOWS.</font>
+                                      </h3>
+                                      <h3 class="page-tit" style="color: rgb(51, 51, 51);">
+                                        <font style="font-size: 18px;"></font>
+                                      </h3>
+                                      <p><b>Procuring</b> exhibitors' attention to your product or brand by utilizing our one-of-a-kind video service.</p>
+                                      <p><b>Promoting</b> your product or brand with JK's tailored marketing touch, using our multiple unique platforms.</p>
+                                      <p><b>Purchases,</b> our objective is to create exclusive advertising experiences to grow brand affinity and product sales.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="top-right-corner">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                          <div class="fullscale">
+                                            <div class="ratio-box-square" >
+                                                <img src="/jkv_theme/static/src/imgs/Links/157552.jpg"
+                                                     class="ratio-box-inside text-center" alt="" style="transform: translateY(-50%) !important"/>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-10 col-lg-offset-2 col-md-11 col-md-offset-1">
+                                            <div class="box-form has-pattern">
+                                                <div class="box-tit">
+                                                    <h3 class="tit">LET’S GET STARTED</h3>
+                                                    <span class="required">*Required</span>
+                                                </div>
+                                                <form class="form-horizontal s_website_form" action="/website_form/"
+                                                      method="post" data-model_name="crm.lead"
+                                                      data-success_page="/page/website_crm.contactus_thanks"
+                                                      enctype="multipart/form-data" id="jkv_form_contact">
+
+                                                    <div class="form-group compound form-field o_website_form_required_custom">
+                                                        <label for="contact_name">Name<span class="text-danger">*</span>
+                                                        </label>
+                                                        <input type="text" class="form-control o_website_form_input"
+                                                               id="contact_name"
+                                                               name="contact_name"
+                                                               required="required"/>
+                                                    </div>
+                                                    <div class="form-group compound form-field o_website_form_required_custom">
+                                                        <label for="phone">Phone<span class="text-danger">*</span>
+                                                        </label>
+                                                        <input type="tel"
+                                                               class="form-control o_website_form_input"
+                                                               name="phone" id="phone"
+                                                               required="required"
+                                                        />
+                                                    </div>
+                                                    <div class="form-group compound form-field o_website_form_required_custom">
+                                                        <label for="inputEmail1">Email<span class="text-danger">*</span>
+                                                        </label>
+                                                        <input type="email"
+                                                               class="form-control o_website_form_input"
+                                                               name="email_from"
+                                                               required="required"/>
+                                                    </div>
+                                                    <div class="form-group compound form-field o_website_form_required_custom">
+                                                        <label for="inputEvent">Event<span class="text-danger">*</span>
+                                                        </label>
+                                                        <input type="text"
+                                                               class="form-control o_website_form_input"
+                                                               name="name"
+                                                               required="required"/>
+                                                    </div>
+                                                    <div class="form-group compound">
+                                                        <label>DETAILS ABOUT THE EVENT</label>
+                                                        <textarea class="form-control o_website_form_input"
+                                                                      name="description"
+                                                                      required="required"></textarea>
+                                                    </div>
+
+                                                    <a href=""
+                                                       class="btn btn-block btn-form o_website_form_send o_website_form_send_fadeIn">
+                                                        <i class="pull-right">
+                                                            <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                 viewBox="0 0 12.13 22.208"
+                                                                 enable-background="new 0 0 12.13 22.208"
+                                                                 xml:space="preserve"><polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline></svg>
+                                                        </i>
+                                                        GET STARTED
+                                                    </a>
+                                                    <span id="o_website_form_result"></span>
+                                                </form>
+                                                <div class="se-pre-con" style="display:none"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 wrapper-cont">
+                                <div class="tit-spacing">
+                                    <h4 class="main-tit">JK RINGSIDE</h4>
+                                    <div class="cont">
+                                        <p>All eyes are on our HD replays between rounds, providing the perfect moment
+                                            for rich, exclusive commercial messaging.
+                                        </p>
+                                    </div>
+                                    <a href="/service/jk-ringside" class="btn btn-link">LEARN MORE »</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 wrapper-cont">
+                                <div class="tit-spacing">
+                                    <h4 class="main-tit">JK STREAM</h4>
+                                    <div class="cont">
+                                        <p>At the same time, we’re building a remote audience by live-streaming events
+                                            through our website.
+                                        </p>
+                                    </div>
+                                    <a href="/service/jk-stream" class="btn btn-link">LEARN MORE »</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 wrapper-cont">
+                                <div class="tit-spacing">
+                                    <h4 class="main-tit">JK DOWNLOAD</h4>
+                                    <div class="cont">
+                                        <p>Want to Relive the Ride™ after the show? Riders can visit our website and
+                                            purchase any of their runs for instant download.
+                                        </p>
+                                    </div>
+                                    <a href="/service/jk-download" class="btn btn-link">LEARN MORE »</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <t t-if="call_to_action">
+                    <section class="pre-foot">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="tit-spacing">
+                                    <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                    <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                    <i class="pull-right">
+                                        <svg version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                             enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                            <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-miterlimit="10"
+                                      points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                            </svg>
+                                    </i>
+                                    Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

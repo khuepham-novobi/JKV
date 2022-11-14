@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<!-- Action a nd View for Rider -->
+		<record id="jkv_show_event_action_rider" model="ir.actions.act_window">
+			<field name="name">JKV Rider</field>
+			<field name="res_model">jkv.rider</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Create a Rider
+				</p>
+			</field>
+		</record>
+
+		<record id="jkv_view_form_rider" model="ir.ui.view">
+			<field name="name">Rider Form</field>
+			<field name="model">jkv.rider</field>
+			<field name="arch" type="xml">
+				<form string="Rider">
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="rider_name" readonly="True"/>
+							</h1>
+						</div>
+						<group>
+							<group string="Rider">
+								<field name="rider_id" string="Rider Name" domain="[('is_rider','=',True)]" required="True"/>
+								<field name="rider_2nd_id" string="Rider Name 2" domain="[('is_rider','=',True)]"/>
+								<field name="rider_number"/>
+								<field name="rider_usef_number" widget="char" readonly="True"/>							
+								<field name="horse_name" required="True"/>
+								<field name="barn"/>
+                                <field name="show_number" required="True"/>
+							</group>
+							<group string="Owner">
+								<field name="owner_id" domain="[('is_owner','=',True)]" />
+								<field name="owner_number"/>
+								<field name="owner_usef_number" widget="char" readonly="True"/>								
+							</group>
+							<group string="Trainer">
+								<field name="trainer_id" domain="[('is_trainer','=',True)]" />
+								<field name="trainer_number"/>
+								<field name="trainer_usef_number" widget="char" readonly="True"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="jkv_view_tree_rider" model="ir.ui.view">
+			<field name="name">Rider Tree</field>
+			<field name="model">jkv.rider</field>
+			<field name="arch" type="xml">
+				<tree string="Rider">
+					<field name="rider_id" string="Rider Name"/>
+					<field name="rider_number" widget="char"/>
+					<field name="rider_usef_number" widget="char"/>
+					<field name="horse_name"/>
+					<field name="barn"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="jkv_search_view_rider" model="ir.ui.view">
+			<field name="name">Rider Search</field>
+			<field name="model">jkv.rider</field>
+			<field name="arch" type="xml">
+				<search string="Rider">
+					<field name="rider_number" string="Rider Number" filter_domain="[('rider_number','=',self)]"/>
+
+					<field name="rider_id" string="Rider Name" filter_domain="['|',('rider_id.jkv_first_name','ilike',self),('rider_id.jkv_last_name','ilike',self)]"/>
+
+					<field name="owner_id" string="Owner Name" filter_domain="['|',('owner_id.jkv_first_name','ilike',self),('owner_id.jkv_last_name','ilike',self)]"/>
+
+					<field name="trainer_id" string="Trainer Name" filter_domain="['|',('trainer_id.jkv_first_name','ilike',self),('trainer_id.jkv_last_name','ilike',self)]"/>
+
+					<field name="horse_name" string="House Name" filter_domain="[('horse_name','ilike',self)]"/>	
+				</search>
+			</field>
+		</record>
+
+		<menuitem id="menu_rider_root" name="Rider" parent="menu_inventory_management_root" sequence="3"/>
+		<menuitem id="menu_jkv_show_rider" parent="menu_rider_root" name="Rider" sequence="1" action="jkv_show_event_action_rider"/>
+
+	</data>
+</odoo>

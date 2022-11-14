@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="jkv_livestream_data" model="jkv.livestream">
+            <field name="name">JK LiveStream</field>
+            <field name="title">WATCH THE KATY INVITATIONAL LIVE</field>
+            <field name="page_url">/page/livestream-main</field>
+        </record>
+        <record id="jkv_livestream_tellespen_data" model="jkv.livestream">
+            <field name="name">JK LiveStream Tellespen</field>
+            <field name="title">WATCH THE TELLESPEN LIVE</field>
+            <field name="page_url">/page/livestream-tellespen</field>
+        </record>
+        <record id="jkv_livestream_secret_key" model="ir.config_parameter">
+            <field name="key">JKV Livestream Secret Key</field>
+            <field name="value">sample_key</field>
+        </record>
+        <record id="jkv_livestream_secret_key_tellespen" model="ir.config_parameter">
+            <field name="key">JKV Livestream Secret Key Tellespen</field>
+            <field name="value">sample_key</field>
+        </record>
+        <record id="jkv_livestream_token_valid_time" model="ir.config_parameter">
+            <field name="key">JKV Livestream Token Valid Time</field>
+            <field name="value">120</field>
+        </record>
+        <record id="jkv_livestream_security" model="ir.config_parameter">
+            <field name="key">JKV Livestream Security</field>
+            <field name="value">0</field>
+        </record>
+    </data>
+</odoo>

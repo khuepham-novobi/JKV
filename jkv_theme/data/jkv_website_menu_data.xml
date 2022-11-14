@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- sub-menu item -->
+        <record id="menu_home" model="website.menu">
+            <field name="name">Home</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">1</field>
+            <field name="url">/page/homepage</field>
+        </record>
+
+        <record id="menu_service" model="website.menu">
+            <field name="name">Services</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">2</field>
+            <field name="url">#</field>
+        </record>
+
+        <record id="menu_service_jkringside" model="website.menu">
+            <field name="name">Jk Ringside</field>
+            <field name="parent_id" ref="menu_service"/>
+            <field name="sequence" type="int">1</field>
+            <field name="url">/service/jk-ringside</field>
+        </record>
+
+        <record id="menu_service_jklive" model="website.menu">
+            <field name="name">Jk Live</field>
+            <field name="parent_id" ref="menu_service"/>
+            <field name="sequence" type="int">2</field>
+            <field name="url">/service/jk-stream</field>
+        </record>
+
+        <record id="menu_service_jkdownload" model="website.menu">
+            <field name="name">Jk Download</field>
+            <field name="parent_id" ref="menu_service"/>
+            <field name="sequence" type="int">3</field>
+            <field name="url">/service/jk-download</field>
+        </record>
+
+        <record id="menu_video" model="website.menu">
+            <field name="name">Videos</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">3</field>
+            <field name="url">#</field>
+        </record>
+
+        <record id="menu_video_archive" model="website.menu">
+            <field name="name">Video archive</field>
+            <field name="parent_id" ref="menu_video"/>
+            <field name="sequence" type="int">1</field>
+            <field name="url">/shop</field>
+        </record>
+
+        <record id="menu_video_livestream" model="website.menu">
+            <field name="name">Livestream</field>
+            <field name="parent_id" ref="menu_video"/>
+            <field name="sequence" type="int">2</field>
+            <field name="url">/page/live-video-main</field>
+        </record>
+
+         <record id="menu_video_livestream_archive" model="website.menu">
+            <field name="name">Livestream videos</field>
+            <field name="parent_id" ref="menu_video"/>
+            <field name="sequence" type="int">3</field>
+            <field name="url">/shop/?is_livestream_product=true</field>
+        </record>
+
+        <record id="menu_video_pricing" model="website.menu">
+            <field name="name">Pricing</field>
+            <field name="parent_id" ref="menu_video"/>
+            <field name="sequence" type="int">4</field>
+            <field name="url">/page/pricing</field>
+        </record>
+
+        <record id="menu_calendar" model="website.menu">
+            <field name="name">Calendar</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">4</field>
+            <field name="url">#</field>
+        </record>
+
+        <!--07/24/2021 Remove Calendar menu-->
+        <!--<record id="menu_calendar_calendar" model="website.menu">-->
+            <!--<field name="name">Calendar</field>-->
+            <!--<field name="parent_id" ref="menu_calendar"/>-->
+            <!--<field name="sequence" type="int">1</field>-->
+            <!--<field name="url">/page/events-calendar</field>-->
+        <!--</record>-->
+
+        <record id="menu_calendar_eventcalendar" model="website.menu">
+            <field name="name">Event Calendar</field>
+            <field name="parent_id" ref="menu_calendar"/>
+            <field name="sequence" type="int">2</field>
+            <field name="url">/page/calendar</field>
+        </record>
+
+        <record id="menu_calendar_eventlivestreamcalendar" model="website.menu">
+            <field name="name">JK Live Calendar</field>
+            <field name="parent_id" ref="menu_calendar"/>
+            <field name="sequence" type="int">3</field>
+            <field name="url">/page/livestream_calendar</field>
+        </record>
+
+    </data>
+</odoo>

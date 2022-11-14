@@ -1,0 +1,311 @@
+<odoo>
+    <template id="jkv_blog">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Blog</t>
+            <div id="wrap">
+                <section class="top-content">
+                    <div class="main-banner"></div>
+                    <div class="container child-banner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="flex-col flex-auto">
+                                    <div class="flex-item">
+                                        <h4 class="breadcrumbs">
+                                            <a href="/page/website.homepage">HOME »</a>
+                                            <span>Blog</span>
+                                        </h4>
+                                        <h2>Blog</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-content">
+                  <t t-call="jkv_theme.hello_section"/>
+                    <div class="blog">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9 col-md-push-3">
+                                    <div class="blog-inner">
+                                        <div class="big-post">
+                                            <h3 class="pre-tit">FEATURED BLOG</h3>
+                                            <t t-if="first_blog">
+                                                <div class="fullscale">
+                                                    <a href="" class="thumb ratio-box-hd half-square"
+                                                       t-attf-style="background-image:url(/web/image?model=jkv.blog&amp;id=#{first_blog['id']}&amp;field=blog_image);">
+
+                                                    </a><!--                                                           class="thumb ratio-box-hd half-square"-->
+                                                    <!--                                                    <img class="thumb ratio-box-hd half-square" alt=""-->
+                                                    <!--                                                         t-att-src="'data:image/png;base64,' +  first_blog['blog_image']"/>-->
+
+                                                </div>
+                                                <h2 class="tit">
+                                                    <t t-esc="first_blog['blog_title']"/>
+                                                </h2>
+                                                <div class="sub-tit">
+                                                    <h4>BY
+                                                        <t t-esc="first_blog['blog_author']['display_name']"/>
+                                                    </h4>
+                                                    |
+                                                    <a href="" class="btn btn-link">
+                                                        <t t-if="tags">
+                                                             <t t-if="first_blog['blog_tags']">
+                                                                <t t-call="jkv_theme.tag_section">
+                                                                     <t t-set="blog_tags" t-value="first_blog['blog_tags']"/>
+                                                                </t>
+                                                            </t>
+                                                        </t>
+                                                    </a>
+                                                </div>
+                                                <div class="cont line-camp-6">
+                                                    <t t-raw="first_blog['blog_content']"/>
+                                                </div>
+                                                <a t-att-href="keep('/blog/article/%s' % slug(first_blog))"
+                                                   class="btn btn-link">
+                                                    LEARN MORE »
+                                                </a>
+                                            </t>
+                                        </div>
+                                        <div class="other-post">
+                                            <t t-as="in_blog" t-foreach="blogs">
+                                                <t t-if="in_blog">
+                                                    <t t-set="blog" t-value="in_blog"/>
+                                                    <t t-call="jkv_theme.blog_article"/>
+                                                </t>
+                                            </t>
+                                        </div>
+                                        <t t-call="website.pager"/>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 col-md-pull-9">
+                                    <div class="video-filter">
+                                        <a data-toggle="collapse" href="#collapseResp1" aria-expanded="true"
+                                           class="box-tit">
+                                            <h3>Archive</h3>
+                                        </a>
+                                        <form id="form-panel-search-result" action='/search_article/results'
+                                              method="get">
+                                            <div id="collapseResp1" class="collapse in mg-b-30">
+                                                <ul class="cat-list">
+                                                    <t t-if="blog_archive_selected">
+                                                        <t t-foreach="blog_archive_selected" t-as="archive_selected">
+                                                            <li class="selected blog_article_search_result"
+                                                                t-attf-for="{{archive_selected}}">
+                                                                <input type="checkbox"
+                                                                       class="blog_article_search_result"
+                                                                       t-attf-id="{{archive_selected}}"
+                                                                       name="blog_archive"
+                                                                       t-attf-value="{{archive_selected}}"
+                                                                       checked="'checked'"/>
+                                                                <t t-esc="archive_selected"/>
+                                                            </li>
+                                                        </t>
+
+
+                                                        <t t-if="archives">
+                                                            <t t-foreach="archives" t-as="archive">
+                                                                <t t-if="archive not in blog_archive_selected">
+                                                                    <li class="blog_article_search_result">
+                                                                        <input type="checkbox"
+                                                                               class="blog_article_search_result"
+                                                                               name="blog_archive"
+                                                                               t-attf-value="{{archive}}"/>
+                                                                        <t t-esc="archive"/>
+                                                                    </li>
+                                                                </t>
+                                                            </t>
+                                                        </t>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-if="archives">
+                                                            <t t-foreach="archives" t-as="archive">
+                                                                <li class="blog_article_search_result">
+                                                                    <input type="checkbox"
+                                                                           class="blog_article_search_result"
+                                                                           name="blog_archive"
+                                                                           t-attf-value="{{archive}}"/>
+                                                                    <t t-esc="archive"/>
+                                                                </li>
+                                                            </t>
+                                                        </t>
+                                                    </t>
+                                                </ul>
+                                            </div>
+
+                                            <a data-toggle="collapse" href="#collapseResp2" aria-expanded="true"
+                                               class="box-tit">
+                                                <h3>Tags</h3>
+                                            </a>
+                                            <div id="collapseResp2" class="collapse in">
+                                                <ul class="cat-list">
+                                                    <t t-if="blog_tags_selected">
+                                                        <t t-foreach="blog_tags_selected" t-as="tag_selected">
+                                                            <li class="selected blog_article_search_result"
+                                                                t-attf-for="{{tag_selected['id']}}">
+                                                                <input type="checkbox"
+                                                                       class="blog_article_search_result"
+                                                                       t-attf-id="{{tag_selected['id']}}"
+                                                                       name="blog_tag"
+                                                                       t-attf-value="{{tag_selected['id']}}"
+                                                                       checked="'checked'"/>
+                                                                <t t-esc="tag_selected['name']"/>
+                                                            </li>
+                                                        </t>
+                                                        <t t-if="tags">
+                                                            <t t-foreach="tags" t-as="tag">
+                                                                <t t-if="tag not in blog_tags_selected">
+                                                                    <li class="blog_article_search_result">
+                                                                        <input type="checkbox"
+                                                                               class="blog_article_search_result"
+                                                                               name="blog_tag"
+                                                                               t-attf-value="{{tag['id']}}"/>
+                                                                        <t t-esc="tag['name']"/>
+                                                                    </li>
+                                                                </t>
+                                                            </t>
+                                                        </t>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-if="tags">
+                                                            <t t-foreach="tags" t-as="tag">
+                                                                <li class="blog_article_search_result">
+                                                                    <input type="checkbox"
+                                                                           class="blog_article_search_result"
+                                                                           name="blog_tag"
+                                                                           t-attf-value="{{tag['id']}}"/>
+                                                                    <t t-esc="tag['name']"/>
+                                                                </li>
+                                                            </t>
+                                                        </t>
+                                                    </t>
+                                                </ul>
+                                            </div>
+                                        </form>
+                                        <div class="holder-banner">
+                                                <img src="/jkv_theme/static/src/imgs/ad-space-square.jpg" class="m-auto img-responsive" alt=""/>
+                                        </div>
+                                    </div>
+                                    <div class="se-pre-con" style="display:none"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <t t-if="call_to_action">
+                    <section class="pre-foot">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="tit-spacing">
+                                    <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                    <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                    <i class="pull-right">
+                                        <svg version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                             enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                    <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                    </svg>
+                                    </i>
+                                    Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <!-- Action and View for JKV BLOG -->
+    <record id="jkv_blog_action_show_blog" model="ir.actions.act_window">
+        <field name="name">Articles</field>
+        <field name="res_model">jkv.blog</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="help" type="html">
+            <p>
+                Create a Article
+            </p>
+        </field>
+    </record>
+
+    <record id="jkv_blog_action_show_tags" model="ir.actions.act_window">
+        <field name="name">Tags</field>
+        <field name="res_model">jkv.tag</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="help" type="html">
+            <p>
+                Create a Tag
+            </p>
+        </field>
+    </record>
+
+    <record id="jkv_blog_view_tree" model="ir.ui.view">
+        <field name="name">BLog List</field>
+        <field name="model">jkv.blog</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="blog_title"/>
+                <field name="blog_author"/>
+                <field name="blog_date"/>
+                <field name="blog_tags" string="Tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="jkv_view_form_blog" model="ir.ui.view">
+        <field name="name">Blog Form</field>
+        <field name="model">jkv.blog</field>
+        <field name="arch" type="xml">
+
+            <form string="Blog">
+                <sheet>
+                    <field name="blog_image" widget='image' class="oe_avatar" options='{"preview_image":"blog_image_medium"}'/>
+                        <div class="oe_title">
+                            <label for="blog_title" class="oe_edit_only"/>
+                            <h1>
+                               <field name="blog_title" placeholder="Article Title"/>
+                            </h1>
+                        </div>
+
+                   <group>
+                        <field name="blog_author" required="True" placeholder="Blog Author"/>
+                        <field name="blog_date" required="True"/>
+                        <field name="blog_tags" widget="many2many_tags"/>
+                   </group>
+
+                    <group name="body_content">
+                            <separator string="Article Body" colspan="4"/>
+                            <field name="blog_content" colspan="4" nolabel="1" required="True"
+                                placeholder="This is the content of article"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_jkv_blog" name="Blog" parent="website.menu_website_configuration" sequence="24"
+              groups="base.group_user"/>
+
+    <menuitem id="menu_jkv_article" name="Articles" parent="menu_jkv_blog" sequence="1" action="jkv_blog_action_show_blog"/>
+
+    <menuitem id="menu_jkv_tags" name="Tags" parent="menu_jkv_blog" sequence="2" action="jkv_blog_action_show_tags"/>
+
+    <record id="group_user_hide" model="res.groups">
+        <field name="name">Hide Blog</field>
+    </record>
+
+    <record model="ir.ui.menu" id="website_blog.menu_website_blog_root">
+        <field name="groups_id" eval="[(6,0,[ref('group_user_hide')])]"/>
+    </record>
+
+</odoo>

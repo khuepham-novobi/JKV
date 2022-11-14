@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <function model="jkv.download" name="_compute_download_reference_value">
+		<function name="search" model="jkv.download">
+			<value eval="[('product_id', '!=', False)]" />
+		</function>
+    </function>
+</odoo>

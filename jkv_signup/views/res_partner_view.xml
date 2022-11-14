@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_tree_inherit" model="ir.ui.view">
+            <field name="name">JKV View Tree Partner Inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="jkv_show_event.jkv_view_partner_tree_inherit"/>
+            <field name="arch" type="xml">
+                <field name="jkv_customer_usef_number" position="after">
+                    <field name="is_rider"/>
+                    <field name="is_trainer"/>
+                    <field name="is_owner"/>
+                </field>
+            </field>
+        </record>
+        <record id="view_res_partner_filter" model="ir.ui.view">
+            <field name="name">res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="filter_domain">['|','|','|',('alias_name','ilike',self),('display_name','ilike',self),('ref','=',self),('email','ilike',self)]</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="jkv_res_partner_filter" model="ir.ui.view">
+            <field name="name">Customer Filter</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Customer">
+                    <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                    <field name="jkv_customer_usef_number" string="USEF Number" filter_domain="[('jkv_customer_usef_number','=',self)]"/>
+                    <field name="horse_name" string="House Name" filter_domain="[('horse_name','ilike',self)]"/>    
+                </search>
+            </field>
+        </record>
+        
+        <record id="jkv_view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">JKV View Form Partner Inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">               
+                <field name="category_id" position="after">
+                    <field name="mapping_videos" string="Mapping Videos" readonly="1" />
+                    <field name="show_ids" readonly="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="show_number"/>
+                        </tree>
+                    </field>
+                    <field name="mapping_riders" readonly="1">
+                        <tree>
+                            <field name="rider_number"/>
+                            <field name="horse_name"/>
+                        </tree>
+                    </field>
+                    <field name="is_rider"/>
+                    <field name="is_trainer"/>
+                    <field name="is_owner"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

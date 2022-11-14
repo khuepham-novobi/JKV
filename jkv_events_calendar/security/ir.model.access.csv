@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_jkv_events_calendar_base_user,jkv.events.calendar.base.user,jkv_events_calendar.model_jkv_events_calendar,base.group_user,1,1,1,1
+access_jkv_events_calendar_public,jkv.events.calendar.public,jkv_events_calendar.model_jkv_events_calendar,,1,1,1,1

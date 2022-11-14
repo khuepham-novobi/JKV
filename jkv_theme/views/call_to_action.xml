@@ -1,0 +1,44 @@
+<odoo>
+    <record id="jkv_call_to_action_tree" model="ir.ui.view">
+        <field name="name">jkv.call.to.action.tree</field>
+        <field name="model">jkv.calltoaction</field>
+        <field name="arch" type="xml">
+            <tree string="JKV Call To Action" create="false" import="false" delete="false">
+                <field name="name" string="Pages"/>
+                <field name="status_on_view" string="Status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="jkv_call_to_action_form" model="ir.ui.view">
+        <field name="name">jkv.call.to.action.form</field>
+        <field name="model">jkv.calltoaction</field>
+        <field name="arch" type="xml">
+            <form string="JKV Call To Action" create="false" delete="false">
+                <sheet>
+                    <div class="oe_title">
+                        <div>Page
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </div>
+                    <group>
+                        <field name="status" string="Show"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="jkv_action_call_to_action_menu" model="ir.actions.act_window">
+        <field name="name">Turn On/Off Contact Call-To-Action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">jkv.calltoaction</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="jkv_call_to_action_menu" name="Contact Call-To-Action"
+              parent="website.menu_website_configuration"
+              action="jkv_action_call_to_action_menu" sequence="25"/>
+</odoo>

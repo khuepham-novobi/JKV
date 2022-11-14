@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<record id="jkv_default_filename_path" model="ir.config_parameter">
+			<field name="key">jkv_product.filename_path</field>
+			<field name="value">https://jkv-video.s3.amazonaws.com/</field>
+		</record>
+		<record id="jkv_default_filename_extension_mp4" model="ir.config_parameter">
+			<field name="key">jkv_product.filename_extension_mp4</field>
+			<field name="value">.mp4</field>
+		</record>
+	</data>
+</odoo>

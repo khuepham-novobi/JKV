@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<!-- Action a nd View for Class -->
+		<record id="jkv_customer_support_action" model="ir.actions.act_window">
+			<field name="name">Customer Support</field>
+			<field name="res_model">crm.lead</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					View Customer Feedback
+				</p>
+			</field>
+		</record>
+
+		<record id="jkv_view_form_customer_support" model="ir.ui.view">
+			<field name="name">Customer Support Form</field>
+			<field name="model">crm.lead</field>
+			<field name="inherit_id" ref="crm.crm_case_form_view_leads" />
+			<field name="arch" type="xml">
+				<xpath expr="//header" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//sheet" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//sheet" position="after">
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="name" placeholder="Subject"/>
+							</h1>
+						</div>
+						<group string="Infomation">
+							<field name="contact_name" required="1"/>
+							<field name="email_from" required="1"/>
+							<field name="phone" required="1"/>
+							<field name="create_date" required="1"/>
+							<field name="description" required="1"/>
+						</group>
+					</sheet>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="jkv_view_tree_customer_support" model="ir.ui.view">
+			<field name="name">Customer Support Tree</field>
+			<field name="model">crm.lead</field>
+			<field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+			<field name="arch" type="xml">
+				<xpath expr="//tree/field[@name='name']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='name']" position="after">
+					<field name="name"/>
+				</xpath>
+				<xpath expr="//tree/field[@name='city']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='country_id']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='team_id']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//tree/field[@name='team_id']" position="after">
+					<field name="description"/>
+				</xpath>
+			</field>
+		</record>
+
+		<menuitem id="menu_customer_support_root" name="Customer Support" parent="jkv_show_event.menu_inventory_management_root" sequence="20"/>
+		<menuitem id="menu_jkv_customer_support" parent="menu_customer_support_root" name="Customer Support" sequence="1" action ="jkv_customer_support_action"/>
+	</data>
+</odoo>

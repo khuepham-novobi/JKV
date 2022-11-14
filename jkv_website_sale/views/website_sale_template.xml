@@ -1,0 +1,1149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!--Add godaddy seal to footer-->
+		<template id="add_godaddy" inherit_id="theme_furnito.footer_copyright">
+            <xpath expr="//div[@class='footer-bottom-div']//div[@class='row'][1]" position="inside">
+				<div class="col-md-6 col-sm-6" style="text-align:right">
+					<span id="siteseal">
+						<script async="true" type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=hqg4yGCccalIXMsyWyfhCgfz0LosH8bX8e1XeRBzLzATaUHNewWcquwrDvNX"></script>
+					</span>
+				</div>
+			</xpath>
+		</template>
+
+		<!--Add link to Video Pricing page-->
+		<template id="add_link_video_pricing_product_detail" inherit_id="theme_furnito.theme_furnito_product_details">
+			<xpath expr="//ul[@class='breadcrumb']" position="attributes">
+				<attribute name="style">width:50%</attribute>
+			</xpath>
+			<xpath expr="//ul[@class='breadcrumb']" position="after">
+				<ul class="breadcrumb" style="width:50%">
+					<li style="float:right">
+						<a href="/page/services" style="color:black;background:#b2be89;border:1px solid;border-color:transparent;border-radius:3px;padding:5px">Video Pricing</a>
+					</li>
+				</ul>
+			</xpath>
+		</template>
+		<template id="add_link_video_pricing_products" inherit_id="theme_furnito.theme_furnito_sale_products">
+			<xpath expr="//ul[@class='breadcrumb']" position="attributes">
+				<attribute name="style">width:50%</attribute>
+			</xpath>
+			<xpath expr="//ul[@class='breadcrumb']" position="after">
+				<ul class="breadcrumb" style="width:50%">
+					<li style="float:right">
+						<a href="/page/services" style="color:black;background:#b2be89;border:1px solid;border-color:transparent;border-radius:3px;padding:5px">Video Pricing</a>
+					</li>
+				</ul>
+			</xpath>
+		</template>
+        <template id="add_to_cart_modal" inherit_id="website_sale.products">
+			<xpath expr="//div[@id='products_grid']" position="inside">
+                <div class="modal fade video_form_notification" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <strong />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="modal fade col-sm-8 col-md-4" id="share_modal" role="dialog" style="margin: auto; top: 30%">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&amp;times;</button>
+							<h4 class="modal-title">Share Video Link</h4>
+						</div>
+						<div class="modal-body">
+							<div class="input-group">
+								<input id="share_link_input" class="form-control" value=""/>
+								<div class="input-group-btn">
+									<button class="btn btn-success copy_btn">
+										<i class="fa fa-clipboard" /> Copy
+									</button>
+								</div>
+							</div>
+							<div style="text-align: center; margin: 5px">
+								<strong class="notification_div" />
+							</div>
+						</div>
+					</div>
+				</div>
+            </xpath>
+        </template>
+		<!-- CUSTOMIZE PRODUCT LIST -->
+		<template id="jkv_products_item" inherit_id="theme_furnito.theme_furnito_products_item" name="Theme JKV Product item">
+			<xpath expr="//form" position="attributes">
+                <attribute name="class">video_form</attribute>
+            </xpath>
+			<xpath expr="//div[@class='pwp-info']//a" position="attributes">
+				<attribute name="style">display:none;</attribute>
+			</xpath>
+			<xpath expr="//p[@class='price']" position="attributes">
+				<attribute name="class">price hidden</attribute>
+			</xpath>
+			<xpath expr="//div[@class='pwp-info']//a" position="after">
+				<a  t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" >
+					<div class="info" style="height:200px;background-color:white;position: relative;padding: 10px;border-radius:10px;">
+						<h4 style="text-align: left;"> 
+							<span><t t-esc="product.show_name"/></span>
+                            <!--<t t-if="check_subscription_all_show">
+                                <t t-if="subscription_all_show.expiried == False">
+                                    <span class="label label-info"><t t-esc="subscription_all_show.expiry_date"></t></span>
+                                </t>
+                                <t t-if="subscription_all_show.expiried == True">
+                                    <t t-foreach="subscriptions" t-as="subscription">
+                                        <t t-if="product.show_number == subscription.show_id.show_number">
+                                            <t t-if="subscription.expiried == False">
+                                                <span class="label label-info"><t t-esc="subscription.expiry_date"></t></span>
+                                            </t>
+                                            <t t-if="subscription.expiried == True">
+                                                <span class="label label-danger"><t t-esc="subscription.expiry_date"></t></span>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </t>
+                            </t>-->
+                            <!--<t t-if="not check_subscription_all_show">
+                                <t t-foreach="subscriptions" t-as="subscription">
+                                    <t t-if="product.show_number == subscription.show_id.show_number">
+                                        <t t-if="subscription.expiried == False">
+                                            <span class="label label-info"><t t-esc="subscription.expiry_date"></t></span>
+                                        </t>
+                                        <t t-if="subscription.expiried == True">
+                                            <span class="label label-danger"><t t-esc="subscription.expiry_date"></t></span>
+                                        </t>
+                                    </t>
+                                </t>
+                            </t>-->
+                            <t t-foreach="subscription_status" t-as="key">
+                            	<t t-if="product.id == key">
+                            		<t t-if="subscription_status[key].expiried == False">
+                            			<span class="label label-info"><t t-esc="subscription_status[key].expiry_date"></t></span>
+                            		</t>
+                            		<t t-if="subscription_status[key].expiried == True">
+                            			<span class="label label-danger"><t t-esc="subscription_status[key].expiry_date"></t></span>
+                            		</t>
+                            	</t>
+                            </t>
+                            <!--<t t-foreach="subscriptions" t-as="subscription">
+                                <t t-if="product.show_number == subscription.show_id.show_number">
+                                    <t t-if="subscription.expiried == False">
+                                        <span class="label label-info"><t t-esc="subscription.expiry_date"></t></span>
+                                    </t>
+                                    <t t-if="subscription.expiried == True">
+                                        <span class="label label-danger"><t t-esc="subscription.expiry_date"></t></span>
+                                    </t>
+                                </t>
+                            </t>-->
+                        </h4>
+                        <h4 style="text-align: left;">
+                        	<span><t t-esc="product.class_name"/></span><br/>
+                        	<span>Ride: <t t-esc="product.ride_number"/></span>
+                        </h4>  
+                        <h4 style="text-align: left;">
+                        	<span><t t-esc="product.horse_name"/> #<t t-esc="product.rider_number"/></span>
+                        </h4>
+                        <span style="text-align:center;position: absolute;bottom: 5px;right: 30px;">Click Here to View/Buy</span>
+                    </div>
+                </a>
+            </xpath>
+            <xpath expr="//div[@class='pwp-img']" position="attributes">
+            	<attribute name="class">hidden</attribute>
+            </xpath>
+        </template>
+        <template id="rating_card" inherit_id="rating.rating_card" name="Rating Card">
+        	<xpath expr="//div[@class='o_rating_card']" position="attributes">
+        		<attribute name="style">display:none</attribute>
+        	</xpath>
+        </template>
+        <!-- CUSTOMIZE PRODUCT DETAIL -->
+        <template id="jkv_product_details" inherit_id="theme_furnito.theme_furnito_product_details" name="Product Details">
+        	<xpath expr="//div[@class='col-xs-12 col-md-5 col-lg-5 col-sm-5 product-detail']//div[@class='product-title']"  position="replace">
+        		<t t-if="product.video_filename_url" >
+        			<div class="product-title" style="border:none">                      
+        				<h1 itemprop="name" t-field="product.rider_name">Rider Name</h1>
+        				<div class="table-responsive">
+        					<table class="table">
+        						<tbody>
+        							<tr>
+        								<td style="width:80px">
+        									<b>Show</b>
+        								</td>
+        								<td>
+        									<t t-esc="product.show_name"/>
+        								</td>
+        							</tr>
+        							<tr>
+        								<td style="width:80px">
+        									<b>Class</b>
+        								</td>
+        								<td>
+        									<t t-esc="product.class_name"/>
+        								</td>
+        							</tr>                                    
+        						</tbody>
+        					</table>                            
+        				</div>
+        				<div style="color:green" class="hidden"><t t-call="website_sale.product_price"/></div>
+        				<span itemprop="url" style="display:none;" t-esc="'/shop/product/%s' % slug(product)"/>
+        			</div>
+        		</t>
+				<t t-if="product.livestream_video_filename_url">
+					<div class="product-title">
+						<div class="detail-info">
+							<h4 class="tit">SHOW</h4>
+							<div>
+								<t t-esc="product.livestream_show_id.name"/>
+							</div>
+							<h4 class="tit">CLASS</h4>
+							<div>
+								<t t-esc="product.livestream_class_id.name"/>
+							</div>
+							<h4 class="tit">LIVESTREAM DATE</h4>
+							<div>
+								<t t-esc="product.livestream_date"/>
+							</div>
+						</div>
+					</div>
+				</t>
+        	</xpath>
+			<!--<xpath expr="//div[@class='col-xs-12 col-md-5 col-lg-5 col-sm-5 product-detail']//div[@class='product-title']"  position="attributes">
+				<attribute name="style">display:none;</attribute>
+			</xpath>-->
+		</template>
+
+		<!-- REPLACE IMAGE BY PRODUCT VIDEO -->
+		<template id="jkv_product_inherit_add_product_video" name="Product" inherit_id="website_sale.product">
+			<xpath expr="//div[@id='wrap']" position="inside">
+				<div class="modal fade" id="pauseModal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"></button>                          
+							</div>
+							<div class="modal-body">
+								<p>Please purchase a subsription to play this video</p>
+							</div>                        
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary btn_confirm_purchase" data-dismiss="modal">Purchase video</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</xpath>
+			<xpath expr="//div[@class='row']/div[@class='col-sm-7']" position="replace">
+				<div class="col-sm-7">                            
+					<t t-if="product.video_filename_url" >
+						<div>
+							<input type="hidden" t-att-value="current_date" id="current_date"/>
+							<input type="hidden" t-att-value="'1' if subscription else '0'" id="subscription"/>
+							<input type="hidden" t-att-value="'1' if not_play else '0'" id="not_play"/>
+							<t t-if="not_play">
+								<video class="product_detail_video col-xs-12 col-sm-12" style="margin-bottom:10px" controlsList="nodownload" preload="auto" t-att-end-date="product.post_date">
+									<source t-att-src="product.sample_file_url"  type="video/mp4"/>
+								</video>
+								<div style="background-color: #f1efe8;
+											padding: 10px;
+											box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+											border-radius: 5px;
+											position:  absolute;
+											top: 30%;
+											left:15%;
+											width:70%;">
+									<p>Please purchase a subsription to play this video</p>
+									<div style="text-align:right">
+										<button type="button" class="btn btn-primary btn_confirm_purchase" data-dismiss="modal">Purchase video</button>
+									</div>
+								</div>
+							</t>
+							<t t-else="">
+								<t t-if="not free_view">
+									<video class="product_detail_video col-xs-12 col-sm-12" style="margin-bottom:10px" controls="true"
+										   controlsList="nodownload" preload="auto" t-att-end-date="product.post_date">
+										<source t-att-src="product.signed_filename_url"  type="video/mp4"/>
+									</video>
+								</t>
+								<t t-else="">
+									<video class="product_detail_video col-xs-12 col-sm-12" style="margin-bottom:10px" controls="true"
+										   controlsList="nodownload" preload="auto" t-att-end-date="product.post_date">
+										<source t-att-src="product.watermark_file_url"  type="video/mp4"/>
+									</video>
+								</t>
+							</t>
+						</div>
+					</t >
+					<t t-if="product.livestream_video_filename_url" >
+						<div>
+							<input type="hidden" t-att-value="current_date" id="current_date"/>
+							<input type="hidden" t-att-value="'1' if subscription else '0'" id="subscription"/>
+							<input type="hidden" t-att-value="'1' if not_play else '0'" id="not_play"/>
+							<video class="product_detail_video col-xs-12 col-sm-12" style="margin-bottom:10px" controls="true"
+								   controlsList="nodownload" preload="auto" t-att-end-date="product.post_date">
+								<source t-att-src="product.livestream_signed_filename_url" type="video/mp4"/>
+							</video>
+						</div>
+					</t>
+				</div>
+			</xpath>			
+		</template>
+
+		<!-- SAMPLE VIDEO  POPUP-->
+		<template id="jkv_sample_video_popup" name="Sample Video Popup">
+			<div class="modal fade jkv_sample_video_product_list" t-attf-id="jkv_sample_video">
+				<div class="div-sample-video modal-content" style="max-height:none;">
+					<div class="modal-header" style="border-bottom:none">
+						<button type="button" class="close" data-dismiss="modal"><p>x</p></button> 
+						<h4 class="modal-title"></h4>
+					</div>
+					<div class="modal-body" style="max-height:none">
+						<video class="col-xs-12 col-sm-12" style="margin-bottom:10px" controls="true" controlsList="nodownload"> 
+							<source t-att-src="sample"  type="video/mp4"/>
+						</video>
+					</div>
+					<div class="modal-footer" style="border-top:none">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<!-- MAIN VIDEO  POPUP-->
+		<template id="jkv_main_video_popup" name="Main Video Popup">
+			<div class="modal fade jkv_main_video_product_list" t-attf-id="jkv_main_video">
+				<div class="div-main-video modal-content" style="max-height:none;">
+					<div class="modal-header" style="border-bottom:none">
+						<button type="button" class="close" data-dismiss="modal"><p>x</p></button> 
+						<h4 class="modal-title"></h4>
+					</div>
+					<div class="modal-body" style="max-height:none;">
+						<video class="col-xs-12 col-sm-12" style="margin-bottom:10px" controls="true" controlsList="nodownload"> 
+							<source t-att-src="main"  type="video/mp4"/>
+						</video>
+					</div>
+					<div class="modal-footer" style="border-top:none">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<!-- ADD BUTTON VIDEO SAMPLE -->		
+		<template id="jkv_product_inherit_add_view_sample_button" name="Product" inherit_id="theme_furnito.theme_furnito_product_details">
+			<xpath expr="//section[@id='product_detail']//div[@class='product-options-bottom']//div[@class='add-to-cart']" position="inside">
+				<t t-if="product.sample_file_url">
+					<input style="margin-left:10px;background-color:#897b6d" type="button" data-toggle="modal" t-attf-data-target="#jkv_sample_video" class="btn cart-btn btn-lg jkv_sample_video" t-attf-source="{{product.sample_file_url}}" id="jkv-view_sample_video" value="View Sample"/>
+				</t>
+			</xpath>
+			<xpath expr="//a[@id='add_to_cart']" position="attributes">
+				<attribute name="style">background-color:#897b6d</attribute>
+			</xpath>
+		</template>
+
+		<!-- CALL SAMPLE VIDEO  POPUP-->
+		<template id="jkv_product_inherit_add_sample_video" name="Product" inherit_id="website_sale.product">
+			<xpath expr="//section" position="inside">
+				<t t-call="jkv_website_sale.jkv_sample_video_popup"/>
+			</xpath>
+		</template>
+
+		<template id="jkv_insert_videos_popup" inherit_id="website_sale.products" name="Insert JKV Videos Popup">
+			<xpath expr="//div[@id='products_grid']" position="inside">
+				<div class="se-pre-con" style="display:none"></div>
+				<t t-call="jkv_website_sale.jkv_main_video_popup"/>
+				<t t-call="jkv_website_sale.jkv_sample_video_popup"/>
+			</xpath>
+		</template>
+
+		<!-- BUTTON ADD TO CARD - VIEW SAMPLE ON PROUCT LIST -->
+		<template id="products_add_to_cart" inherit_id="theme_furnito.theme_furnito_products_add_to_cart" name="Add to Cart">
+			<xpath expr="//div[@class='shopping-cart']" position="attributes">
+				<attribute name="style">display:inline</attribute>
+			</xpath>
+			<xpath expr="//div[@class='shopping-cart']" position="before">
+				<div class="custom_fa" style="display:inline">
+					<span>Play sample <i class="btn btn-xs">
+						<span data-toggle="modal" t-attf-data-target="#jkv_sample_video"  t-attf-source="{{product.sample_file_url}}"  class="fa fa-play jkv_sample_video"/>
+					</i></span>
+				</div>                                 
+				<t t-if="product in product_subcribed_no_expire or product.free_view == True">
+					<div class="custom_fa" style="display:inline">   
+						<i class="btn btn-xs">
+							<span data-toggle="modal" t-attf-data-target="#jkv_main_video" t-attf-source="{{product.video_filename_url}}" class="fa fa-video-camera jkv_main_video"/>
+						</i>
+					</div> 
+				</t>
+				<t t-if="product in products_purchased">
+					<div class="custom_fa" style="display:inline">   
+						<a target="_blank" t-att-href="download_url[product.id]"> <i class="fa fa-download"/></a>
+					</div>
+				</t>
+				<t t-if="all_products_purchased and product in all_products_purchased">
+                    <!--
+					<div class="custom_fa" style="display:inline">
+						<a class="share_button"><i class="fa fa-share-alt" t-att-data-link="'%s%s' % (share_link_prefix, slug(product))" /></a>
+					</div>
+					-->
+				</t>
+			</xpath>
+			<xpath expr="//i[@class='fa fa-shopping-cart'][1]/.." position="replace">                       
+				<t t-if="product not in product_subcribed_no_expire and product.free_view == False">                    						
+					<t t-if="product not in products_purchased">
+						<i class="btn btn-xs a-submit">
+							<span class="fa fa-shopping-cart" />
+						</i>
+					</t>
+				</t>
+			</xpath>
+		</template>
+
+		<!-- POPUP CONFIRM DATE SEARCH VIDEOS-->
+		<template id="jkv_confirm_date_search_popup" name="Popup Confirm Date" >
+			<div class="modal fade" id="jkv_date_search_confirm">
+				<div class="div-confirm-date-search-popup modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><p>x</p></button> 
+						<h4 class="modal-title">Warning!</h4>
+					</div>
+					<div class="modal-body">
+						<h3>Your set date range may result in large numbers of video product options. Do you want to continue?</h3>
+					</div>
+					<div class="modal-footer">
+						<button id="button_search_confirm_date_info" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<!-- POPUP CONFIRM DATE SEARCH FOR RESULT VIDEOS-->
+		<template id="jkv_confirm_date_search_for_result_popup" name="Popup Confirm Date For Result" >
+			<div class="modal fade" id="jkv_date_search_for_result_confirm">
+				<div class="div-confirm-date-search-popup modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><p>x</p></button> 
+						<h4 class="modal-title">Warning!</h4>
+					</div>
+					<div class="modal-body">
+						<h3>Your set filters may result in large numbers of video product options. Do you want to continue?</h3>
+					</div>
+					<div class="modal-footer">
+						<button id="button_search_for_result_confirm_date_info" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</template>
+
+
+		<!-- SAMPLE WARNING DATE SEARCH VIDEOS-->
+		<template id="jkv_warning_date_search_popup" name="Popup Wawrning Date">
+			<div class="modal fade" id="jkv_date_search_warning">
+				<div class="div-warning-date-search-popup modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><p>x</p></button> 
+						<h4 class="modal-title">Warning!</h4>
+					</div>
+					<div class="modal-body">
+						<h3>End Date must be later or equal to Start Date</h3>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<template id="subscription_status_template" name="Subscription Status" inherit_id="website_sale.products">
+			<xpath expr="//div[@id='wrap']" position="inside">
+				<input type="hidden" id="show_status" t-att-value="show_status"/>
+				<t t-if="show_status">
+					<div class="modal fade" id="statusModal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"></button>                          
+								</div>
+								<div class="modal-body">
+									<p><t t-esc="content_status"/></p>
+									<div class="checkbox">
+										<label class="checkbox-inline"><input type="checkbox" value="" id="not_show"/> In the future, do not show this message</label>
+									</div>
+								</div>                        
+								<div class="modal-footer">
+									<t t-if="new_subscription">
+										<a href="/my/subscriptions" class="btn btn-primary">Buy one</a>
+										<!--<button type="button" class="btn btn-primary" data-dismiss="modal">Buy one</button>-->
+									</t>
+									<t t-if="not new_subscription">
+										<a href="/my/subscriptions" class="btn btn-primary">Yes</a>
+										<!--<button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>-->
+									</t>
+									<button id="close_status_modal" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</t>
+			</xpath>
+		</template>
+
+		<!-- TEMPLATE SEACH VIDEO -->
+		<template id="theme_search_videos" name="Search Videos">
+			<t t-call="website.layout">
+				<div id="wrap" class="container oe_website_sale"  t-attf-jkv_result="loaded">
+					<div class="row" style="float:right">
+						<form id="form_search_info" action='/search_videos' method="get">
+							<label>Date From </label><input type="text" id="jkv_start_date_search_video" name="jkv_start_date_search_video" t-attf-value="{{jkv_start_date_search_video}}"/>
+							<label>To </label><input type="text" id="jkv_end_date_search_video" name="jkv_end_date_search_video" t-attf-value="{{jkv_end_date_search_video}}"/>
+							<input id="button_search_info" type="button" class="btn btn-primary" value="Search" />
+						</form>
+					</div>
+					<!--<table style=" width:100%;">
+						<tr>
+							<th valign="bottom">
+								<form id="form_search_info" action='/search_videos' method="get">
+									<label>Enter Date From </label><input type="text" id="jkv_start_date_search_video" name="jkv_start_date_search_video" t-attf-value="{{jkv_start_date_search_video}}"/>
+									<label>To </label><input type="text" id="jkv_end_date_search_video" name="jkv_end_date_search_video" t-attf-value="{{jkv_end_date_search_video}}"/>
+									<input id="button_search_info" type="button" class="btn btn-primary" value="Search" />
+								</form>
+							</th>
+						</tr>
+					</table>-->
+					<t t-call="jkv_website_sale.jkv_confirm_date_search_popup"/>
+					<t t-call="jkv_website_sale.jkv_warning_date_search_popup"/>
+					<t t-call="jkv_website_sale.jkv_confirm_date_search_for_result_popup"/>
+					<div class="row" style="margin-top:20px">
+						<form id="form_search_result" action='/search_videos/results' method="get">
+							<input type="text"  class="hidden" id="jkv_start_date_search_video" name="jkv_start_date_search_video" t-attf-value="{{jkv_start_date_search_video}}"/>
+							<input type="text"  class="hidden" id="jkv_end_date_search_video" name="jkv_end_date_search_video" t-attf-value="{{jkv_end_date_search_video}}"/>
+
+							<div class="row jkv_search_videos_title" style="background-color: #f1efe8; text-align:center; padding: 10px 0px 10px 0px;margin-top:20px;">
+								<div class="col-sm-3 col-xs-3">
+									<div style="height:30px;"><span>Show Name</span></div>
+									<div style="max-height:300px;overflow-y:auto;overflow-x:hidden;" >
+										<t t-foreach="show_ids" t-as="show_id">
+											<div class="row"  style="text-align:left;padding:15px;">
+												<input type="checkbox" class="show_name_search" name="show_number" t-attf-value="{{show_id.id}}"/>
+												<span><t t-esc="show_id.name"/></span>
+											</div>
+										</t>
+									</div>
+								</div>
+								<div class="col-sm-3 col-xs-3">
+									<div style="height:30px;"><span>Class Name</span></div>
+									<div style="max-height:300px;overflow-y:auto;overflow-x:hidden;" >
+										<t t-foreach="class_ids" t-as="class_id">
+											<div class="row"  style="text-align:left;padding:15px;">
+												<input type="checkbox" class="class_name_search" name="class_number" t-attf-value="{{class_id.id}}"/>
+												<span><t t-esc="class_id.name"/></span>
+											</div>
+										</t>
+									</div>
+								</div>
+								<div class="col-sm-2 col-xs-2">
+									<div style="height:30px;"><span>Rider Number</span></div>
+									<div style="max-height:300px;overflow-y:auto;overflow-x:hidden;" >
+										<t t-foreach="rider_numbers" t-as="rider_number">
+											<div class="row"  style="text-align:left;padding:15px;">
+												<input type="checkbox" class="rider_number_search" name="rider_number" t-attf-value="{{rider_number}}"/>
+												<span><t t-esc="rider_number"/></span>
+											</div>
+										</t>
+									</div>
+								</div>
+								<div class="col-sm-2 col-xs-2">
+									<div style="height:30px;"><span>Day</span></div>
+									<div style="max-height:300px;overflow-y:auto;overflow-x:hidden;" >
+										<t t-foreach="post_days" t-as="post_day">
+											<div class="row"  style="text-align:left;padding:15px;">
+												<input type="checkbox" class="post_day_search" name="post_day" t-attf-value="{{post_day}}"/>
+												<span><t t-esc="post_day"/></span>
+											</div>
+										</t>
+									</div>
+								</div>
+								<div class="col-sm-2 col-xs-2">
+									<div style="height:30px;"><span>Horse Name</span></div>
+									<div style="max-height:300px;overflow-y:auto;overflow-x:hidden;" >
+										<t t-foreach="horse_names" t-as="horse_name">
+											<div class="row"  style="text-align:left;padding:15px;">
+												<input type="checkbox" class="horse_name_search" name="horse_name" t-attf-value="{{horse_name}}"/><span><t t-esc="horse_name"/></span>
+											</div>
+										</t>
+									</div>
+								</div>
+							</div>
+							<label class="checkbox-inline" style="font-size:120%;font-weight:bold;margin-top:10px">
+								<input type="checkbox" id="jkv_save_filter" name="jkv_save_filter" value="jkv_save_filter" t-att-checked="'checked' if jkv_save_filter else None"/> Save my filters for next times<br/>
+							</label><br/>
+							<div style="margin-top:10px margin-bottom:10px;">
+								<input type="button" id="button_search_result" class="btn btn-primary" value="Show My Video"/>
+								<input class="hidden" name="jkv_view_last_filter" id="jkv_view_last_filter"/>
+								<input type="button" id="button_view_last_filter" class="btn btn-primary" value="View Last Filter"/>
+							</div>
+						</form>
+					</div>
+				</div>
+			</t>
+		</template>
+
+		<template id="jkv_filter-videos" inherit_id="website_sale.products" priority="20" active="True" customize_show="True" name="JKV Filter Videos">
+			<xpath expr="//div[@id='products_grid_before']" position="inside">
+				<t t-call="jkv_website_sale.jkv_warning_date_search_popup"/>
+				<form id="form-panel-search-result" action='/search_videos/results' method="get" >
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-info">
+							<div class="panel-heading hidden">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+										Date Range <i t-att-class="'fa fa-chevron-up icon_accordion' if jkv_collapse == 'collapse1' else 'fa fa-chevron-down icon_accordion'" aria-hidden="true" style="float:right;vertical-align: middle;"></i>
+									</a>
+								</h4>
+							</div>
+							<div id="collapse1" class="panel-collapse collapse hidden">
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-sm-3 col-md-3 col-xs-3 text-center">
+											From
+										</div>
+										<div class="col-sm-9 col-md-9 col-xs-9">
+											<input type="text" id="jkv_start_date_search_result_video" name="jkv_start_date_search_video" t-attf-value="{{jkv_start_date_search_video}}"/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-3 col-md-3 col-xs-3 text-center">
+											To
+										</div>
+										<div class="col-sm-9 col-md-9 col-xs-9">
+											<input type="text" id="jkv_end_date_search_result_video" name="jkv_end_date_search_video" t-attf-value="{{jkv_end_date_search_video}}"/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-3 col-md-3 col-xs-3 text-center">
+											<input type="checkbox" id="show_my_videos_hidden" class="subscribed_or_show_all" name="show_my_videos" value="show_my_videos" t-att-checked="'checked' if show_my_videos else None"/>
+										</div>
+										<div class="col-sm-9 col-md-9 col-xs-9">
+											Show all videos
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-3 col-md-3 col-xs-3 text-center">
+											<input type="checkbox" id="subscribed_video_only_hidden" class="subscribed_or_show_all" name="subscribed_video_only" value="subscribed_video_only"  t-att-checked="'checked' if subscribed_video_only else None"/>
+										</div>
+										<div class="col-sm-9 col-md-9 col-xs-9">
+											Subscribed video only
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12 text-right">
+											<input type="button" class="btn btn-primary" id="button_change_range_date" name="button_change_range_date" value="Search"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--Filter: Show name-->
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+										Show Name <i t-att-class="'fa fa-chevron-up icon_accordion' if jkv_collapse == 'collapse2' else 'fa fa-chevron-down icon_accordion'" aria-hidden="true" style="float:right;vertical-align: middle;"></i>
+									</a>
+								</h4>
+							</div>
+							<div id="collapse2" t-att-class="'panel-collapse collapse in' if jkv_collapse == 'collapse2' else 'panel-collapse collapse'">
+								<div class="panel-body">
+									<div class="input-group search_input" id="search_show_name" data-model="jkv.show.venue" data-label="show_name_search_result">
+										<input type="text" class="form-control" placeholder="Search..."/>
+										<div class="input-group-btn">
+											<a class="btn btn-default">
+												<i class="fa fa-search"></i>
+											</a>
+										</div>
+									</div>
+									<t t-if="selected_shows">
+										<a class="clear_all" id="clear_show">
+											<i class="fa fa-angle-left" aria-hidden="true" style="margin-right:5px"></i>
+											Clear</a>
+									</t>
+									<ul style="max-height: 300px;overflow-x:hidden;overflow-y:scroll;">
+										<t t-foreach="selected_shows" t-as="selected_show">
+											<li class="checkbox" style="border-bottom:1px solid">
+												<label><input type="checkbox" class="show_name_search_result" name="show_number" t-attf-value="{{selected_show['id']}}"  checked="'checked'"/><span class="data_show"><t t-esc="selected_show['name']"/></span></label>
+											</li>
+										</t>
+										<t t-foreach="show_ids" t-as="show_id">
+											<t t-if="show_id['id'] not in show_checked_ids">
+												<li class="checkbox" style="border-bottom:1px solid">
+													<label><input type="checkbox" class="show_name_search_result" name="show_number" t-attf-value="{{show_id['id']}}"/><span class="data_show"><t t-esc="show_id['name']"/></span></label>
+												</li>
+											</t>
+										</t>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!--Filter Class name-->
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+										Class Name <i t-att-class="'fa fa-chevron-up icon_accordion' if jkv_collapse == 'collapse3' else 'fa fa-chevron-down icon_accordion'" aria-hidden="true" style="float:right;vertical-align: middle;"></i>
+									</a>
+								</h4>
+							</div>
+							<div id="collapse3" t-att-class="'panel-collapse collapse in' if jkv_collapse == 'collapse3' else 'panel-collapse collapse'">
+								<div class="panel-body">
+									<div class="input-group search_input" data-model="jkv.class" data-label="class_name_search_result">
+										<input type="text" class="form-control" id = "search_class_name" placeholder="Search..."/>
+										<div class="input-group-btn">
+											<a class="btn btn-default">
+												<i class="fa fa-search"></i>
+											</a>
+										</div>
+									</div>
+									<t t-if="selected_classes">
+										<a class="clear_all" id="clear_class">
+											<i class="fa fa-angle-left" aria-hidden="true" style="margin-right:5px"></i>
+											Clear
+										</a>
+									</t>
+
+									<ul style="max-height: 300px;overflow-x:hidden;overflow-y:scroll;">
+										<t t-foreach="selected_classes" t-as="selected_class">
+											<li class="checkbox" style="border-bottom:1px solid">
+												<label>
+													<input type="checkbox" class="class_name_search_result" name="class_number" t-attf-value="{{selected_class['id']}}"  checked="'checked'"/>
+													<span class="data_show"><t t-esc="selected_class['name']"/></span>
+												</label>
+											</li>
+										</t>
+										<t t-foreach="class_ids" t-as="class_id">
+											<t t-if="class_id['id'] not in class_checked_ids">
+												<li class="checkbox" style="border-bottom:1px solid">
+													<label>
+														<input type="checkbox" class="class_name_search_result" name="class_number" t-attf-value="{{class_id['id']}}"/>
+														<span class="data_show"><t t-esc="class_id['name']"/></span>
+													</label>
+												</li>
+											</t>
+										</t>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!--Filter Rider Name-->
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+										Rider Name <i t-att-class="'fa fa-chevron-up icon_accordion' if jkv_collapse == 'collapse4' else 'fa fa-chevron-down icon_accordion'" aria-hidden="true" style="float:right;vertical-align: middle;"></i>
+									</a>
+								</h4>
+							</div>
+							<div id="collapse4" t-att-class="'panel-collapse collapse in' if jkv_collapse ==  'collapse4' else 'panel-collapse collapse'">
+								<div class="panel-body">
+									<div class="input-group search_input" data-model="jkv.rider" data-label="rider_name_search_result">
+										<input type="text" class="form-control" id = "search_rider_name" placeholder="Search..."/>
+										<div class="input-group-btn">
+											<a class="btn btn-default">
+												<i class="fa fa-search"></i>
+											</a>
+										</div>
+									</div>
+									<t t-if="rider_checked_names">
+										<a class="clear_all" id="clear_rider_name">
+											<i class="fa fa-angle-left" aria-hidden="true" style="margin-right:5px"></i>
+											Clear
+										</a>
+									</t>
+									<ul style="max-height: 300px;overflow-x:hidden;overflow-y:scroll;">
+										<t t-foreach="rider_checked_names" t-as="rider_checked_name">
+											<li class="checkbox" style="border-bottom:1px solid">
+												<label>
+													<input type="checkbox" class="rider_name_search_result" name="rider_name" t-attf-value="{{rider_checked_name}}" checked="'checked'"/>
+													<span class="data_show"><t t-esc="rider_checked_name"/></span>
+												</label>
+											</li>
+										</t>
+										<t t-foreach="rider_names" t-as="rider_name">
+											<t t-if="rider_name not in rider_checked_names">
+												<li class="checkbox" style="border-bottom:1px solid">
+													<label>
+														<input type="checkbox" class="rider_name_search_result" name="rider_name" t-attf-value="{{rider_name}}" />
+														<span class="data_show"><t t-esc="rider_name"/></span>
+													</label>
+												</li>
+											</t>
+										</t>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!--Filter: Rider number-->
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+										Rider Number <i t-att-class="'fa fa-chevron-up icon_accordion' if jkv_collapse == 'collapse5' else 'fa fa-chevron-down icon_accordion'" aria-hidden="true" style="float:right;vertical-align: middle;"></i>
+									</a>
+								</h4>
+							</div>
+							<div id="collapse5" t-att-class="'panel-collapse collapse in' if jkv_collapse == 'collapse5' else 'panel-collapse collapse'">
+								<div class="panel-body">
+									<div class="input-group search_input" data-model="jkv.rider" data-label="rider_number_search_result">
+										<input type="text" class="form-control" id = "search_rider_number" placeholder="Search..."/>
+										<div class="input-group-btn">
+											<a class="btn btn-default">
+												<i class="fa fa-search"></i>
+											</a>
+										</div>
+									</div>
+									<t t-if="rider_checked_numbers">
+										<a class="clear_all" id="clear_rider_number">
+											<i class="fa fa-angle-left" aria-hidden="true" style="margin-right:5px"></i>
+											Clear
+										</a>
+									</t>
+									<ul style="max-height: 300px;overflow-x:hidden;overflow-y:scroll;">
+										<t t-foreach="rider_checked_numbers" t-as="rider_checked_number">
+											<li class="checkbox" style="border-bottom:1px solid">
+												<label>
+													<input type="checkbox" class="rider_number_search_result" name="rider_number" t-attf-value="{{rider_checked_number}}" checked="'checked'"/>
+													<span class="data_show"><t t-esc="rider_checked_number"/></span>
+												</label>
+											</li>
+										</t>
+										<t t-foreach="rider_numbers" t-as="rider_number">
+											<t t-if="rider_number not in rider_checked_numbers">
+												<li class="checkbox" style="border-bottom:1px solid">
+													<label>
+														<input type="checkbox" class="rider_number_search_result" name="rider_number" t-attf-value="{{rider_number}}" />
+														<span class="data_show"><t t-esc="rider_number"/></span>
+													</label>
+												</li>
+											</t>
+										</t>
+									</ul>
+								</div>
+							</div>
+						</div> 
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+										Day <i t-att-class="'fa fa-chevron-up icon_accordion' if jkv_collapse == 'collapse6' else 'fa fa-chevron-down icon_accordion'" aria-hidden="true" style="float:right;vertical-align: middle;"></i>
+									</a>
+								</h4>
+							</div>
+							<div id="collapse6" t-att-class="'panel-collapse collapse in' if jkv_collapse == 'collapse6' else 'panel-collapse collapse'">
+								<div class="panel-body">
+									<ul style="max-height: 300px;overflow-x:hidden;overflow-y:scroll;">
+										<t t-foreach="post_days" t-as="post_day">
+											<li class="checkbox" style="border-bottom:1px solid">
+												<label>
+													<input type="checkbox" class="post_day_search_result" name="post_day" t-attf-value="{{post_day}}" t-att-checked="'checked' if post_day in post_checked_days else None"/> <t t-esc="post_day"/>
+												</label>
+											</li>
+										</t>
+									</ul>
+								</div>
+							</div>
+						</div> 
+						<!--<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
+										Ride Number <i t-att-class="'fa fa-chevron-up icon_accordion' if jkv_collapse == 'collapse7' else 'fa fa-chevron-down icon_accordion'" aria-hidden="true" style="float:right;vertical-align: middle;"></i>
+									</a>
+								</h4>
+							</div>
+							<div id="collapse7" t-att-class="'panel-collapse collapse in' if jkv_collapse == 'collapse7' else 'panel-collapse collapse'">
+								<div class="panel-body">
+									<ul style="max-height: 300px;overflow-x:hidden;overflow-y:scroll;">
+										<t t-foreach="ride_numbers" t-as="ride_number">
+											<li>
+												<label class="checkbox-inline">
+													<input type="checkbox" class="ride_number_search_result" name="ride_number" t-attf-value="{{ride_number}}" t-att-checked="'checked' if ride_number in ride_checked_numbers else None"/> <t t-esc="ride_number"/>
+												</label>
+											</li>
+										</t>
+									</ul>
+								</div>
+							</div>
+						</div>-->
+
+						<!--Filter Horse Name-->
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse8">
+										Horse Name <i t-att-class="'fa fa-chevron-up icon_accordion' if jkv_collapse == 'collapse8' else 'fa fa-chevron-down icon_accordion'" aria-hidden="true" style="float:right;vertical-align: middle;"></i>
+									</a>
+								</h4>
+							</div>
+							<div id="collapse8" t-att-class="'panel-collapse collapse in' if jkv_collapse == 'collapse8' else 'panel-collapse collapse'">
+								<div class="panel-body">
+									<div class="input-group search_input" data-model="jkv.rider" data-label="horse_name_search_result">
+										<input type="text" class="form-control" id = "search_horse_name" placeholder="Search..."/>
+										<div class="input-group-btn">
+											<a class="btn btn-default">
+												<i class="fa fa-search"></i>
+											</a>
+										</div>
+									</div>
+									<t t-if="horse_checked_names">
+										<a class="clear_all" id="clear_horse">
+											<i class="fa fa-angle-left" aria-hidden="true" style="margin-right:5px"></i>
+											Clear
+										</a>
+									</t>
+
+									<ul style="max-height: 300px;overflow-x:hidden;overflow-y:scroll;">
+										<t t-foreach="horse_checked_names" t-as="horse_checked_name">
+											<li class="checkbox" style="border-bottom:1px solid">
+												<label>
+													<input type="checkbox" class="horse_name_search_result" name="horse_name" t-attf-value="{{horse_checked_name}}" checked="'checked'"/>
+													<span class="data_show"><t t-esc="horse_checked_name"/></span>
+												</label>
+											</li>
+										</t>
+										<t t-foreach="horse_names" t-as="horse_name">
+											<t t-if="horse_name not in horse_checked_names">
+												<li class="checkbox" style="border-bottom:1px solid">
+													<label>
+														<input type="checkbox" class="horse_name_search_result" name="horse_name" t-attf-value="{{horse_name}}" />
+														<span class="data_show"><t t-esc="horse_name"/></span>
+													</label>
+												</li>
+											</t>
+										</t>
+									</ul>
+								</div>
+							</div>
+						</div> 
+					</div>
+					<input class="hidden" type="text" id="jkv_collapse" name="jkv_collapse" t-attf-value="{{jkv_collapse}}"/>
+				</form>
+			</xpath>
+			<xpath expr="//div[@id='products_grid_before']" position="attributes">
+				<attribute name="class">col-md-3 hidden-xs</attribute>
+			</xpath>
+			<xpath expr="//div[@id='products_grid']" position="attributes">
+				<attribute name="class">col-md-9</attribute>
+			</xpath>
+		</template>
+
+		<template id="contactus" inherit_id="website.contactus">
+			<xpath expr="//div[@class='container']/div[1]" position="attributes">
+				<attribute name='class'></attribute>
+			</xpath>
+			<xpath expr="//t[@t-call='website.company_description']/.." position="attributes">
+				<attribute name="style">background:#f1efe8;box-shadow: 1px 10px 26px rgba(57, 57, 57, 0.41);padding-top:10px</attribute>
+			</xpath>
+			<xpath expr="//div[@class='col-md-8']" position="attributes">
+				<attribute name="style">font-weight:bold</attribute>
+			</xpath>
+		</template>
+
+
+		<!-- CUSTOM CONTACT US FORM -->
+		<template id="jkv_contactus_form" inherit_id="website_crm.contactus_form" priority="20">
+			<xpath expr="//form/.." position="attributes">
+				<attribute name="class">jkv_contactus_form</attribute>
+			</xpath>
+			<xpath expr="//form/div[7]" position="replace">
+				<div class="row form-group">
+					<div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7 col-xs-7 col-xs-offset-3">
+						<span class="btn btn-primary btn-lg o_website_form_send">Send</span>
+						<span id="o_website_form_result"></span>
+					</div>
+				</div>
+			</xpath>
+			<xpath expr="//form/div[6]" position="replace">
+				<div class=" row form-group form-field o_website_form_required_custom" style="margin-left:0px;margin-right:0px;">
+					<label class="col-md-3 col-sm-3 col-xs-3 control-label" for="description">Your Question</label>
+					<div class="col-md-9 col-sm-9 col-xs-9">
+						<textarea class="form-control o_website_form_input" name="description" required=""><t t-esc="request.params.get('description', '')"/></textarea>
+					</div>
+				</div>
+			</xpath>
+			<xpath expr="//form/div[5]" position="replace">
+				<div class="row form-group form-field o_website_form_required" style="margin-left:0px;margin-right:0px;">
+					<label class="col-md-3 col-sm-3 col-xs-3 control-label" for="name">Subject</label>
+					<div class="col-md-9 col-sm-9 col-xs-9">
+						<input type="text" class="form-control o_website_form_input" name="name" required="" t-att-value="request.params.get('name', '')" />
+					</div>
+				</div>
+			</xpath>
+			<xpath expr="//form/div[4]" position="replace">
+			</xpath>
+			<xpath expr="//form/div[3]" position="replace">
+				<div class="row form-group form-field o_website_form_required_custom" style="margin-left:0px;margin-right:0px;">
+					<label class="col-md-3 col-sm-3 col-xs-3 control-label" for="email_from">Email</label>
+					<div class="col-md-9 col-sm-9 col-xs-9">
+						<input type="email" class="form-control o_website_form_input" name="email_from" required="" t-att-value="request.params.get('email_from', '')" />
+					</div>
+				</div>
+			</xpath>
+			<xpath expr="//form/div[2]" position="replace">
+			</xpath>
+			<xpath expr="//form/div[1]" position="replace">                  
+				<div class="row form-group form-field o_website_form_required_custom" style="margin-left:0px;margin-right:0px;">
+					<label class="col-md-3 col-sm-3 col-xs-3 control-label" for="contact_name">Your Name</label>
+					<div class="col-md-9 col-sm-9 col-xs-9">
+						<input type="text" class="form-control o_website_form_input" name="contact_name" t-att-value="request.params.get('contact_name', '')" required=""/>
+					</div>
+				</div>
+			</xpath>
+		</template>
+
+		<template id="contactus_thanks" inherit_id="website_crm.contactus_thanks">
+			<xpath expr="//t[@t-call='website.company_description']/.." position="attributes">
+				<attribute name="style">background:#f1efe8;box-shadow: 1px 10px 26px rgba(57, 57, 57, 0.41);padding-top:10px</attribute>
+			</xpath>
+			<xpath expr="//div[@class='col-md-8']" position="attributes">
+				<attribute name="style">font-weight:bold</attribute>
+			</xpath>
+		</template>
+
+		<!-- HIDE SEARCH BUTTON -->
+		<template id="jkv_hide_search_button" inherit_id="theme_furnito.theme_furnito_header_layout" name="Hide Search Button">		
+			<xpath expr="//div[@class='hm-search']" position="replace">
+			</xpath>
+		</template>
+
+		<!-- HIDE SEARCH BUTTON -->
+		<template id="jkv_contact_us_thanks_inherit" inherit_id="website_crm.contactus_thanks" name="Contact Us">		
+			<xpath expr="//div[@class='container']" position="replace">
+				<div class="container">
+					<h1>Thanks!</h1>
+					<div class="row">
+						<div class="col-md-8">
+							<div class="alert alert-success">
+								Thank you for your message. We will get back to you as soon as possible.
+								<button type="button" class="close" data-dismiss="alert">&amp;times;</button>
+							</div>
+							<p class="mt64">
+								If you have an emergency, do not hesitate to contact us by phone:
+							</p>
+							<ul class="list-unstyled">
+								<li><i class="fa fa-phone"></i> : <span t-field="res_company.phone"/></li>
+								<li><i class="fa fa-envelope"></i> : <span t-field="res_company.email"/></li>
+							</ul>
+						</div>
+						<div class="col-md-4">
+							<t t-call="website.company_description"/>
+						</div>
+					</div>
+				</div>
+			</xpath>
+		</template>
+
+		<!-- Move icon CART on mobile screen -->
+		<template id="jkv_shopping_cart_mobile" inherit_id="theme_furnito.theme_furnito_header_layout">
+			<xpath expr="//ul[@id='top_menu']/t" position="before">
+				<li class="visible-xs-block">
+					<a href="/shop/cart" style="font-size:15px;">
+						<t t-set="website_sale_order" t-value="website.sale_get_order()"/>
+						<i class="fa fa-shopping-cart"/>
+						<span class="furnito_theme_cart_quantity" t-esc="website_sale_order and website_sale_order.cart_quantity or 0"/>
+					</a>
+				</li>
+			</xpath>
+			<xpath expr="//ul[@class='hm-cart']" position="after">
+				<ul class="hm-cart">
+					<li class="item-no">
+						<a href="/shop/cart" class="top-link-checkout" title="Checkout">
+							<t t-set="website_sale_order" t-value="website.sale_get_order()"/>
+							<i class="fa fa-shopping-cart"/>
+							<span class="furnito_theme_cart_quantity" t-esc="website_sale_order and website_sale_order.cart_quantity or 0"/>
+						</a>
+					</li>
+				</ul>
+			</xpath>
+			<xpath expr="//ul[@class='hm-cart'][1]" position="attributes">
+				<attribute name="class">hm-cart hidden</attribute>
+			</xpath>
+		</template>
+
+		<!-- Move check-box 'show all video' and 'subscribed video only' on shop page -->
+		<template id="theme_furnito_sale_products_inherit" inherit_id="theme_furnito.theme_furnito_sale_products">
+			<xpath expr="//div[@class='right-title']" position="replace">
+				<div class="right-title">
+					<div class="row">
+						<div class="col-md-3">
+							<t t-if="category">
+								<h3 t-field="category.name"/>
+							</t>
+							<t t-if="not category">
+								<h3>All Products</h3>
+							</t>
+						</div>
+						<div class="col-md-9">
+							<!--<input type="checkbox" id="show_all_video" class="subscribed_or_show_all" name="show_all_video" value="show_all_video" t-att-checked="'checked' if show_all_video else None"/> Show all videos-->
+							<input type="checkbox" id="show_my_videos" class="subscribed_or_show_all" name="show_my_videos" value="show_my_videos" t-att-checked="'checked' if show_my_videos else None"/>Show my videos
+							<input type="checkbox" id="subscribed_video_only" class="subscribed_or_show_all" name="subscribed_video_only" value="subscribed_video_only"  t-att-checked="'checked' if subscribed_video_only else None"/>	Subscribed video only
+						</div>
+					</div>
+					<hr/>
+				</div>
+			</xpath>
+		</template>
+
+		<!-- Add link for terms and policy in footer -->
+		<template id="footer_copyright_inherit" inherit_id="theme_furnito.footer_copyright">
+			<xpath expr="//ul[@class='link']/li[1]/a" position="attributes">
+				<attribute name="href">/page/terms</attribute>
+			</xpath>
+			<xpath expr="//ul[@class='link']/li[2]/a" position="attributes">
+				<attribute name="href">/page/privacy</attribute>
+			</xpath>
+		</template>
+
+        <!--Update url for Continue button-->
+        <template id="continue_shopping" inherit_id="website_sale.continue_shopping">
+            <xpath expr="//a[@href='/shop']" position="replace">
+                <t t-if="filter_url">
+                    <a t-att-href="filter_url" class="btn btn-default mb32">
+                        <span class="fa fa-long-arrow-left" />
+                        <span class="hidden-xs">Continue Shopping</span>
+                        <span class="visible-xs-inline">Continue</span>
+                    </a>
+                </t>
+                <t t-else="">
+                    <a href="/shop" class="btn btn-default mb32">
+                        <span class="fa fa-long-arrow-left" />
+                        <span class="hidden-xs">Continue Shopping</span>
+                        <span class="visible-xs-inline">Continue</span>
+                    </a>
+                </t>
+
+            </xpath>
+        </template>
+
+		<!-- Use gtag.js instead of analytics.js for Google Analytics -->
+        <template id="layout" inherit_id="website.layout">
+            <xpath expr="//script[@id='tracking_code']" position="replace">
+                <t id='tracking_code' t-if="website and website.google_analytics_key and not editable">
+                    <!-- Global site tag (gtag.js) - Google Analytics -->
+                    <script async="true" t-attf-src="https://www.googletagmanager.com/gtag/js?id=#{website.google_analytics_key}"></script>
+                    <script>
+                       window.dataLayer = window.dataLayer || [];
+                       function gtag(){dataLayer.push(arguments);}
+                       gtag('js', new Date());
+
+                       gtag('config', '<t t-esc="website.google_analytics_key"/>');
+                    </script>
+                </t>
+            </xpath>
+        </template>
+	</data>
+</odoo>
+

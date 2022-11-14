@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<!-- Action a nd View for Show Event Venue -->
+		<record id="jkv_show_event_action_show_event_venue" model="ir.actions.act_window">
+			<field name="name">Show Event Venue</field>
+			<field name="res_model">jkv.show.venue</field>
+			<field name="view_mode">tree,form,pivot</field>
+			<field name="help" type="html">
+				<p>
+					Create a show event
+				</p>
+			</field>
+		</record>
+
+		<record id="jkv_view_form_show_event_venue" model="ir.ui.view">
+			<field name="name">Show Event Venue Form</field>
+			<field name="model">jkv.show.venue</field>
+			<field name="arch" type="xml">
+				<form string="Show Event Venue">
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="name" placeholder="Show Event name"/>
+							</h1>
+						</div>
+						<group string="Show Event Venue">
+							<field name="show_number"/>
+							<field name="show_location" required="True"/>
+							<field name="start_date" required="True"/>
+							<field name="end_date" required="True"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="jkv_view_tree_show_event_venue" model="ir.ui.view">
+			<field name="name">Show Event Venue Tree</field>
+			<field name="model">jkv.show.venue</field>
+			<field name="arch" type="xml">
+				<tree string="Show Event Venue">
+					<field name="name"/>
+					<field name="show_number"/>
+					<field name="show_location"/>
+					<field name="start_date" />
+					<field name="end_date" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="jkv_search_view_show_event_venue" model="ir.ui.view">
+			<field name="name">Show Event Search</field>
+			<field name="model">jkv.show.venue</field>
+			<field name="arch" type="xml">
+				<search string="Show Event">
+					<field name="name" string="Show Name" filter_domain="[('name','ilike',self)]"/>
+					<field name="show_number" string="Show Number" filter_domain="[('show_number','=',self)]"/>
+					<field name="show_location" string="Show Location" filter_domain="[('show_location','ilike',self)]"/>
+					<field name="end_date" string="End Date" filter_domain="[('end_date','&lt;=',self)]"/>
+				</search>
+			</field>
+		</record>
+
+		<menuitem id="menu_inventory_management_root" name="Inventory Management" sequence="1" web_icon="jkv_show_event,static/description/icon.png"/>
+		<menuitem id="menu_show_root" name="Show Event" parent="menu_inventory_management_root" sequence="1"/>
+		<menuitem id="menu_jkv_show_event" parent="menu_show_root" name="Show Event" sequence="1" action="jkv_show_event_action_show_event_venue"/>
+
+	</data>
+</odoo>

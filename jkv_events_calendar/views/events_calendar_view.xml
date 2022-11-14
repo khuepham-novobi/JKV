@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<!-- Action a nd View for Events Calendar -->
+		<record id="jkv_event_calendar_action" model="ir.actions.act_window">
+			<field name="name">JKV Events Calendar</field>
+			<field name="res_model">jkv.events.calendar</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Create a s Calendar
+				</p>
+			</field>
+		</record>
+
+		<record id="jkv_view_form_events_calendar" model="ir.ui.view">
+			<field name="name">Events Calendar Form</field>
+			<field name="model">jkv.events.calendar</field>
+			<field name="arch" type="xml">
+				<form string="JKV Events Calendar">
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="name" placeholder="Events Calendar Name"/>
+							</h1>
+						</div>
+						<group string="Events Calendar Detail">
+							<field name="filename"  required="True"/>
+							<field name="event_description"/>
+							<field name="event_date"  required="True"/>
+							<field name="event_file" filename="filename" widget="file" required="True"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="jkv_view_tree_events_calendar" model="ir.ui.view">
+			<field name="name">Events Calendar Tree</field>
+			<field name="model">jkv.events.calendar</field>
+			<field name="arch" type="xml">
+				<tree string="JKV Events Calendar">					
+					<field name="name"/>
+					<field name="event_date"/>
+					<field name="event_description"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="jkv_search_view_events_calendar" model="ir.ui.view">
+			<field name="name">Events Calendar Search</field>
+			<field name="model">jkv.events.calendar</field>
+			<field name="arch" type="xml">
+				<search string="Events Calendar">
+					<field name="name" string="Events Calendar Name" filter_domain="[('name','ilike',self)]"/>
+				</search>
+			</field>
+		</record>
+
+		<menuitem id="menu_event_calendar_root" name="Events Calendar" sequence="1" web_icon="jkv_events_calendar,static/description/icon.png"/>
+		<menuitem id="menu_jkv_event_calendar_root" name="Events Calendar" parent="menu_event_calendar_root" sequence="21"/>
+		<menuitem id="menu_jkv_event_calendar" parent="menu_jkv_event_calendar_root" name="Events Calendar" sequence="1" action ="jkv_event_calendar_action"/>
+
+
+		<!-- HIDE UNUSED MENU -->
+		<!-- Create a group Invisible -->
+		<record id="make_invisible" model="res.groups">
+			<field name="name">Invisible</field>
+		</record>
+
+		<record model="ir.ui.menu" id="mass_mailing.mass_mailing_menu_root">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="mail.mail_channel_menu_root_chat">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="calendar.mail_menu_calendar">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
+		</record>
+		<record model="ir.ui.menu" id="utm.menu_link_tracker_root">
+			<field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
+		</record>
+	</data>
+</odoo>

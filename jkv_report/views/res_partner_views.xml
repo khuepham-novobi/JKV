@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Action a nd View for Class -->
+		<record id="view_res_partner_report_tree" model="ir.ui.view">
+			<field name="name">res.partner.report.tree</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<tree string="Customers">
+					<field name="name" />
+					<field name="jkv_customer_usef_number" widget="char"/>
+					<field name="is_rider" />
+					<field name="is_trainer" />
+					<field name="is_owner" />
+					<field name="receive_email" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.server" id="action_res_partner_report">
+            <field name="name">Customers</field>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">action = env['res.partner'].get_customers()</field>
+        </record>
+
+		<!--<record id="action_res_partner_report" model="ir.actions.act_window">
+			<field name="name">Customers</field>
+			<field name="res_model">res.partner</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('user_ids','!=',False)]</field>
+			<field name="view_id" ref="view_res_partner_report_tree"/>
+		</record>-->
+
+		<menuitem id="menu_customer_report" parent="jkv_report.menu_jkv_report_root" name="Customers" action ="action_res_partner_report"/>
+
+	</data>
+</odoo>

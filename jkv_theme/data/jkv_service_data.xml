@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="jkv_general_service" model="jkv.service">
+            <field name="service_name">JK Service</field>
+            <field name="is_general_service">True</field>
+        </record>
+        <record id="jkv_ringside" model="jkv.service">
+            <field name="service_name">JK RingSide</field>
+            <field name="is_general_service">False</field>
+        </record>
+        <record id="jkv_stream" model="jkv.service">
+            <field name="service_name">JK Stream</field>
+            <field name="is_general_service">False</field>
+        </record>
+        <record id="jkv_download" model="jkv.service">
+            <field name="service_name">JK Download</field>
+            <field name="is_general_service">False</field>
+        </record>
+    </data>
+</odoo>

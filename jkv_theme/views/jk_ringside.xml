@@ -1,0 +1,209 @@
+<odoo>
+    <template id="jk_ringside_view">
+        <t t-set="additional_title">JK RingSide</t>
+        <t t-call="website.layout">
+            <main>
+                <section class="top-content">
+                    <div class="main-banner"></div>
+                    <div class="container child-banner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="flex-col flex-auto">
+                                    <div class="flex-item">
+                                        <h4 class="breadcrumbs">
+                                            <a href="/">HOME »</a>
+                                            <span>SERVICES</span>
+                                        </h4>
+                                        <h2>JK RINGSIDE</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="tit-spacing">
+                                    <h3 class="page-tit">
+                                        IMAGINE BEING ABLE TO INSTANTLY WATCH YOUR ROUND OR HEAD BACK TO THE STABLE TO WATCH AT A LATER TIME
+                                    </h3>
+                                </div>
+                                <div class="wrapper-cont-text">
+                                    <div class="cont">
+                                        <p>All eyes are on our HD TV replays, providing the perfect moment for a one of a kind training tool in between rounds.
+                                            It is our goal to have every video uploaded and available for online viewing within an hour after the class is completed,
+                                            in the event you're unable to enjoy your instant replay.</p>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="top-right-corner">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="fullscale">
+                                                <div class="ratio-box-square">
+                                                    <img src="/jkv_theme/static/src/imgs/Links/20577.png"
+                                                         class="ratio-box-inside text-center"
+                                                         alt=""
+                                                         style="transform: translateY(-50%) !important"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-10 col-lg-offset-2 col-md-11 col-md-offset-1">
+                                            <div class="box-form has-pattern">
+                                                <div class="box-tit">
+                                                    <h3 class="tit">LET’S GET STARTED</h3>
+                                                    <span class="required">*Required</span>
+                                                </div>
+                                                <form class="form-horizontal s_website_form" action="/website_form/"
+                                                      method="post" data-model_name="crm.lead"
+                                                      data-success_page="/page/website_crm.contactus_thanks"
+                                                      enctype="multipart/form-data" id="jkv_form_contact">
+
+                                                    <div class="form-group compound form-field o_website_form_required_custom">
+                                                        <label for="contact_name">Name<span class="text-danger">*</span>
+                                                        </label>
+                                                        <input type="text" class="form-control o_website_form_input"
+                                                               id="contact_name"
+                                                               name="contact_name"
+                                                               required="required"/>
+                                                    </div>
+                                                    <div class="form-group compound form-field o_website_form_required_custom">
+                                                        <label for="phone">Phone<span class="text-danger">*</span>
+                                                        </label>
+                                                        <input type="tel"
+                                                               class="form-control o_website_form_input"
+                                                               name="phone" id="phone"
+                                                               required="required"
+                                                        />
+                                                    </div>
+                                                    <div class="form-group compound form-field o_website_form_required_custom">
+                                                        <label for="inputEmail1">Email<span class="text-danger">*</span>
+                                                        </label>
+                                                        <input type="email"
+                                                               class="form-control o_website_form_input"
+                                                               name="email_from"
+                                                               required="required"/>
+                                                    </div>
+                                                    <div class="form-group compound form-field o_website_form_required_custom">
+                                                        <label for="inputEvent">Event<span class="text-danger">*</span>
+                                                        </label>
+                                                        <input type="text"
+                                                               class="form-control o_website_form_input"
+                                                               name="name"
+                                                               required="required"/>
+                                                    </div>
+                                                    <div class="form-group compound">
+                                                        <label>DETAILS ABOUT THE EVENT</label>
+                                                        <textarea class="form-control o_website_form_input"
+                                                                      name="description"
+                                                                      required="required"></textarea>
+                                                    </div>
+
+                                                    <a href=""
+                                                       class="btn btn-block btn-form o_website_form_send o_website_form_send_fadeIn">
+                                                        <i class="pull-right">
+                                                            <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                 viewBox="0 0 12.13 22.208"
+                                                                 enable-background="new 0 0 12.13 22.208"
+                                                                 xml:space="preserve"><polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline></svg>
+                                                        </i>
+                                                        GET STARTED
+                                                    </a>
+                                                    <span id="o_website_form_result"></span>
+                                                </form>
+                                                <div class="se-pre-con" style="display:none"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="text-center tit-page-spacing">
+                            <h4 class="pre-tit">OTHER SERVICES</h4>
+                        </div>
+                        <div class="row row-reset">
+                                <div class="col-sm-6">
+                                    <div class="big-cat-link">
+                                        <a href="/service/jk-stream" class="btn btn-form valign-middle">
+                                            <div class="mr-auto">
+                                                JK Stream
+                                            </div>
+                                            <div class="icon-corner">
+                                                <svg xml="http://www.w3.org/2000/svg"
+                                                     xml:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px"
+                                                     y="0px" width="12.13px" height="22.208px"
+                                                     viewBox="0 0 12.13 22.208"
+                                                     enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                                                <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round" stroke-miterlimit="10"
+                                                          points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                            </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="big-cat-link sep">
+                                        <a href="/service/jk-download" class="btn btn-form valign-middle">
+                                            <div class="mr-auto">
+                                                JK Download
+                                            </div>
+                                            <div class="icon-corner">
+                                                <svg xml="http://www.w3.org/2000/svg"
+                                                     xml:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px"
+                                                     y="0px" width="12.13px" height="22.208px"
+                                                     viewBox="0 0 12.13 22.208"
+                                                     enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                                                <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round" stroke-miterlimit="10"
+                                                          points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                            </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </section>
+                <t t-if="call_to_action">
+                    <section class="pre-foot">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="tit-spacing">
+                                    <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                    <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                    <i class="pull-right">
+                                        <svg xml="http://www.w3.org/2000/svg" xml:xlink="http://www.w3.org/1999/xlink"
+                                             version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                             enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                                            <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                      stroke-linejoin="round" stroke-miterlimit="10"
+                                                      points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                        </svg>
+                                    </i>
+                                    Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </t>
+            </main>
+        </t>
+    </template>
+</odoo>

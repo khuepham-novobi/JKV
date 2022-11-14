@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data >
+        <record id="product_subscription" model="product.product">
+			<field name="name">Subscription</field>
+		</record>
+        <record id="product_livestream_subscription" model="product.product">
+			<field name="name">Livestream Subscription</field>
+            <field name="type">consu</field>
+		</record>
+	</data>
+    
+    <data noupdate="1">
+        <record id="product_price" model="ir.config_parameter">
+            <field name="key">product_price</field>
+            <field name="value">1</field>
+        </record>
+        <record id="subscription_my_video" model="ir.config_parameter">
+            <field name="key">subscription_my_video</field>
+            <field name="value">4</field>
+        </record>
+        <record id="subscription_all_videos" model="ir.config_parameter">
+            <field name="key">subscription_all_videos</field>
+            <field name="value">4</field>
+        </record>
+        <record id="subscription_livestream" model="ir.config_parameter">
+            <field name="key">subscription_livestream</field>
+            <field name="value">9.99</field>
+        </record>
+        <!--<record id="subscription_7_days" model="ir.config_parameter">
+            <field name="key">subscription_7_days</field>
+            <field name="value">1</field>
+        </record>
+        <record id="subscription_30_days" model="ir.config_parameter">
+            <field name="key">subscription_30_days</field>
+            <field name="value">2</field>
+        </record>
+        <record id="subscription_90_days" model="ir.config_parameter">
+            <field name="key">subscription_90_days</field>
+            <field name="value">3</field>
+        </record>
+        <record id="subscription_1_year" model="ir.config_parameter">
+            <field name="key">subscription_1_year</field>
+            <field name="value">4</field>
+        </record>
+        <record id="subscription_1_year" model="ir.config_parameter">
+            <field name="key">subscription_1_year</field>
+            <field name="value">4</field>
+        </record>-->
+    </data>
+    
+</odoo>

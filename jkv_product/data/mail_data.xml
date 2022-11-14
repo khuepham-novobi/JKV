@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+        <record id="error_file_access" model="mail.template">
+            <field name="name">Mail Template: S3 Bucket(Access Error)</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="email_from"><![CDATA[${object.company_id.name} <${(object.company_id.email or user.email)|safe}>]]></field>
+            <field name="email_to">${object.email|safe}</field>
+            <field name="subject"><![CDATA[${ctx.get('subject')}]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        The following files don't exist:
+                    </p>
+                    <ul>
+                        % for line in ctx.get('content',[]):                      
+                           <li> ${line} </li>
+                        %endfor
+                    </ul>
+                    <p> </p>
+
+                    <br/>
+                    
+                    <p>
+                    Sincerely,
+                    </p>
+                    
+                    <br/>
+                    
+                    <p>
+                    Odoo
+                    </p>
+                ]]>
+            </field>            
+        </record>
+        <record id="error_create_file" model="mail.template">
+            <field name="name">Mail Template: Create File</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="email_from"><![CDATA[${object.company_id.name} <${(object.company_id.email or user.email)|safe}>]]></field>
+            <field name="email_to">${object.email|safe}</field>
+            <field name="subject"><![CDATA[${ctx.get('subject')}]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        The following files cannot create (Show, Class, Rider number cannot be found):
+                    </p>
+                    <ul>
+                        % for line in ctx.get('content',[]):                      
+                           <li> ${line} </li>
+                        %endfor
+                    </ul>
+                    <p> </p>
+
+                    <br/>
+                    
+                    <p>
+                    Sincerely,
+                    </p>
+                    
+                    <br/>
+                    
+                    <p>
+                    Odoo
+                    </p>
+                ]]>
+            </field>            
+        </record>
+        <record id="error_create_livestream_file" model="mail.template">
+            <field name="name">Mail Template: Create Livestream File</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="email_from"><![CDATA[${object.company_id.name} <${(object.company_id.email or user.email)|safe}>]]></field>
+            <field name="email_to">${object.email|safe}</field>
+            <field name="subject"><![CDATA[${ctx.get('subject')}]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        The following files cannot create (Show, Class, Date cannot be found):
+                    </p>
+                    <ul>
+                        % for line in ctx.get('content',[]):
+                           <li> ${line} </li>
+                        %endfor
+                    </ul>
+                    <p> </p>
+
+                    <br/>
+
+                    <p>
+                    Sincerely,
+                    </p>
+
+                    <br/>
+
+                    <p>
+                    Odoo
+                    </p>
+                ]]>
+            </field>
+        </record>
+  </data>
+</openerp>

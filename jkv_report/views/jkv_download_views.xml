@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Action a nd View for Class -->
+		<record id="jkv_download_action" model="ir.actions.act_window">
+			<field name="name">JKV Download</field>
+			<field name="res_model">jkv.download</field>
+			<field name="view_mode">tree,form,pivot</field>
+			<field name="help" type="html">
+				<p>
+					Create a Download Videos Record
+				</p>
+			</field>
+		</record>
+
+		<record id="view_jkv_download_tree" model="ir.ui.view">
+			<field name="name">jkv.download.tree</field>
+			<field name="model">jkv.download</field>
+			<field name="arch" type="xml">
+				<tree string="Downloaded Video">  
+					<field name="partner_id" />
+					<field name="show_name" />
+					<field name="class_id" /> 
+					<field name="rider_number" />   
+					<field name="ride_number" />          
+					<field name="create_date" string="Date Of Purchase"/>
+					<field name="url" />
+					<field name="token"/>
+					<field name="downloaded"/>
+					<field name="downloaded_on" string="Last Downloaded on"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_jkv_download_form" model="ir.ui.view">
+			<field name="name">jkv.download.form</field>
+			<field name="model">jkv.download</field>
+			<field name="arch" type="xml">
+				<form string="Downloaded Video" create="0" edit="1">
+					<sheet>
+						<group>
+							<group string="Downloaded information">
+								<field name="partner_id" />        
+								<field name="create_date"  string="Date Of Purchase"/>
+								<field name="product_id" />     
+								<field name="token" readonly="1"/>
+								<field name="downloaded"/>
+								<field name="downloaded_on" string="Last Downloaded on" readonly="1"/>
+							</group>
+							<group string="Video information">  
+								<field name="show_id" />   
+								<field name="class_id" /> 
+								<field name="rider_number" />   
+								<field name="ride_number" />   
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_jkv_download_pivot" model="ir.ui.view">
+			<field name="name">jkv.download.pivot</field>
+			<field name="model">jkv.download</field>
+			<field name="arch" type="xml">
+				<pivot string="Subscription">  
+					<field name="create_date" string="Date Of Subscription" type="col" interval="week"/>
+					<field name="show_id" type="row"/>
+				</pivot>
+			</field>
+		</record>
+
+		<menuitem id="menu_jkv_download_report_root" name="Downloaded Videos" parent="jkv_report.menu_jkv_report_root" sequence="2"/>
+		<menuitem id="menu_jkv_download" parent="menu_jkv_download_report_root" name="Downloaded Videos" sequence="1" action ="jkv_download_action"/>
+
+	</data>
+</odoo>

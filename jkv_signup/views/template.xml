@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="login" inherit_id="web.login" name="Login">
+        <xpath expr="//button[@type='submit']" position="attributes">
+            <attribute name="style">width:100%</attribute>
+        </xpath>
+        <xpath expr="//div[@class='form-group field-login']/label" position="replace">
+            <label for="login" class="control-label">Username</label>
+        </xpath>
+    </template>
+    <template id="auth_signup.login" inherit_id="web.login" name="Sign up - Reset Password">
+        <xpath expr="//button[@type='submit']" position="after">
+            <br/>
+            <a t-if="signup_enabled" t-attf-href="/web/signup?{{ keep_query() }}" class="pull-right" style="margin-top:10px;color:#c38647">Sign up</a>
+            <a t-if="reset_password_enabled" t-attf-href="/web/reset_password?{{ keep_query() }}" class="pull-left" style="margin-top:10px;color:#c38647">Forgot Password?</a>
+        </xpath>
+    </template>
+    
+
+    <!-- POPUP CONFIRM DATE SEARCH VIDEOS-->
+    <template id="jkv_confirm_change_user_details" name="Popup Confirm Change User Details" >
+        <div class="modal fade" id="confirm_change_user_details">
+            <div class="div-confirm-change-user-details-popup modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><p>x</p></button> 
+                    <h4 class="modal-title">Warning!</h4>
+                </div>
+                <div class="modal-body">
+                    <h3>Do you want to save your changes?</h3>
+                </div>
+                <div class="modal-footer">
+                    <button id="button_confirm_change_user_details" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="details" inherit_id="website_portal.details" name="Detail">
+        <xpath expr="//form" position="before">
+            <t t-call="jkv_signup.jkv_confirm_change_user_details" />
+        </xpath>
+        <xpath expr="//form" position="attributes">
+            <attribute name="id">form_change_user_detailts</attribute>
+        </xpath>
+        <xpath expr="//input[@name='company_name']/.." position="attributes">
+            <attribute name="style">display:none;</attribute>
+        </xpath>
+        <xpath expr="//input[@name='vat']/.." position="attributes">
+            <attribute name="style">display:none;</attribute>
+        </xpath>
+        <xpath expr="//input[@name='email']/.." position="after">
+            <div t-attf-class="form-group #{error.get('jkv_customer_number') and 'has-error' or ''} col-lg-6">
+                <label class="control-label" for="jkv_customer_number">Customer Number</label>
+                <input type="text" name="jkv_customer_number" class="form-control" t-att-value="jkv_customer_number or partner.jkv_customer_number" readonly="True"/>
+            </div>
+            <div t-attf-class="form-group #{error.get('jkv_customer_usef_number') and 'has-error' or ''} col-lg-6">
+                <label class="control-label" for="jkv_customer_usef_number">USEF Number</label>
+                <input type="text" name="jkv_customer_usef_number" class="form-control" t-att-value="jkv_customer_usef_number or partner.jkv_customer_usef_number" />
+            </div>
+            <div t-attf-class="form-group col-lg-6">
+                <label for="type" class="control-label">Type</label>
+                <t t-set="type" t-value="0"/>
+                <t t-if="partner.is_rider">
+                    <input type="text" class="form-control col-lg-2" autocapitalize="true" value="Rider" readonly="True"/>
+                    <t t-set="type" t-value="1"/>
+                </t>
+                <t t-if="partner.is_trainer">
+                    <input type="text" class="form-control col-lg-2" autocapitalize="true" value="Trainer" readonly="True"/>
+                    <t t-set="type" t-value="1"/>
+                </t>
+                <t t-if="partner.is_owner">
+                    <input type="text" class="form-control col-lg-2" autocapitalize="true" value="Owner" readonly="True"/>
+                    <t t-set="type" t-value="1"/>
+                </t>
+                <t t-if="type == 0">
+                    <input type="text" class="form-control" value="None" readonly="True"/>
+                </t>
+            </div>
+        </xpath>        
+        <xpath expr="//input[@name='redirect']" position="before">            
+            <div t-attf-class="form-group col-lg-6">
+                <t t-if="partner.receive_email">
+                    <input type="checkbox" name="receive_email" checked="true"/> Receive promotions, news and information via Email
+                </t>
+                <t t-if="not partner.receive_email">
+                    <input type="checkbox" name="receive_email"/> Receive promotions, news and information via Email
+                </t>
+            </div>
+        </xpath>
+        <xpath expr="//input[@name='street']/../label" position="replace">
+            <label class="control-label" for="street">Street</label>
+        </xpath>
+        <xpath expr="//input[@name='phone']" position="attributes">
+            <attribute name="type">text</attribute>
+            <attribute name="id">phone_register</attribute>
+        </xpath>
+        <xpath expr="//div[@class='col-md-8']/div[@class='clearfix']/button" position="attributes">
+            <attribute name="style">display:none;</attribute>
+        </xpath>
+        <xpath expr="//div[@class='col-md-8']/div[@class='clearfix']/button" position="after">
+            <input id="button_submit_confirm_change_user_details" type="button" class="btn btn-primary pull-right mb32 fa fa-long-arrow-right" value="Confirm" />
+        </xpath>
+    </template>
+
+    <template id="remove_account" inherit_id="website_portal.details" name="Remove Account">
+        <xpath expr="//button[@type='submit']" position="attributes">
+            <attribute name="class">btn btn-primary pull-right mb32</attribute>
+        </xpath>           
+        <xpath expr="//button[@type='submit']" position="before">
+            <a style="color:#c38647" class="pull-left" data-toggle="modal" data-target="#confirm_remove">Remove account</a>
+        </xpath>        
+        <xpath expr="//form" position="before">
+            <div class="modal fade" id="confirm_remove">
+                <div class="modal-dialog modal-content">
+                   <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal"><p>x</p></button> 
+                      <h4 class="modal-title">Remove account</h4>
+                  </div>
+                  <div class="modal-body form-horizontal">
+                    <p class="alert alert-danger" id="error_remove_account" style="display:none"></p>
+                    <div class="form-group row">
+                        <label class="control-label col-sm-4">Your password:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="password" name="password" id="remove_password"/>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin-top:10px">
+                        <div class="col-sm-8 col-sm-offset-4">
+                            <a id="confirm_remove_account" class="btn btn-primary">
+                                Confirm
+                                <span class="fa fa-long-arrow-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </xpath>
+</template>
+<template id="detection" name="Detection">
+    <t t-call="web.login_layout">
+        <form class="oe_signup_form media-control-signup" role="form" method="get" style="max-width:1200px;">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <input type="hidden" name="detection_redirect" value="/shop"/>
+            <input type="hidden" name="type" t-att-value="type"/>
+            <t t-if="'trainer' in type">
+                <h3>Are you the trainer of the following horses?</h3>
+                <ul class="list-unstyled">
+                    <t t-foreach="lines_trainer" t-as="l">
+                        <li>
+                            <input type="checkbox" name="lines" class="line" t-att-value="l['id']"/>                                
+                            <span style="font-weight: normal" t-esc="l['horse_name']" />
+                        </li>
+                    </t>       
+                </ul>
+            </t>
+            <t t-if="'owner' in type">
+                <h3>Are you the owner of the following horses?</h3>
+                <ul class="list-unstyled">
+                    <t t-foreach="lines_owner" t-as="l">
+                        <li>
+                            <input type="checkbox" name="lines" class="line" t-att-value="l['id']"/>                                
+                            <span style="font-weight: normal" t-esc="l['horse_name']" />
+                        </li>
+                    </t>       
+                </ul>
+            </t>
+            <t t-if="'rider' in type">
+                <h3>You are</h3>
+                <ul class="list-unstyled">
+                    <t t-foreach="lines_rider" t-as="l">
+                        <li>
+                            <input type="checkbox" name="lines" class="line" t-att-value="l['id']"/>
+                            <span style="font-weight: normal" t-esc="l['name']" />
+                            <span> that had rider number </span>
+                            <span style="font-weight: normal" t-esc="l['rider_number']" />
+                            <span> at </span>
+                            <span style="font-weight: normal" t-esc="l['show_name']" />
+                        </li>
+                    </t>       
+                </ul>
+            </t>
+            <div class="clearfix oe_login_buttons">
+                <a t-attf-href="/shop" class="pull-right" style="margin-right:20px;color:#c38647">No, thanks</a>
+                <button type="submit" class="btn btn-primary pull-left">Confirm</button>
+            </div>                
+        </form>
+    </t>
+</template>
+<!--CUSTOMIZE SIGN UP FORM-->
+<template id="signup" inherit_id="auth_signup.signup" name="Sign up login">
+    <xpath expr="//form" position="attributes">
+        <attribute name="class">oe_signup_form form-horizontal media-control-signup</attribute>
+        <attribute name="style">max-width:1200px;</attribute>
+    </xpath>
+    <xpath expr="//div[@class='clearfix oe_login_buttons']" position="replace">            
+        <div class="clearfix oe_login_buttons" style="text-align:center">
+            <a class="col-sm-4"></a>
+            <button type="submit" class="btn btn-primary pull-left col-sm-6">Sign up</button><br/>
+
+        </div>
+        <div style="margin-top:15px">
+            <span class="pull-left">Already have an account? <a t-attf-href="/web/login?{{ keep_query() }}" style="margin-right:20px;color:#c38647">Login</a></span>
+        </div>
+    </xpath>
+</template>
+<template id="signup" inherit_id="auth_signup.signup" name="Sign up login">
+    <xpath expr="//form" position="attributes">
+        <attribute name="class">oe_signup_form form-horizontal media-control-signup</attribute>
+        <attribute name="style">max-width:1200px;</attribute>
+    </xpath>
+</template>
+<template id="fields" inherit_id="auth_signup.fields" name="Auth Signup/ResetPassword form fields">
+    <xpath expr="//div[@class='form-group field-login']" position="replace">
+        <div class="form-group field-login row">
+            <label for="login" class="control-label col-sm-3 col-md-3 col-xs-3">Username<span style="color:red">*</span></label>
+            <div class="col-sm-9 col-md-8 col-xs-9">
+                <input type="text" name="login" t-att-value="login" id="login" class="form-control" autofocus="autofocus"
+                    autocapitalize="off" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[@class='form-group field-name']" position="replace">
+            <div class="form-group field-name row">
+                <label for="name" class="control-label col-sm-3 col-md-3 col-xs-3">Name<span style="color:red">*</span></label>
+                <div class="col-sm-9 col-md-8 col-xs-9">
+                    <input type="text" name="name" t-att-value="name" id="name" class="form-control" placeholder="e.g. John Doe"
+                        required="required" t-att-readonly="'readonly' if only_passwords else None"
+                        t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//div[@class='form-group field-password']" position="replace">
+                <div class="form-group field-password row">
+                    <label for="password" class="control-label col-sm-3 col-md-3 col-xs-3">Password<span style="color:red">*</span></label>
+                    <div class="col-sm-9 col-md-8 col-xs-9">
+                        <input type="password" name="password" id="password" class="form-control"
+                            required="required" t-att-autofocus="'autofocus' if only_passwords else None"/>
+                        </div>
+                    </div>
+                </xpath>
+                <xpath expr="//div[@class='form-group field-confirm_password']" position="replace">
+                    <div class="form-group field-confirm_password row">
+                        <label for="confirm_password" class="control-label col-sm-3 col-md-3 col-xs-3">Confirm Password<span style="color:red">*</span></label>
+                        <div class="col-sm-9 col-md-8 col-xs-9">
+                            <input type="password" name="confirm_password" id="confirm_password" class="form-control" required="required"/>
+                        </div>
+                    </div>
+                </xpath>
+                <xpath expr="//div[@class='form-group field-confirm_password row']" position="after">
+                    <t t-if="not only_passwords">
+                        <div class="form-group field-address">
+                            <label for="address" class="control-label col-sm-3 col-md-3 col-xs-3">Address<span style="color:red">*</span></label>
+                            <div class="col-sm-9 col-md-8 col-xs-9">
+                                <input type="text" name="street" id="street" class="form-control" placeholder="Street..." required="True"/>              
+                            </div>
+                        </div>
+                        <!--For large screen-->
+                        <div class="hidden-xs hidden-sm form-group field-address">
+                            <div class="col-sm-2 col-sm-offset-3 col-md-2 col-md-offet-3 col-xs-2 col-xs-offset-3">                        
+                                <input type="text" name="city" id="city" class="form-control" placeholder="City" required="True"/>                        
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-xs-4">
+                                <select name="state_id" class="form-control" required="True">
+                                    <t t-foreach="states or []" t-as="state">
+                                        <option t-att-value="state.id">
+                                            <t t-esc="state.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-sm-2 col-md-2 col-xs-2">                        
+                                <input type="text" name="zip_code" id="zip_code" class="form-control" placeholder="ZIP" required="True"/>                        
+                            </div>
+                        </div>
+                        <!--For mobile screen-->
+                        <div class="form-group field-address hidden-md hidden-lg">
+                            <div class="col-sm-offset-3 col-xs-offset-3 col-sm-9 col-xs-9">
+                                <input type="text" id="city_xs" class="form-control" placeholder="City"/>
+                            </div>
+                        </div>
+                        <div class="form-group field-address hidden-md hidden-lg">
+                            <div class="col-sm-offset-3 col-xs-offset-3 col-sm-9 col-xs-9">
+                                <select id="state_id_xs" class="form-control">
+                                    <t t-foreach="states or []" t-as="state">
+                                        <option t-att-value="state.id">
+                                            <t t-esc="state.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group field-address hidden-md hidden-lg">
+                            <div class="col-sm-offset-3 col-xs-offset-3 col-sm-9 col-xs-9">
+                                <input type="text" id="zip_code_xs" class="form-control" placeholder="ZIP"/>
+                            </div>
+                        </div>
+                        <div class="form-group field-phone">
+                            <label for="phone" class="control-label col-sm-3 col-md-3 col-xs-3">Phone<span style="color:red">*</span></label>
+                            <div class="col-sm-9 col-md-8 col-xs-9">
+                                <input type="tel" name="phone" id="phone" class="form-control" required="required"/>
+                            </div>
+                        </div>
+                        <div class="form-group field-email">
+                            <label for="email" class="control-label col-sm-3 col-md-3 col-xs-3">Email<span style="color:red">*</span></label>
+                            <div class="col-sm-9 col-md-8 col-xs-9">
+                                <input type="email" name="email" id="email" class="form-control" required="required"/>
+                            </div>
+                        </div>
+                        <div class="form-group field-customer_usef_number">
+                            <label for="customer_usef_number" class="control-label col-sm-3 col-md-3 col-xs-3">USEF Number</label>
+                            <div class="col-sm-9 col-md-8 col-xs-9">
+                                <input type="text" name="customer_usef_number" id="customer_usef_number" class="form-control" autocapitalize="off"/>
+                            </div>
+                        </div>
+                        <div class="form-group field-type">
+                            <label for="type" class="control-label col-sm-3 col-md-3 col-xs-3">Type</label>
+                            <div class="col-sm-9 col-md-8 col-xs-9">
+                                <label class="checkbox-inline"><input type="checkbox" name="type_rider" value="rider"/>Rider</label> <br/>
+                                <label class="checkbox-inline"><input type="checkbox" name="type_trainer" value="trainer"/>Trainer</label> <br/>
+                                <label class="checkbox-inline"><input type="checkbox" name="type_owner" value="owner"/>Owner</label> 
+                            </div>
+                        </div>
+                        <div class="form-group field-receive_email checkbox" style="margin-bottom:20px">
+                            <label class="col-sm-2 col-md-2 col-xs-2"></label>
+                            <label class="control-label"><input type="checkbox" name="receive_email" id="receive_email"/>I would like to receive promotions, news and information via Email</label>                    
+                        </div>
+                    </t>
+                </xpath>
+            </template>
+        </odoo>

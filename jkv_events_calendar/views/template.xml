@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<!-- TEMPLATE LIST EVENTS CALENDAR -->
+		<template id="theme_events_calencar" name="Events Calencar">
+			<t t-call="website.layout">
+				<div id="wrap" class="container oe_website_sale">
+					<h2 style="text-align:center;">JKV Events Calendar</h2>
+					<div class="products_pager">
+						<t t-call="website.pager" />
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
+								<ul class="event-list">
+									<t t-foreach="events" t-as="event">
+										<li>
+											<time>
+												<span class="day"><t t-esc="event.day"/></span>
+												<span class="month"><t t-esc="event.month"/></span>
+												<span class="year"><t t-esc="event.year"/></span>
+											</time>
+											<div class="info">
+												<a t-attf-href="/page/events-calendar/events/{{event.id}}" class="list-group-item">
+													<h2 class="title"><t t-esc="event.name"/></h2>
+													<p class="desc"><t t-esc="event.event_description"/></p>
+												</a>
+											</div>
+										</li>
+									</t>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- Template in link below
+						Link : https://bootsnipp.com/snippets/featured/event-list
+					-->
+				</div>
+			</t>
+		</template>
+
+		<!-- TEMPLATE EVENTS CALENDAR DETAIL -->
+		<template id="theme_events_calencar_detail" name="Events Calencar Detail">
+			<t t-call="website.layout">
+				<div id="wrap" class="container oe_website_sale">
+					<h2 style="text-align:center;">JKV Events Calendar</h2>
+					<div>
+						<embed width="100%" height="700px;" type="application/pdf" t-attf-src="data:application/pdf;base64,{{event.event_file}}"></embed>
+					</div>
+				</div>
+			</t>
+		</template>
+	</data>
+</odoo>

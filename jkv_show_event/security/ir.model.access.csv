@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_jkv_class_base_user,jkv.class.base.user,jkv_show_event.model_jkv_class,base.group_user,1,1,1,1
+access_jkv_rider_base_user,jkv.rider.base.user,jkv_show_event.model_jkv_rider,base.group_user,1,1,1,1
+access_jkv_show_venue_base_user,jkv.show_venue.base.user,jkv_show_event.model_jkv_show_venue,base.group_user,1,1,1,1
+access_jkv_class_public,jkv.class.public,jkv_show_event.model_jkv_class,,1,0,0,0
+access_jkv_rider_public,jkv.rider.public,jkv_show_event.model_jkv_rider,,1,0,0,0
+access_jkv_show_venue_public,jkv.show_venue.public,jkv_show_event.model_jkv_show_venue,,1,0,0,0

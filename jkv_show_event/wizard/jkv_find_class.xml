@@ -1,0 +1,37 @@
+<odoo>
+	<data>	
+
+		<record id="jkv_find_class_form" model="ir.ui.view">
+			<field name="name">JKV Find Class Form</field>
+			<field name="model">jkv.find.class</field>
+			<field name="arch" type="xml">
+				<form string="Class Data">
+					<group string="Class">
+						<field name="class_number"/>
+						<field name="class_name"/>
+					</group>
+					<footer>
+						<button name="find_class" string="Find" type="object" class="oe_highlight"/>
+						<!-- Jul 24,2017 - Hide button Save and Delete
+
+						<button name="save_class" string="Save" type="object" confirm="Do you want to continue save this record?" default_focus="1" class="oe_highlight" />                
+						<button name="delete_class" string="Delete" confirm="Do you want to continue delete this record?" type="object" default_focus="1" class="oe_highlight"/> 
+
+					-->
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="jkv_find_class" model="ir.actions.act_window">
+			<field name="name">JKV Find Class</field>
+			<field name="res_model">jkv.find.class</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="jkv_find_class_form"/>
+			<field name="target">new</field>
+		</record>
+		
+		<menuitem id="menu_jkv_find_class" name="Find Class" parent="jkv_show_event.menu_class_root" action="jkv_find_class" sequence="23"/>
+	</data>
+</odoo>

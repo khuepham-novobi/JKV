@@ -1,0 +1,167 @@
+<odoo>
+    <template id="jkv_theme_sample_video_popup" inherit_id="jkv_website_sale.jkv_sample_video_popup" priority="999">
+        <xpath expr="//div[@class='modal-footer']" position="replace">
+            <div class="modal-footer" style="border-top:none">
+                <a href="" class="btn btn-close-video-popup" data-dismiss="modal">Close</a>
+            </div>
+        </xpath>
+    </template>
+    <template id="jkv_videos">
+        <t t-call="website.layout">
+            <t t-set="additional_title">JK Live</t>
+            <div id="wrap" class="video-page">
+                <section class="top-content">
+                    <div class="main-banner"></div>
+                    <div class="container child-banner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="flex-col flex-auto">
+                                    <div class="flex-item">
+                                        <h4 class="breadcrumbs">
+                                            <a href="/">HOME »</a>
+                                            <span>Videos</span>
+                                        </h4>
+                                        <h2>JK Live</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-content">
+                    <t t-call="jkv_theme.hello_section"/>
+                    <div class="container">
+                      <div class="row hidden-xs">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <div class="holder-banner">
+                                        <img src="/jkv_theme/static/src/imgs/Links/157375.png" class="m-auto img-responsive" alt=""/>
+                                    </div>
+                                  </div>
+                                </div>
+                        <div class="row visible-xs-block">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <div class="holder-banner">
+                                        <img src="/jkv_theme/static/src/imgs/Links/157375.png" class="m-auto img-responsive" alt=""/>
+                                    </div>
+                                  </div>
+                                </div>
+                      <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <div class="livestream-bg">
+                              <a href="/page/livestream-main">
+                                  <img src="/jkv_theme/static/src/imgs/Links/158032.png" alt="" class="img-responsive"/>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <div class="livestream-bg">
+                                    <a href="/page/livestream-tellespen">
+                                        <img src="/jkv_theme/static/src/imgs/Links/158032.png" alt=""
+                                             class="img-responsive"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="fifth-content">
+                    <div class="bg"></div>
+                    <div class="container js_sale oe_website_sale">
+                        <div class="tit-spacing text-center">
+                            <h4 class="main-tit">RECENTLY UPLOADED</h4>
+                        </div>
+                        <div class="row flex-col">
+                            <t t-as="tr_product" t-foreach="products">
+                                <t t-as="td_product" t-foreach="tr_product">
+                                    <t t-if="td_product">
+                                        <t t-set="product" t-value="td_product"/>
+                                        <t t-call="jkv_theme.product_box_homepage"/>
+                                    </t>
+                                </t>
+                            </t>
+                        </div>
+                        <div class="modal fade video_form_notification" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <strong></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade col-sm-8 col-md-4" id="share_modal" role="dialog"
+                             style="margin: auto; top: 30%">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title">Share Video Link</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group">
+                                        <input id="share_link_input" class="form-control" value=""/>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-success copy_btn">
+                                                <i class="fa fa-clipboard"></i>
+                                                Copy
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center; margin: 5px">
+                                        <strong class="notification_div"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="se-pre-con" style="display:none"></div>
+                        <t t-call="jkv_website_sale.jkv_main_video_popup"/>
+                        <t t-call="jkv_website_sale.jkv_sample_video_popup"/>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                <a href="/shop" class="btn btn-main btn-dark btn-block">
+                                    <i class="pull-right">
+                                        <svg version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                             enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                    <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                    </svg>
+                                    </i>
+                                    All Videos
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <t t-if="call_to_action">
+                    <section class="pre-foot">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="tit-spacing">
+                                    <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                    <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                    <i class="pull-right">
+                                        <svg version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                             enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                    <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                    </svg>
+                                    </i>
+                                    Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

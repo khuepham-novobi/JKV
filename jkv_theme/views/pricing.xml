@@ -1,0 +1,210 @@
+<odoo>
+    <template id="jkv_pricing">
+        <t t-call="website.layout">
+            <t t-set="additional_title">JK Videos</t>
+            <div id="wrap" class="video-page">
+                <section class="top-content">
+                    <div class="main-banner"></div>
+                    <div class="container child-banner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="flex-col flex-auto">
+                                    <div class="flex-item">
+                                        <h4 class="breadcrumbs">
+                                            <a href="/">HOME »</a>
+                                            <span>Videos</span>
+                                        </h4>
+                                        <h2>Pricing</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-content">
+                    <t t-call="jkv_theme.hello_section"/>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="wrapper-cont">
+
+                                    <div class="tit-spacing tit-pricing">
+                                        <h2 class="main-tit text-center">live stream Subscription</h2>
+                                    </div>
+                                    <div class="row">
+                                        <!--<div class="col-md-8 col-md-offset-2">-->
+                                        <div>
+                                            <div class="box-pricing single" style="padding-top:0;">
+                                                <div class="row">
+                                                    <div class="col-sm-4"/>
+
+                                                    <!--Livestream-->
+                                                    <div class="col-sm-4 item">
+                                                        <div class="box-item">
+                                                            <div class="text-center tit">
+                                                                <h2 class="main-tit">$<t t-esc="livestream_subscription_price"/></h2>
+                                                                <h3>JKV Livestream</h3>
+                                                            </div>
+                                                            <ul class="benefit-list">
+                                                                <li>ANNUAL SUBSCRIPTION</li>
+                                                                <li>UNLIMITED ONLINE VIEWING ACCESS TO ALL JK LIVE STREAMED EVENTS</li>
+                                                            </ul>
+                                                            <t t-if="request.session.uid">
+                                                                <a href="/purchase_subscription?is_livestream_subscription=1"
+                                                                   class="btn btn-block btn-form">
+                                                                    <i class="pull-right">
+                                                                        <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                             viewBox="0 0 12.13 22.208"
+                                                                             enable-background="new 0 0 12.13 22.208"
+                                                                             xml:space="preserve"><polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline></svg>
+                                                                    </i>
+                                                                    Shop Subscriptions
+                                                                </a>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <div class="loginOverlay btn btn-block btn-form">
+                                                                    <i class="pull-right">
+                                                                        <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                             viewBox="0 0 12.13 22.208"
+                                                                             enable-background="new 0 0 12.13 22.208"
+                                                                             xml:space="preserve"><polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline></svg>
+                                                                    </i>
+                                                                    Shop Subscriptions
+                                                                </div>
+                                                            </t>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-4"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="tit-spacing tit-pricing">
+                                        <h2 class="main-tit text-center">Single Videos</h2>
+                                    </div>
+                                    <div class="box-pricing single">
+                                        <div class="row">
+                                            <div class="col-sm-4 item">
+                                                <div class="most-pop">
+                                                    <h3>Hunter/Jumper shows</h3>
+                                                </div>
+                                                <div class="box-item">
+                                                    <div class="text-center tit">
+                                                        <h2 class="main-tit">$5</h2>
+                                                        <h3>PER SINGLE VIDEO*</h3>
+                                                    </div>
+                                                    <ul class="benefit-list">
+                                                        <li>Select and download a single video</li>
+                                                        <li>One download per purchase</li>
+                                                    </ul>
+
+                                                    <a href="/shop" class="btn btn-block btn-form">
+                                                        <i class="pull-right">
+                                                            <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                 viewBox="0 0 12.13 22.208"
+                                                                 enable-background="new 0 0 12.13 22.208"
+                                                                 xml:space="preserve"><polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline></svg>
+                                                        </i>
+                                                        Shop Videos
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 item active">
+                                                <div class="most-pop">
+                                                    <h3>Reining shows</h3>
+                                                </div>
+                                                <div class="box-item">
+                                                    <div class="text-center tit">
+                                                        <h2 class="main-tit">$10</h2>
+                                                        <h3>PER SINGLE VIDEO*</h3>
+                                                    </div>
+                                                    <ul class="benefit-list">
+                                                        <li>Select and download a single video</li>
+                                                        <li>One download per purchase</li>
+                                                    </ul>
+                                                    <a href="/shop" class="btn btn-block btn-form">
+                                                        <i class="pull-right">
+                                                            <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                 viewBox="0 0 12.13 22.208"
+                                                                 enable-background="new 0 0 12.13 22.208"
+                                                                 xml:space="preserve"><polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline></svg>
+                                                        </i>
+                                                        Shop Videos
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 item">
+                                                <div class="most-pop">
+                                                    <h3>Dressage shows</h3>
+                                                </div>
+                                                <div class="box-item">
+                                                    <div class="text-center tit">
+                                                        <h2 class="main-tit">$35</h2>
+                                                        <h3>PER SINGLE VIDEO*</h3>
+                                                    </div>
+                                                    <ul class="benefit-list">
+                                                        <li>Select and download a single video</li>
+                                                        <li>One download per purchase</li>
+                                                    </ul>
+                                                    <a href="/shop" class="btn btn-block btn-form">
+                                                        <i class="pull-right">
+                                                            <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                 viewBox="0 0 12.13 22.208"
+                                                                 enable-background="new 0 0 12.13 22.208"
+                                                                 xml:space="preserve"><polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline></svg>
+                                                        </i>
+                                                        Shop Videos
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="login-overlay" class="login-overlay" style="display:none;">
+                                <div style="background: #22353C;width: 100%;height: 100%;opacity: 0.9;"></div>
+                                <div class="text-overlay">
+                                    <div style="padding-bottom:10px;">PLEASE LOGIN TO</div>
+                                    <div>SHOP SUBSCRIPTIONS.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <t t-if="call_to_action">
+                    <section class="pre-foot">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="tit-spacing">
+                                    <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                    <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                    <i class="pull-right">
+                                        <svg version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                             enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                    <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                    </svg>
+                                    </i>
+                                    Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

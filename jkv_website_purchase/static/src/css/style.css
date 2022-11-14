@@ -1,0 +1,9 @@
+.jkv_form_box {
+    padding: 50px;
+    width: 400px;
+    margin: 0 auto;
+    border: 1px solid #c38647;
+    box-shadow: 1px 10px 26px rgba(57, 57, 57, 0.41);
+    margin-top: 30px;
+    background-color: #f1efe8;
+}

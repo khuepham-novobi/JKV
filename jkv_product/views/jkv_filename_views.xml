@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<!-- Action a nd View for Class -->
+		<record id="jkv_filename_action" model="ir.actions.act_window">
+			<field name="name">Video File Action</field>
+			<field name="res_model">jkv.filename</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Create a Video File
+				</p>
+			</field>
+		</record>
+        
+        <record id="jkv_search_view_video" model="ir.ui.view">
+			<field name="name">Video Search</field>
+			<field name="model">jkv.filename</field>
+			<field name="arch" type="xml">
+				<search string="Video">
+					<field name="name" string="File Name" filter_domain="[('name','ilike',self)]"/>
+
+					<field name="show_number" string="Show Number" filter_domain="[('show_number','=',self)]"/>
+
+                    <field name="class_number" string="Class Number" filter_domain="[('class_number','=',self)]"/>
+                    
+					<field name="rider_number" string="Rider Number" filter_domain="[('rider_number','=',self)]"/>
+						
+				</search>
+			</field>
+		</record>
+
+		<record id="jkv_view_form_filename" model="ir.ui.view">
+			<field name="name">Video File Form</field>
+			<field name="model">jkv.filename</field>
+			<field name="arch" type="xml">
+				<form string="JKV Filename">
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="name" placeholder="Video Filename"/>
+							</h1>
+						</div>
+						<group string="Video Infomation">
+							<field name="show_id" required="1"/>
+							<field name="show_number" readonly="1"/>
+							<field name="class_id" required="1"/>
+							<field name="class_number" readonly="1"/>
+							<field name="rider_id" string="Rider Name" required="1"/>
+							<field name="rider_number" readonly="1"/>
+							<field name="ride_number" required="1"/>
+							<field name="video_filename_url" readonly='1'/>
+							<field name="sample_file_url"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="jkv_view_tree_filename" model="ir.ui.view">
+			<field name="name">Video File Tree</field>
+			<field name="model">jkv.filename</field>
+			<field name="arch" type="xml">
+				<tree string="JKV Filename">	
+					<field name="name"/>
+					<field name="show_id"/>
+					<field name="class_id"/>
+					<field name="rider_id" string="Rider Name"/>
+					<field name="ride_number"/>
+				</tree>
+			</field>
+		</record>
+
+		<menuitem id="menu_filename_root" name="Video File" parent="jkv_show_event.menu_inventory_management_root" sequence="4"/>
+		<menuitem id="menu_jkv_show_filename" parent="menu_filename_root" name="Video File" sequence="1" action ="jkv_filename_action"/>
+        
+        <record id="jkv_product_action" model="ir.actions.act_window">
+			<field name="name">Products</field>
+			<field name="res_model">product.template</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Create a Video File
+				</p>
+			</field>
+		</record>
+
+        <menuitem id="menu_jkv_product" parent="menu_filename_root" name="Products" sequence="1" action ="jkv_product_action"/>
+
+	</data>
+</odoo>

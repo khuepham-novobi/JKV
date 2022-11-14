@@ -1,0 +1,23 @@
+<odoo>
+    <template id="jkv_theme" name="JKV Theme" inherit_id = "website.assets_frontend" priority="9999">
+         <xpath expr="." position="inside">
+<!--              <link href="https://fonts.googleapis.com/css?family=Montserrat:500&amp;subset=latin-ext" type="text/css" rel="stylesheet"/>-->
+              <link rel="stylesheet" type="text/css" href="/jkv_theme/static/src/css/fullcalendar.css"/>
+              <link rel="stylesheet" type="text/css" href="/jkv_theme/static/src/css/jkv-new-style.css"/>
+              <link rel="stylesheet" type="text/css" href="/jkv_theme/static/src/css/jkv-custom-style.css"/>
+              <link rel="stylesheet" type="text/css" href="/jkv_theme/static/src/css/video-js.css"/>
+
+
+
+              <script type="text/javascript" src="/jkv_theme/static/src/js/jkv_website_form.js"/>
+              <script type="text/javascript" src="/jkv_theme/static/src/js/jkv_custom.js"/>
+              <script type="text/javascript" src="/jkv_theme/static/src/js/jkv_event_calendar.js"/>
+              <script type="text/javascript" src="/jkv_theme/static/src/js/jkv_event_livestream_calendar.js"/>
+              <script type="text/javascript" src="/jkv_theme/static/src/js/fullcalendar.js"/>
+              <script type="text/javascript" src="/jkv_theme/static/src/js/gcal.js"/>
+              <script type="text/javascript" src="/jkv_theme/static/src/js/jkv_livestream_videos.js"/>
+              <script type="text/javascript" src="/jkv_theme/static/src/js/video.min.js"/>
+              <script type="text/javascript" src="/jkv_theme/static/src/js/videojs-http-streaming.min.js"/>
+         </xpath>
+    </template>
+</odoo>

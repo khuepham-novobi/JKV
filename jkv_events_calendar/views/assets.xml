@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Assets Frontend -->
+		<template id="jkv_assets_frontend" inherit_id="website.assets_frontend" name="Shop">
+			<xpath expr="." position="inside">
+				<link href="/jkv_events_calendar/static/src/css/website.css" rel="stylesheet" type="text/less"/>
+			</xpath>
+		</template>
+	</data>
+</openerp>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="homepage" inherit_id="website.homepage" name="Homepage">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="oe_structure oe_empty">
+                <section class="top-content">
+                    <div class="main-banner">
+                        <img src="/jkv_theme/static/src/imgs/Links/home-hero.jpg" alt=""/>
+                    </div>
+                    <div class="container">
+                        <div class="row welcome-box">
+                            <div class="col-md-5 col-md-offset-7 col-sm-6 col-sm-offset-6">
+                                <div class="flex-col">
+                                    <div>
+                                        <h2>RELIVE THE RIDE</h2>
+                                        <h4>Welcome to the next generation of the riding experience.</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Livestream subscribe-->
+                        <div class="row flex-col">
+                            <div class="col-md-5 col-sm-6 right-box">
+                                <a href="/page/pricing" class="valign-middle">
+                                    <div class="mr-auto">
+                                        <h3>SUBSCRIBE TO LIVE EVENTS</h3>
+                                    </div>
+                                    <div class="icon-corner">
+                                        <svg version="1.1" x="0px" y="0px" width="12.13px" height="22.208px"
+                                             viewBox="0 0 12.13 22.208" enable-background="new 0 0 12.13 22.208"
+                                             xml:space="preserve">
+                                        <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                  stroke-linejoin="round" stroke-miterlimit="10"
+                                                  points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                    </svg>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-7 col-sm-6 left-box" style="background:none; padding-bottom:0;"/>
+                        </div>
+
+
+                        <div class="row flex-col">
+                            <div class="col-md-5 col-sm-6 right-box">
+                                <a href="/page/contactus" class="valign-middle">
+                                    <div class="mr-auto">
+                                        <h3>CONTACT OUR SALES TEAM</h3>
+                                    </div>
+                                    <div class="icon-corner">
+                                        <svg version="1.1" x="0px" y="0px" width="12.13px" height="22.208px"
+                                             viewBox="0 0 12.13 22.208" enable-background="new 0 0 12.13 22.208"
+                                             xml:space="preserve">
+                                        <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                  stroke-linejoin="round" stroke-miterlimit="10"
+                                                  points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                    </svg>
+                                    </div>
+                                </a>
+                            </div>
+
+
+<!--                            <div id="playerElement"  style="display:none"></div>-->
+<!--                            <input type="hidden" t-att-value="license" id="license"/>-->
+<!--                            <input type="hidden" t-att-value="source_url" id="source_url"/>-->
+
+<!--                            <script type="text/javascript" src="//player.wowza.com/player/latest/wowzaplayer.min.js"></script>-->
+<!--                            <script type="text/javascript">-->
+<!--                                $(document).ready(function(){-->
+<!--                                    var player = WowzaPlayer.create('playerElement',-->
+<!--                                        {-->
+<!--                                            "license":$('#license').val(),-->
+<!--                                            "sourceURL":$('#source_url').val(),-->
+<!--                                        }-->
+<!--                                    );-->
+<!--                                    player.play();-->
+<!--                                    player.onPlay(function(){-->
+<!--                                        setTimeout(function(){-->
+<!--                                            if (player.isLive()){-->
+<!--                                                $('#livestream_panel').css('background', '#152A31');-->
+<!--                                                $('#livestream_panel a').css('display','flex');-->
+<!--                                            }-->
+<!--                                        }, 300);-->
+<!--                                    });-->
+<!--                                });-->
+<!--                            </script>-->
+                            <t t-if="live_now">
+                                <div class="col-md-7 col-sm-6 left-box" id="livestream_panel" style="background:#152A31">
+                                    <a href="/page/live-video-main" class="valign-middle" style="display:flex">
+                                        <div class="mr-auto">
+                                            <h4 class="text-uppercase">Now streaming
+                                                <i class="fa fa-circle"></i>
+                                            </h4>
+                                            <h3><t t-esc="title_livestream"/></h3>
+                                        </div>
+                                        <div class="icon-corner">
+                                            <svg version="1.1" x="0px" y="0px" width="12.13px" height="22.208px"
+                                                 viewBox="0 0 12.13 22.208" enable-background="new 0 0 12.13 22.208"
+                                                 xml:space="preserve">
+                                          <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-miterlimit="10"
+                                                    points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                        </svg>
+                                        </div>
+                                    </a>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div class="col-md-7 col-sm-6 left-box" id="livestream_panel" style="background:none">
+                                    <a href="/page/live-video-main" class="valign-middle" style="display:none">
+                                        <div class="mr-auto">
+                                            <h4 class="text-uppercase">Now streaming
+                                                <i class="fa fa-circle"></i>
+                                            </h4>
+                                            <h3><t t-esc="title_livestream"/></h3>
+                                        </div>
+                                        <div class="icon-corner">
+                                            <svg version="1.1" x="0px" y="0px" width="12.13px" height="22.208px"
+                                                 viewBox="0 0 12.13 22.208" enable-background="new 0 0 12.13 22.208"
+                                                 xml:space="preserve">
+                                          <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-miterlimit="10"
+                                                    points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                        </svg>
+                                        </div>
+                                    </a>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </section>
+                <section class="sec-content">
+                    <div class="container fix-pos-bg">
+                        <div class="bg col-md-offset-1"></div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                                <div class="tit-spacing">
+                                    <h4 class="pre-tit">A UNIQUE EXPERIENCE</h4>
+                                    <h2 class="main-tit">Equestrian events will Never be the same.</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-0 col-sm-10 col-sm-offset-1">
+                                <div class="holder-img">
+                                    <img class="img-responsive"
+                                         src="/jkv_theme/static/src/imgs/Links/157377.jpg"/>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-md-offset-0 col-sm-10 col-sm-offset-1 wrapper-cont">
+                                <div class="cont">
+                                    <p>What happens when two passionate equestrians develop a videography service
+                                        tailored just for the horseback riding community? A game-changer that’s
+                                        re-defining
+                                        the day-of experience.
+                                    </p>
+                                    <br/>
+                                    <p>What do we do? We augment the show with three unique video services: JK
+                                        Ringside®, JK Live®, and JK Download®. Video recording and coverage is something
+                                        that’s been painfully omitted from the riding experience—until now. JK is
+                                        changing
+                                        all that by offering a service that is tailored to the exhibitors' experience.
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-md-offset-0 col-sm-6 col-sm-offset-3">
+                                        <a href="/services" class="btn btn-main btn-block align-left">
+                                            <i class="pull-right">
+                                                <svg version="1.1" x="0px" y="0px" width="6px"
+                                                     viewBox="0 0 12.13 22.208" enable-background="new 0 0 12.13 22.208"
+                                                     xml:space="preserve">
+                                                    <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                              stroke-linejoin="round"
+                                                              stroke-miterlimit="10"
+                                                              points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                                </svg>
+                                            </i>
+                                            GET STARTED
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <div class="holder-banner">
+                            <img src="/jkv_theme/static/src/imgs/Links/157370.png" class="m-auto img-responsive" alt=""/>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <section class="third-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="tit-spacing text-center">
+                                <h4 class="pre-tit">OUR SERVICES</h4>
+                                <h2 class="main-tit">THREE DISTINCT WAYS WE’RE CHANGING THE RIDING EXPERIENCE FOREVER.
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="fourth-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-5 col-md-4 col-md-offset-1 wrapper-cont">
+                            <div class="tit-spacing">
+                                <h4 class="main-tit">JK RINGSIDE</h4>
+                                <div class="cont">
+                                    <p>All eyes are on our HD replays between rounds, providing the perfect moment for
+                                        rich, exclusive commercial messaging.
+                                    </p>
+                                </div>
+                                <a href="/service/jk-ringside" class="btn btn-link">LEARN MORE »</a>
+                            </div>
+                            <div class="tit-spacing">
+                                <h4 class="main-tit">JK STREAM</h4>
+                                <div class="cont">
+                                    <p>At the same time, we’re building a remote audience by live-streaming events
+                                        through our website.
+                                    </p>
+                                </div>
+                                <div><a href="/page/pricing" class="btn btn-link">SUBSCRIBE HERE »</a></div>
+                                <a href="/service/jk-stream" class="btn btn-link">LEARN MORE »</a>
+                            </div>
+                            <div class="tit-spacing">
+                                <h4 class="main-tit">JK DOWNLOAD</h4>
+                                <div class="cont">
+                                    <p>Want to Relive the Ride™ after the show? Riders can visit our website and
+                                        purchase any of their runs for instant download.
+                                    </p>
+                                </div>
+                                <a href="/service/jk-download" class="btn btn-link">LEARN MORE »</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg"></div>
+            </section>
+            <section class="fifth-content">
+                <div class="bg"></div>
+                <div class="container js_sale oe_website_sale">
+                    <div class="tit-spacing text-center">
+                        <h4 class="main-tit">RECENTLY UPLOADED</h4>
+                    </div>
+                        <div class="row flex-col">
+                            <t t-as="tr_product" t-foreach="products">
+                                <t t-as="td_product" t-foreach="tr_product">
+                                    <t t-if="td_product">
+                                        <t t-set="product" t-value="td_product"/>
+                                        <t t-call="jkv_theme.product_box_homepage"/>
+                                    </t>
+                                </t>
+                            </t>
+                        </div>
+                        <div class="modal fade video_form_notification" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <strong></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade col-sm-8 col-md-4" id="share_modal" role="dialog"
+                             style="margin: auto; top: 30%">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title">Share Video Link</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group">
+                                        <input id="share_link_input" class="form-control" value=""/>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-success copy_btn">
+                                                <i class="fa fa-clipboard"></i>
+                                                Copy
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center; margin: 5px">
+                                        <strong class="notification_div"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="se-pre-con" style="display:none"></div>
+                        <t t-call="jkv_website_sale.jkv_main_video_popup"/>
+                        <t t-call="jkv_website_sale.jkv_sample_video_popup"/>
+
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                            <a href="/shop" class="btn btn-main btn-dark btn-block">
+                                <i class="pull-right">
+                                    <svg version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                         enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                                        <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                  stroke-linejoin="round" stroke-miterlimit="10"
+                                                  points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                    </svg>
+                                </i>
+                                All Videos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <t t-if="call_to_action">
+                <section class="pre-foot">
+                    <div class="container">
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <div class="tit-spacing">
+                                <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                            <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                <i class="pull-right">
+                                    <svg version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                         enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                                        <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                  stroke-linejoin="round" stroke-miterlimit="10"
+                                                  points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                    </svg>
+                                </i>
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </t>
+        </xpath>
+    </template>
+</odoo>

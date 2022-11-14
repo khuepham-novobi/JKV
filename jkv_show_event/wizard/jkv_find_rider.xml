@@ -1,0 +1,37 @@
+<odoo>
+	<data>	
+
+		<record id="jkv_find_rider_form" model="ir.ui.view">
+			<field name="name">JKV Find Rider Form</field>
+			<field name="model">jkv.find.rider</field>
+			<field name="arch" type="xml">
+				<form string="Rider Data">
+					<group string="Rider">
+						<field name="rider_number"/>
+						<field name="rider_first_name"/>
+						<field name="rider_last_name"/>
+						<field name="owner_first_name"/>
+						<field name="owner_last_name"/>
+						<field name="trainer_first_name"/>
+						<field name="trainer_last_name"/>
+						<field name="horse_name"/>
+					</group>
+					<footer>
+						<button name="find_rider" string="Find" type="object" class="oe_highlight"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="jkv_find_rider" model="ir.actions.act_window">
+			<field name="name">JKV Find Rider</field>
+			<field name="res_model">jkv.find.rider</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="jkv_find_rider_form"/>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem id="menu_jkv_find_rider" name="Find Rider" parent="jkv_show_event.menu_rider_root" action="jkv_find_rider" sequence="24"/>
+	</data>
+</odoo>

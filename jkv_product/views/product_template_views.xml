@@ -1,0 +1,193 @@
+
+<odoo>
+	<data>
+
+		<record id="jkv_product_search_form_view" model="ir.ui.view">
+            <field name="name">product.template.search</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//filter[@name='inactive']" position="after">
+                    <separator/>
+                    <filter name="is_livestream_product" string="Is livestream Video" domain="[('is_livestream_product', '=', True)]"/>
+					 <filter name="is_normal_product" string="Is Normal Video" domain="[('is_livestream_product', '=', False)]"/>
+                </xpath>
+            </field>
+        </record>
+
+		<record id="jkv_product_template_only_form_view_inherit" model="ir.ui.view">
+			<field name="name">product.template.product.form</field>
+			<field name="model">product.template</field>
+			<field name="priority" eval="99" />
+			<field name="inherit_id" ref="product.product_template_form_view"/>
+			<field name="arch" type="xml">
+				<!--
+				<xpath expr="//page[@name='general_information']/group" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				`-->
+				<xpath expr="//page[@name='general_information']/group" position="after">
+					<group>
+						<field name="is_livestream_product" readonly="1"/>
+					</group>
+					<group attrs="{'invisible': [('is_livestream_product', '=', True)]}">
+						<group string="Video Information">
+							<field name="filename_id" attrs="{'required': [('is_livestream_product', '=', False)]}"/>
+							<field name="show_name" readonly="1"/>
+							<field name="show_number" readonly="1"/>
+							<field name="class_name" readonly="1"/>
+							<field name="class_number" readonly="1"/>
+							<field name="rider_name" readonly="1"/>
+							<field name="rider_number" readonly="1"/>
+							<field name="ride_number" readonly="1"/>
+						</group>
+						<group string="Video Url">
+							<field name="video_filename_url" readonly="1"/>
+							<field name="sample_file_url"/>
+							<field name="post_date" readonly="1"/>
+						</group>
+					</group>
+					<group attrs="{'invisible': [('is_livestream_product', '=', False)]}">
+						<group string="Video Information">
+							<field name="livestream_show_id" readonly="1"/>
+							<field name="livestream_show_number" readonly="1"/>
+							<field name="livestream_class_id" readonly="1"/>
+							<field name="livestream_class_number" readonly="1"/>
+						</group>
+						<group string="Video Url">
+							<field name="livestream_video_filename_url" readonly="1"/>
+							<field name="livestream_video_sample_file_url" readonly="1"/>
+							<field name="livestream_date" readonly="1"/>
+						</group>
+					</group>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="jkv_product_template_tree_view" model="ir.ui.view">
+			<field name="name">product.template.product.tree</field>
+			<field name="model">product.template</field>
+			<field name="priority" eval="10" />
+			<field name="arch" type="xml">
+				<tree string="Product">
+					<field name="name"/>
+					<field name="show_name"/>
+					<field name="class_name"/>
+					<field name="rider_name"/>
+					<field name="rider_number"/>
+					<field name="ride_number"/>
+					<field name="filename_id"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="jkv_livestream_product_template_tree_view" model="ir.ui.view">
+			<field name="name">product.template.livestream.product.tree</field>
+			<field name="model">product.template</field>
+			<field name="priority" eval="10" />
+			<field name="mode">primary</field>
+			<field name="arch" type="xml">
+				<tree string="Product">
+					<field name="name"/>
+					<field name="livestream_show_id"/>
+					<field name="livestream_class_id"/>
+					<field name="livestream_date"/>
+				</tree>
+			</field>
+		</record>
+
+		<!--Livestream management-->
+
+		<record id="jkv_livestream_show_tree" model="ir.ui.view">
+			<field name="name">jkv_livestream_show_tree</field>
+			<field name="model">jkv_livestream.show</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="show_number"/>
+					<field name="show_location"/>
+					<field name="start_date"/>
+					<field name="end_date"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="jkv_livestream_show_form" model="ir.ui.view">
+			<field name="name">jkv_livestream_show_form</field>
+			<field name="model">jkv_livestream.show</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="show_number"/>
+							<field name="show_location"/>
+							<field name="start_date"/>
+							<field name="end_date"/>
+							<field name="page_url_id"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_jkv_livestream_show" model="ir.actions.act_window">
+            <field name="name">Livestream Shows</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">jkv_livestream.show</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+		<record id="jkv_livestream_class_tree" model="ir.ui.view">
+			<field name="name">jkv_livestream_class_tree</field>
+			<field name="model">jkv_livestream.class</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="class_number"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="jkv_livestream_class_form" model="ir.ui.view">
+			<field name="name">jkv_livestream_class_form</field>
+			<field name="model">jkv_livestream.class</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="class_number"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_jkv_livestream_class" model="ir.actions.act_window">
+            <field name="name">Livestream Classes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">jkv_livestream.class</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+		<menuitem id="menu_livestream_root"
+				  name="Livestream"
+				  parent="jkv_show_event.menu_inventory_management_root"
+				  sequence="10"/>
+
+		<menuitem id="menu_livestream_show"
+				  name="Shows"
+				  parent="jkv_product.menu_livestream_root"
+				  action="action_jkv_livestream_show"
+				  sequence="1"/>
+
+		<menuitem id="menu_livestream_class"
+				  name="Classes"
+				  parent="jkv_product.menu_livestream_root"
+				  action="action_jkv_livestream_class"
+				  sequence="5"/>
+	</data>
+</odoo>

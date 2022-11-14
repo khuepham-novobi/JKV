@@ -1,0 +1,97 @@
+<odoo>
+    <data noupdate="1">
+        <record id="signup_login" model="jkv.calltoaction">
+            <field name="name">SIGN UP/LOGIN</field>
+             <field name="status">True</field>
+        </record>
+
+        <record id="home" model="jkv.calltoaction">
+            <field name="name">HOME</field>
+            <field name="status">True</field>
+        </record>
+        <record id="services" model="jkv.calltoaction">
+            <field name="name">SERVICES</field>
+             <field name="status">True</field>
+        </record>
+        <record id="jk_ringside" model="jkv.calltoaction">
+            <field name="name">JK RINGSIDE</field>
+             <field name="status">True</field>
+        </record>
+        <record id="jk_stream" model="jkv.calltoaction">
+            <field name="name">JK STREAM</field>
+             <field name="status">True</field>
+        </record>
+        <record id="jk_download" model="jkv.calltoaction">
+            <field name="name">JK DOWNLOAD</field>
+             <field name="status">True</field>
+        </record>
+         <record id="calendar" model="jkv.calltoaction">
+            <field name="name">CALENDAR</field>
+             <field name="status">True</field>
+        </record>
+        <record id="event_calendar" model="jkv.calltoaction">
+            <field name="name">EVENT CALENDAR</field>
+             <field name="status">True</field>
+        </record>
+        <record id="event_livestream_calendar" model="jkv.calltoaction">
+            <field name="name">JK Live Calendar</field>
+             <field name="status">True</field>
+        </record>
+        <record id="video_archive" model="jkv.calltoaction">
+            <field name="name">VIDEO ARCHIVE</field>
+             <field name="status">True</field>
+        </record>
+        <record id="livestream_videos" model="jkv.calltoaction">
+            <field name="name">LIVESTREAM VIDEOS</field>
+             <field name="status">True</field>
+        </record>
+        <record id="video_details" model="jkv.calltoaction">
+            <field name="name">INDIVIDUAL VIDEO</field>
+             <field name="status">True</field>
+        </record>
+        <record id="live_stream" model="jkv.calltoaction">
+            <field name="name">LIVE STREAM</field>
+            <field name="status">True</field>
+        </record>
+
+        <record id="blog" model="jkv.calltoaction">
+            <field name="name">BLOG</field>
+            <field name="status">True</field>
+        </record>
+
+        <record id="article" model="jkv.calltoaction">
+            <field name="name">ARTICLE</field>
+             <field name="status">True</field>
+        </record>
+
+        <record id="pricing" model="jkv.calltoaction">
+            <field name="name">PRICING</field>
+            <field name="status">True</field>
+        </record>
+        <record id="contact_details" model="jkv.calltoaction">
+            <field name="name">ACCOUNT DETAILS</field>
+             <field name="status">True</field>
+        </record>
+        <record id="my_account" model="jkv.calltoaction">
+            <field name="name">MY ACCOUNT</field>
+             <field name="status">True</field>
+        </record>
+        <record id="payment_process" model="jkv.calltoaction">
+            <field name="name">CHECKOUT PROCESS</field>
+             <field name="status">True</field>
+        </record>
+        <record id="contact" model="jkv.calltoaction">
+            <field name="name">CONTACT US</field>
+             <field name="status">True</field>
+        </record>
+        <record id="purchase_subscription" model="jkv.calltoaction">
+            <field name="name">PURCHASE SUBSCRIPTION</field>
+             <field name="status">True</field>
+        </record>
+
+        <record id="jk_thank" model="jkv.calltoaction">
+            <field name="name">THANK YOU</field>
+             <field name="status">True</field>
+        </record>
+    </data>
+</odoo>

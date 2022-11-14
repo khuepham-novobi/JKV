@@ -1,0 +1,788 @@
+<odoo>
+    <template id="jkv_products" inherit_id="website_sale.products" priority="999">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="js_sale oe_website_sale">
+                <section class="top-content">
+                    <div class="main-banner"></div>
+                    <div class="container child-banner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="flex-col flex-auto">
+                                    <div class="flex-item">
+                                        <t t-if="is_livestream_product">
+                                            <h4 class="breadcrumbs">
+                                                <a href="">HOME »</a>
+                                                <a href="">Videos »</a>
+                                                <span>Livestream Videos</span>
+                                            </h4>
+                                            <h2>Livestream Videos</h2>
+                                        </t>
+                                        <t t-else="">
+                                            <h4 class="breadcrumbs">
+                                                <a href="">HOME »</a>
+                                                <a href="">Videos »</a>
+                                                <span>Video Archive</span>
+                                            </h4>
+                                            <h2>Video Archive</h2>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="main-content">
+                    <t t-call="jkv_theme.hello_section"/>
+                    <div class="video-archive">
+                        <div class="container">
+                            <div class="row">
+                                <t t-if="no_subscription and is_livestream_product">
+                                    <a href="/purchase_subscription?is_livestream_subscription=1" class="no-content ratio-box-hd" style="margin-top:10px">
+                                        <div class="bg ratio-box-inside">
+                                            <svg version="1.1" x="0px" y="0px" width="350px"
+                                                 viewBox="-176 -235.11 388.493 500"
+                                                 enable-background="new -176 -235.11 388.493 500"
+                                                 xml:space="preserve">
+                                                    <path d="M-20.089,113.487c0,21.873-17.803,39.676-39.689,39.676h-8.455v61.039       c0,15.728-10.778,28.952-25.337,32.719v-11.603c0-9.321-7.561-16.882-16.896-16.882v46.453h8.455       c27.935,0,50.674-22.752,50.674-50.688V169.44c27.206-4.097,48.144-27.633,48.144-55.953V96.605       c0-9.334-7.561-16.91-16.896-16.91V113.487z"></path>
+                                                <path d="M113.633,6.779c-9.32,0-16.881,7.561-16.881,16.896h27.068       c9.321,0,16.896,7.575,16.896,16.882v29.571c0,6.214-3.409,11.685-8.454,14.613V74.335c-0.056-9.28-7.59-16.8-16.896-16.8       v46.37h8.455c18.614,0,33.792-15.163,33.792-33.777V40.557c0-18.629-15.178-33.777-33.792-33.777H113.633z"></path>
+                                                <path d="M74.028,40.158l-61.989,62.001c6.585,6.586,17.295,6.586,23.88,0       c0.247-0.261,15.782-15.796,15.782-15.796v10.242c0,21.872-17.803,39.675-39.69,39.675H3.557v61.04       c0,15.699-10.778,28.952-25.337,32.705v-11.589c0-9.335-7.561-16.896-16.896-16.896v46.453h8.455       c27.935,0,50.674-22.738,50.674-50.674v-44.775c27.206-4.083,48.129-27.619,48.129-55.939V69.481l28.939-28.925l-5.98-5.966       C71.057,14.093,66.48-16.263,77.821-41.188C56.842-18.462,55.591,16.017,74.028,40.158"></path>
+                                                <path d="M18.982-65.218l-98.996,99.01c-30.919,1.87-55.499,27.619-55.499,58.991       c0,26.918-16.8,49.904-40.487,59.074c31.798-0.921,57.382-27.055,57.382-59.074c0-16.909,9.981-31.496,24.361-38.246       c-4.812,12.607-4.66,26.85,0.949,39.635c-0.605,46.783-31.62,86.211-74.182,99.45c51.099-5.169,91.091-48.405,91.091-100.839       h-0.192l0.192-0.013v-2.338l-0.852-1.745c-6.613-13.583-3.877-29.915,6.832-40.611L30.929-53.271l11.946-11.947       c-3.299-3.286-7.616-4.949-11.933-4.949C26.612-70.167,22.295-68.504,18.982-65.218"></path>
+                                                <path d="M102.471-235.11c-41.917,0-76.024,34.107-76.024,76.024v56.063       c0,11.025-7.053,20.401-16.896,23.894c2.653,0.921,5.485,1.442,8.455,1.442c13.555,0,24.622-10.64,25.309-24.03       c0.014-0.439,0.014-0.866,0.014-1.306v-56.063c0-29.736,22.079-54.413,50.688-58.523v19.906l59.431,59.417       c6.571,6.599,6.571,17.309,0,23.907c-6.599,6.585-17.322,6.585-23.893,0c-1.65-1.663-3.822-2.488-5.98-2.488       c-13.968,0-25.337-11.355-25.337-25.323c-2.159,4.014-3.382,8.62-3.382,13.5c0,12.923,8.536,23.853,20.276,27.454v82.665       h63.583c9.321,0,16.896,7.588,16.896,16.896v29.558c0,6.255-3.409,11.713-8.455,14.627V32.115       c0-9.335-7.561-16.896-16.882-16.896v46.439h8.44c18.629,0,33.778-15.15,33.778-33.777V-1.676       c0-18.629-15.149-33.778-33.778-33.778h-46.687v-58.454c11.452,3.326,24.334,0.48,33.352-8.538       c13.185-13.17,13.185-34.602,0-47.773l-54.481-54.467v-30.424H102.471z"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="ratio-box-inside">
+                                            <h2 class="main-tit">NO SUBSCRIPTION</h2>
+                                            <p>You don’t have livestream subscription currently.<br/>Click here to add one.
+                                            </p>
+                                            <i>
+                                                <svg version="1.1" x="0px" y="0px" width="80px" viewBox="0 0 80 80"
+                                                     enable-background="new 0 0 80 80" xml:space="preserve"><path fill="#826A45" d="M40,0C18,0,0,18,0,40s18,40,40,40s40-18,40-40S62,0,40,0 M40,70   c-16.5,0-30-13.5-30-30s13.5-30,30-30s30,13.5,30,30S56.5,70,40,70"></path>
+                                                    <line fill="none" stroke="#826A45" stroke-width="10"
+                                                          stroke-miterlimit="10" x1="40" y1="55" x2="40" y2="25"/>
+                                                    <line fill="none" stroke="#826A45" stroke-width="10"
+                                                          stroke-miterlimit="10" x1="55" y1="40" x2="25" y2="40"/>
+                                                        </svg>
+                                            </i>
+                                        </div>
+                                    </a>
+                                </t>
+                                <t t-else="">
+                                    <div class="col-md-3">
+                                        <div class="video-filter">
+                                            <a data-toggle="collapse" href="#collapseResp" aria-expanded="true"
+                                               class="box-tit collapsed">
+                                                <h3>Filter
+                                                    <i class="hidden-lg">
+                                                        <svg version="1.1" x="0px" y="0px" width="10px"
+                                                             viewBox="0 0 12.13 22.208"
+                                                             enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                                    <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                              stroke-miterlimit="10"
+                                              points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                    </svg>
+                                                    </i>
+                                                </h3>
+                                            </a>
+
+                                            <t t-call="jkv_website_sale.jkv_warning_date_search_popup"/>
+                                            <form id="form-panel-search-result" action='/search_videos/results'
+                                                  method="get">
+
+                                                <!--- HIDDEN FILTERS -->
+
+                                                <div class="panel-group" id="accordion">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading hidden">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                   href="#collapse1">
+                                                                    Date Range
+                                                                    <i t-att-class="'fa fa-chevron-up icon_accordion' if jkv_collapse == 'collapse1' else 'fa fa-chevron-down icon_accordion'"
+                                                                       aria-hidden="true"
+                                                                       style="float:right;vertical-align: middle;"></i>
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapse1" class="panel-collapse collapse hidden">
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    <div class="col-sm-3 col-md-3 col-xs-3 text-center">
+                                                                        From
+                                                                    </div>
+                                                                    <div class="col-sm-9 col-md-9 col-xs-9">
+                                                                        <input type="text"
+                                                                               id="jkv_start_date_search_result_video"
+                                                                               name="jkv_start_date_search_video"
+                                                                               t-attf-value="{{jkv_start_date_search_video}}"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-3 col-md-3 col-xs-3 text-center">
+                                                                        To
+                                                                    </div>
+                                                                    <div class="col-sm-9 col-md-9 col-xs-9">
+                                                                        <input type="text"
+                                                                               id="jkv_end_date_search_result_video"
+                                                                               name="jkv_end_date_search_video"
+                                                                               t-attf-value="{{jkv_end_date_search_video}}"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-3 col-md-3 col-xs-3 text-center">
+                                                                        <input type="checkbox" id="show_my_videos_hidden"
+                                                                               class="subscribed_or_show_all"
+                                                                               name="show_my_videos" value="show_my_videos"
+                                                                               t-att-checked="'checked' if show_my_videos else None"/>
+                                                                    </div>
+                                                                    <div class="col-sm-9 col-md-9 col-xs-9">
+                                                                        Show all videos
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-3 col-md-3 col-xs-3 text-center">
+                                                                        <input type="checkbox"
+                                                                               id="subscribed_video_only_hidden"
+                                                                               class="subscribed_or_show_all"
+                                                                               name="subscribed_video_only"
+                                                                               value="subscribed_video_only"
+                                                                               t-att-checked="'checked' if subscribed_video_only else None"/>
+                                                                    </div>
+                                                                    <div class="col-sm-9 col-md-9 col-xs-9">
+                                                                        Subscribed video only
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12 text-right">
+                                                                        <input type="button" class="btn btn-primary"
+                                                                               id="button_change_range_date"
+                                                                               name="button_change_range_date"
+                                                                               value="Search"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input class="hidden" type="text" id="jkv_collapse" name="jkv_collapse"
+                                                       t-attf-value="{{jkv_collapse}}"/>
+                                                <input class="hidden" type="text" id="is_livestream_product" name="is_livestream_product"
+                                                       t-attf-value="{{is_livestream_product}}"/>
+                                                <!--- HIDDEN FILTERS -->
+
+                                                <div id="collapseResp" class="collapse-resp collapse">
+                                                    <!--<div class="form-check">-->
+                                                        <!--<input class="form-check-input subscribed_or_show_all"-->
+                                                               <!--type="checkbox" id="show_my_videos" value="show_my_videos"-->
+                                                               <!--t-att-checked="'checked' if show_my_videos else None"/>-->
+                                                        <!--<label class="form-check-label" for="show_my_videos">-->
+                                                            <!--MY VIDEOS ONLY-->
+                                                        <!--</label>-->
+                                                    <!--</div>-->
+                                                    <div class="form-check">
+                                                        <input class="form-check-input subscribed_or_show_all"
+                                                               type="checkbox" id="subscribed_video_only"
+                                                               value="subscribed_video_only"
+                                                               t-att-checked="'checked' if subscribed_video_only else None"/>
+                                                        <label class="form-check-label" for="subscribed_video_only">
+                                                            SUBSCRIBED VIDEOS ONLY
+                                                        </label>
+                                                    </div>
+
+                                                    <a class="collapse-header" role="button" data-toggle="collapse"
+                                                       data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+                                                       aria-controls="collapseOne">
+                                                        Show name
+                                                        <i class="pull-right">
+                                                            <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                 viewBox="0 0 12.13 22.208"
+                                                                 enable-background="new 0 0 12.13 22.208"
+                                                                 xml:space="preserve">
+                                                    <polyline fill="none" stroke-width="3" stroke-linecap="round"
+                                                              stroke-linejoin="round" stroke-miterlimit="10"
+                                                              points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                                    </svg>
+                                                        </i>
+                                                    </a>
+                                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                                                         aria-labelledby="headingOne">
+                                                        <div class="search-bar">
+                                                            <a class="search-btn">
+                                                                <svg version="1.1" x="0px" y="0px" width="20px"
+                                                                     viewBox="0 0 30.001 30"
+                                                                     enable-background="new 0 0 30.001 30"
+                                                                     xml:space="preserve">
+                                                                <g>
+                                                                    <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                                                    <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12.666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                                                    <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                                                    <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12.666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                                                </g>
+                                                                </svg>
+                                                            </a>
+                                                            <div class="form-group search_input" id="search_show_name"
+                                                                 data-model="jkv.show.venue"
+                                                                 data-label="show_name_search_result">
+                                                                <input class="form-control" placeholder="Search"/>
+                                                            </div>
+                                                            <t t-if="is_livestream_product">
+                                                                <t t-if="livestream_selected_shows">
+                                                                    <div class="form-group">
+                                                                        <a class="clear_all" id="clear_show">
+                                                                            <i class="fa fa-angle-left" aria-hidden="true"
+                                                                               style="margin-right:5px"></i>
+                                                                            Clear
+                                                                        </a>
+                                                                        <hr class="light-dark" style="margin-top:10px;margin-bottom:1px"/>
+                                                                    </div>
+                                                                </t>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <t t-if="selected_shows">
+                                                                    <div class="form-group">
+                                                                        <a class="clear_all" id="clear_show">
+                                                                            <i class="fa fa-angle-left" aria-hidden="true"
+                                                                               style="margin-right:5px"></i>
+                                                                            Clear
+                                                                        </a>
+                                                                        <hr class="light-dark" style="margin-top:10px;margin-bottom:1px"/>
+                                                                    </div>
+                                                                </t>
+                                                            </t>
+
+                                                        </div>
+
+                                                        <ul class="cat-list search-max-size">
+                                                            <t t-if="is_livestream_product" >
+                                                                 <t t-foreach="livestream_selected_shows" t-as="livestream_selected_show">
+                                                                    <li class="selected show_name_search_result"
+                                                                        t-attf-for="{{livestream_selected_show['id']}}">
+                                                                        <input type="checkbox" class="show_name_search_result"
+                                                                               t-attf-id="{{livestream_selected_show['id']}}"
+                                                                               name="livestream_show_number"
+                                                                               t-attf-value="{{livestream_selected_show['id']}}"
+                                                                               checked="'checked'"/>
+                                                                        <t t-esc="livestream_selected_show['name']"/>
+                                                                    </li>
+                                                                </t>
+                                                                <t t-foreach="livestream_show_ids" t-as="livestream_show_id">
+                                                                    <t t-if="livestream_show_id['id'] not in livestream_show_checked_ids">
+                                                                        <li class="show_name_search_result">
+                                                                            <input type="checkbox"
+                                                                                   class="show_name_search_result"
+                                                                                   name="livestream_show_number"
+                                                                                   t-attf-value="{{livestream_show_id['id']}}"/>
+                                                                            <t t-esc="livestream_show_id['name']"/>
+                                                                        </li>
+                                                                    </t>
+                                                                </t>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <t t-foreach="selected_shows" t-as="selected_show">
+                                                                    <li class="selected show_name_search_result"
+                                                                        t-attf-for="{{selected_show['id']}}">
+                                                                        <input type="checkbox" class="show_name_search_result"
+                                                                               t-attf-id="{{selected_show['id']}}"
+                                                                               name="show_number"
+                                                                               t-attf-value="{{selected_show['id']}}"
+                                                                               checked="'checked'"/>
+                                                                        <t t-esc="selected_show['name']"/>
+                                                                    </li>
+                                                                </t>
+
+                                                                <t t-foreach="show_ids" t-as="show_id">
+                                                                    <t t-if="show_id['id'] not in show_checked_ids">
+                                                                        <li class="show_name_search_result">
+                                                                            <input type="checkbox"
+                                                                                   class="show_name_search_result"
+                                                                                   name="show_number"
+                                                                                   t-attf-value="{{show_id['id']}}"/>
+                                                                            <t t-esc="show_id['name']"/>
+                                                                        </li>
+                                                                    </t>
+                                                                </t>
+                                                            </t>
+                                                        </ul>
+                                                    </div>
+
+
+
+                                                    <a class="collapse-header collapsed" role="button"
+                                                       data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                                                       aria-expanded="true" aria-controls="collapseTwo">
+                                                        CLASS NAME
+                                                        <i class="pull-right">
+                                                            <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                 viewBox="0 0 12.13 22.208"
+                                                                 enable-background="new 0 0 12.13 22.208"
+                                                                 xml:space="preserve">
+                                                    <polyline fill="none" stroke-width="3" stroke-linecap="round"
+                                                              stroke-linejoin="round" stroke-miterlimit="10"
+                                                              points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                                    </svg>
+                                                        </i>
+                                                    </a>
+                                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                                         aria-labelledby="headingTwo">
+                                                        <div class="search-bar">
+                                                            <a class="search-btn">
+                                                                <svg version="1.1" x="0px" y="0px" width="20px"
+                                                                     viewBox="0 0 30.001 30"
+                                                                     enable-background="new 0 0 30.001 30"
+                                                                     xml:space="preserve">
+                                                        <g>
+                                                            <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                                            <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12.666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                                            <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                                            <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12.666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                                        </g>
+                                                        </svg>
+                                                            </a>
+                                                            <div class="form-group search_input" id="search_class_name"
+                                                                 data-model="jkv.class"
+                                                                 data-label="class_name_search_result">
+                                                                <input class="form-control" placeholder="Search"/>
+                                                            </div>
+                                                            <t t-if="is_livestream_product">
+                                                                <t t-if="livestream_selected_classes">
+                                                                    <div class="form-group">
+                                                                        <a class="clear_all" id="clear_class">
+                                                                            <i class="fa fa-angle-left" aria-hidden="true"
+                                                                               style="margin-right:5px"></i>
+                                                                            Clear
+                                                                        </a>
+                                                                        <hr class="light-dark"
+                                                                            style="margin-top:10px;margin-bottom:1px"/>
+                                                                    </div>
+                                                                </t>
+                                                            </t>
+                                                            <t t-else="">
+                                                                    <t t-if="selected_classes">
+                                                                    <div class="form-group">
+                                                                        <a class="clear_all" id="clear_class">
+                                                                            <i class="fa fa-angle-left" aria-hidden="true"
+                                                                               style="margin-right:5px"></i>
+                                                                            Clear
+                                                                        </a>
+                                                                        <hr class="light-dark"
+                                                                            style="margin-top:10px;margin-bottom:1px"/>
+                                                                    </div>
+                                                                </t>
+                                                            </t>
+                                                        </div>
+                                                        <ul class="cat-list search-max-size">
+                                                            <t t-if="is_livestream_product">
+                                                                <t t-foreach="livestream_selected_classes" t-as="livestream_selected_class">
+                                                                    <li class="selected class_name_search_result">
+                                                                        <input type="checkbox" class="class_name_search_result"
+                                                                               name="livestream_class_number"
+                                                                               t-attf-value="{{livestream_selected_class['id']}}"
+                                                                               checked="'checked'"/>
+                                                                        <t t-esc="livestream_selected_class['name']"/>
+                                                                    </li>
+                                                                </t>
+                                                                <t t-foreach="livestream_class_ids" t-as="livestream_class_id">
+                                                                    <t t-if="livestream_class_id['id'] not in livestream_class_checked_ids">
+                                                                        <li class="class_name_search_result">
+                                                                            <input type="checkbox"
+                                                                                   class="class_name_search_result"
+                                                                                   name="livestream_class_number"
+                                                                                   t-attf-value="{{livestream_class_id['id']}}"/>
+                                                                                <t t-esc="livestream_class_id['name']"/>
+                                                                        </li>
+                                                                    </t>
+                                                                </t>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <t t-foreach="selected_classes" t-as="selected_class">
+                                                                    <li class="selected class_name_search_result">
+                                                                        <input type="checkbox" class="class_name_search_result"
+                                                                               name="class_number"
+                                                                               t-attf-value="{{selected_class['id']}}"
+                                                                               checked="'checked'"/>
+                                                                        <t t-esc="selected_class['name']"/>
+                                                                    </li>
+                                                                </t>
+                                                                <t t-foreach="class_ids" t-as="class_id">
+                                                                    <t t-if="class_id['id'] not in class_checked_ids">
+                                                                        <li class="class_name_search_result">
+                                                                            <input type="checkbox"
+                                                                                   class="class_name_search_result"
+                                                                                   name="class_number"
+                                                                                   t-attf-value="{{class_id['id']}}"/>
+                                                                            <t t-esc="class_id['name']"/>
+                                                                        </li>
+                                                                    </t>
+                                                                </t>
+                                                            </t>
+                                                        </ul>
+                                                    </div>
+                                                    <t t-if="not is_livestream_product">
+                                                        <a class="collapse-header collapsed" role="button"
+                                                           data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+                                                           aria-expanded="true" aria-controls="collapseThree">
+                                                            Rider name
+                                                            <i class="pull-right">
+                                                                <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                     viewBox="0 0 12.13 22.208"
+                                                                     enable-background="new 0 0 12.13 22.208"
+                                                                     xml:space="preserve">
+                                                        <polyline fill="none" stroke-width="3" stroke-linecap="round"
+                                                                  stroke-linejoin="round" stroke-miterlimit="10"
+                                                                  points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                                        </svg>
+                                                            </i>
+                                                        </a>
+                                                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                                             aria-labelledby="headingThree">
+                                                            <div class="search-bar">
+                                                                <a class="search-btn">
+                                                                    <svg version="1.1" x="0px" y="0px" width="20px"
+                                                                         viewBox="0 0 30.001 30"
+                                                                         enable-background="new 0 0 30.001 30"
+                                                                         xml:space="preserve">
+                                                            <g>
+                                                                <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                                                <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12.666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                                                <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                                                <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12.666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                                            </g>
+                                                            </svg>
+                                                                </a>
+                                                                <div class="form-group search_input"
+                                                                     data-model="jkv.rider"
+                                                                     data-label="rider_name_search_result">
+                                                                    <input class="form-control" id="search_rider_name"
+                                                                           placeholder="Search"/>
+                                                                </div>
+                                                                <t t-if="rider_checked_names">
+                                                                    <div class="form-group">
+                                                                        <a class="clear_all" id="clear_rider_name">
+                                                                            <i class="fa fa-angle-left" aria-hidden="true"
+                                                                               style="margin-right:5px"></i>
+                                                                            Clear
+                                                                        </a>
+                                                                        <hr class="light-dark"
+                                                                            style="margin-top:10px;margin-bottom:1px"/>
+                                                                    </div>
+                                                                </t>
+                                                            </div>
+                                                            <ul class="cat-list search-max-size">
+                                                                <t t-if="not is_livestream_product">
+                                                                    <t t-foreach="rider_checked_names" t-as="rider_checked_name">
+                                                                        <li class="selected rider_name_search_result">
+                                                                            <t t-esc="rider_checked_name"/>
+                                                                            <input type="checkbox" class="rider_name_search_result"
+                                                                                   name="rider_name"
+                                                                                   t-attf-value="{{rider_checked_name}}"
+                                                                                   checked="'checked'"/>
+                                                                        </li>
+                                                                    </t>
+                                                                    <t t-foreach="rider_names" t-as="rider_name">
+                                                                        <t t-if="rider_name not in rider_checked_names">
+                                                                            <li class="rider_name_search_result">
+                                                                                <t t-esc="rider_name"/>
+                                                                                <input type="checkbox"
+                                                                                       class="rider_name_search_result"
+                                                                                       name="rider_name"
+                                                                                       t-attf-value="{{rider_name}}"/>
+                                                                            </li>
+                                                                        </t>
+                                                                    </t>
+                                                                </t>
+                                                            </ul>
+                                                        </div>
+                                                        <a class="collapse-header collapsed" role="button"
+                                                           data-toggle="collapse" data-parent="#accordion" href="#collapseFour"
+                                                           aria-expanded="true" aria-controls="collapseFour">
+                                                            Rider Number
+                                                            <i class="pull-right">
+                                                                <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                     viewBox="0 0 12.13 22.208"
+                                                                     enable-background="new 0 0 12.13 22.208"
+                                                                     xml:space="preserve">
+                                                        <polyline fill="none" stroke-width="3" stroke-linecap="round"
+                                                                  stroke-linejoin="round" stroke-miterlimit="10"
+                                                                  points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                                        </svg>
+                                                            </i>
+                                                        </a>
+                                                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
+                                                             aria-labelledby="headingFour">
+                                                            <div class="search-bar">
+                                                                <a class="search-btn">
+                                                                    <svg version="1.1" x="0px" y="0px" width="20px"
+                                                                         viewBox="0 0 30.001 30"
+                                                                         enable-background="new 0 0 30.001 30"
+                                                                         xml:space="preserve">
+                                                            <g>
+                                                                <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                                                <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12.666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                                                <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                                                <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12.666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                                            </g>
+                                                            </svg>
+                                                                </a>
+                                                                <div class="form-group search_input" data-model="jkv.rider"
+                                                                     data-label="rider_number_search_result">
+                                                                    <input class="form-control" placeholder="Search"
+                                                                           id="search_rider_number"/>
+                                                                </div>
+                                                                <t t-if="rider_checked_numbers">
+                                                                    <div class="form-group">
+                                                                        <a class="clear_all" id="clear_rider_number">
+                                                                            <i class="fa fa-angle-left" aria-hidden="true"
+                                                                               style="margin-right:5px"></i>
+                                                                            Clear
+                                                                        </a>
+                                                                        <hr class="light-dark"
+                                                                            style="margin-top:10px;margin-bottom:1px"/>
+                                                                    </div>
+                                                                </t>
+                                                            </div>
+
+                                                            <ul class="cat-list search-max-size">
+                                                                <t t-if="not is_livestream_product">
+                                                                    <t t-foreach="rider_checked_numbers"
+                                                                       t-as="rider_checked_number">
+                                                                        <li class="selected rider_number_search_result">
+                                                                            <t t-esc="rider_checked_number"/>
+                                                                            <input type="checkbox"
+                                                                                   class="rider_number_search_result"
+                                                                                   name="rider_number"
+                                                                                   t-attf-value="{{rider_checked_number}}"
+                                                                                   checked="'checked'"/>
+                                                                        </li>
+                                                                    </t>
+                                                                    <t t-foreach="rider_numbers" t-as="rider_number">
+                                                                        <t t-if="rider_number not in rider_checked_numbers">
+                                                                            <li class="rider_number_search_result">
+                                                                                <t t-esc="rider_number"/>
+                                                                                <input type="checkbox"
+                                                                                       class="rider_number_search_result"
+                                                                                       name="rider_number"
+                                                                                       t-attf-value="{{rider_number}}"/>
+                                                                            </li>
+                                                                        </t>
+                                                                    </t>
+                                                                </t>
+                                                            </ul>
+                                                        </div>
+                                                        <a class="collapse-header collapsed" role="button"
+                                                           data-toggle="collapse" data-parent="#accordion" href="#collapseSix"
+                                                           aria-expanded="true" aria-controls="collapseSix">
+                                                            Horse Name
+                                                            <i class="pull-right">
+                                                                <svg version="1.1" x="0px" y="0px" width="6px"
+                                                                     viewBox="0 0 12.13 22.208"
+                                                                     enable-background="new 0 0 12.13 22.208"
+                                                                     xml:space="preserve">
+                                                        <polyline fill="none" stroke-width="3" stroke-linecap="round"
+                                                                  stroke-linejoin="round" stroke-miterlimit="10"
+                                                                  points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                                        </svg>
+                                                            </i>
+                                                        </a>
+                                                        <div id="collapseSix" class="panel-collapse collapse" role="tabpanel"
+                                                         aria-labelledby="headingFive">
+                                                        <div class="search-bar">
+                                                            <a class="search-btn">
+                                                                <svg version="1.1" x="0px" y="0px" width="20px"
+                                                                     viewBox="0 0 30.001 30"
+                                                                     enable-background="new 0 0 30.001 30"
+                                                                     xml:space="preserve">
+                                                        <g>
+                                                            <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                                            <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12.666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                                            <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                                            <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12.666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                                        </g>
+                                                        </svg>
+                                                            </a>
+                                                            <div class="form-group search_input" data-model="jkv.rider"
+                                                                 data-label="horse_name_search_result">
+                                                                <input class="form-control" placeholder="Search"
+                                                                       id="search_horse_name"/>
+                                                            </div>
+                                                            <t t-if="horse_checked_names">
+                                                                <div class="form-group">
+                                                                    <a class="clear_all" id="clear_horse">
+                                                                        <i class="fa fa-angle-left" aria-hidden="true"
+                                                                           style="margin-right:5px"></i>
+                                                                        Clear
+                                                                    </a>
+                                                                    <hr class="light-dark"
+                                                                        style="margin-top:10px;margin-bottom:1px"/>
+                                                                </div>
+                                                            </t>
+                                                        </div>
+
+                                                        <ul class="cat-list search-max-size">
+                                                            <t t-if="not is_livestream_product">
+                                                                <t t-foreach="horse_checked_names" t-as="horse_checked_name">
+                                                                    <li class="selected horse_name_search_result">
+                                                                        <input type="checkbox" class="horse_name_search_result"
+                                                                               name="horse_name"
+                                                                               t-attf-value="{{horse_checked_name}}"
+                                                                               checked="'checked'"/>
+                                                                        <t t-esc="horse_checked_name"/>
+                                                                    </li>
+                                                                </t>
+                                                                <t t-foreach="horse_names" t-as="horse_name">
+                                                                    <t t-if="horse_name not in horse_checked_names">
+                                                                        <li class="horse_name_search_result">
+                                                                            <input type="checkbox"
+                                                                                   class="horse_name_search_result"
+                                                                                   name="horse_name"
+                                                                                   t-attf-value="{{horse_name}}"/>
+                                                                            <t t-esc="horse_name"/>
+                                                                        </li>
+                                                                    </t>
+                                                                </t>
+                                                            </t>
+                                                        </ul>
+
+                                                        </div>
+                                                    </t>
+                                                </div>
+                                            </form>
+
+                                            <div class="holder-banner">
+                                                    <img src="/jkv_theme/static/src/imgs/Links/157371.png" class="m-auto img-responsive" alt=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <t t-if="not is_livestream_product">
+                                            <div class="block-dark text-center fullscale">
+                                                VIDEOS ARE FREE TO WATCH DURING THE DURATION OF A SHOW
+                                                <br/>
+                                                <font style="color: rgb(247, 173, 107);">Do not record videos from website or TVs</font>
+                                            </div>
+                                            <t t-if="bins"></t>
+                                            <t t-else="">
+                                                <div style="text-align:center;">
+                                                    <h3 style="color: rgb(255, 0, 0);">No Videos!</h3>
+                                                    <p>A HORSE THAT HAS MULTIPLE RIDERS CAN ONLY BE LINKED WITH ONE RIDER.</p>
+                                                    <p><b>PLEASE</b> LIMIT YOUR SEARCH TO ONE CRITERIA IE. RIDER # OR HORSE NAME.</p>
+                                                    <p>IF VIDEOS ARE MISSING, CONTACT US IMMEDIATELY.</p>
+                                                    <p>IF YOU ARE LOOKING FOR A <b>SUBSCRIPTION</b>, MAKE SURE THE APPROPRIATE SHOW IS SELECTED.</p>
+                                                </div>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-if="not bins">
+                                                <div style="text-align:center;">
+                                                    <h3 style="color: rgb(255, 0, 0);">No Videos!</h3>
+                                                </div>
+                                            </t>
+                                            <t t-else="">
+                                                <div class="row">
+                                                    <div class="col-sm-5 col-sm-offset-1">
+                                                        <div class="livestream-bg">
+                                                            <a href="/page/livestream-main">
+                                                                <img src="/jkv_theme/static/src/imgs/Links/158032.png" alt="" class="img-responsive"/>
+                                                            </a>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-sm-5 col-sm-offset-1">
+                                                        <div class="livestream-bg">
+                                                            <a href="/page/livestream-tellespen">
+                                                                <img src="/jkv_theme/static/src/imgs/Links/158032.png" alt=""
+                                                                     class="img-responsive"/>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </t>
+                                        <div class="row flex-col item-margin">
+                                            <t t-as="tr_product" t-foreach="bins">
+                                                <t t-as="td_product" t-foreach="tr_product">
+                                                    <t t-if="td_product">
+                                                        <t t-set="product" t-value="td_product['product']"/>
+                                                        <t t-call="jkv_theme.product_box_item"/>
+                                                    </t>
+                                                </t>
+                                            </t>
+                                        </div>
+                                        <t t-call="website.pager"/>
+
+                                        <div class="modal fade video_form_notification" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <strong></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade col-sm-8 col-md-4" id="share_modal" role="dialog"
+                                             style="margin: auto; top: 30%">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                                    <h4 class="modal-title">Share Video Link</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="input-group">
+                                                        <input id="share_link_input" class="form-control" value=""/>
+                                                        <div class="input-group-btn">
+                                                            <button class="btn btn-success copy_btn">
+                                                                <i class="fa fa-clipboard"></i>
+                                                                Copy
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div style="text-align: center; margin: 5px">
+                                                        <strong class="notification_div"></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="se-pre-con" style="display:none"></div>
+                                        <t t-call="jkv_website_sale.jkv_main_video_popup"/>
+                                        <t t-call="jkv_website_sale.jkv_sample_video_popup"/>
+
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <t t-if="call_to_action">
+                    <section class="pre-foot">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="tit-spacing">
+                                    <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                    <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                    <i class="pull-right">
+                                        <svg version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                             enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                            <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-miterlimit="10"
+                                      points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                </svg>
+                                    </i>
+                                    Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </t>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

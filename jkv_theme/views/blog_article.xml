@@ -1,0 +1,67 @@
+<odoo>
+    <template id="website.pager" name="Pager">
+        <nav class="paging">
+            <ul class="pagination" t-if="pager['page_count'] > 1" t-attf-class="#{ classname or '' } pagination"
+                t-att-style="style or None">
+                <li t-att-class=" 'disabled' if pager['page']['num'] == 1 else None ">
+                    <a t-att-href=" pager['page_previous']['url'] if pager['page']['num'] != 1 else None">
+                        <span>« PREV</span>
+                    </a>
+                </li>
+                <t t-foreach="pager['pages']" t-as="page">
+                    <li t-att-class=" 'active' if page['num'] == pager['page']['num'] else None ">
+                        <a t-att-href="page['url']" t-raw="page['num']"></a>
+                    </li>
+                </t>
+                <li t-att-class=" 'disabled' if pager['page']['num'] == pager['page_count'] else None ">
+                    <a t-att-href="pager['page_next']['url'] if pager['page']['num'] != pager['page_count'] else None">
+                        <span>NEXT »</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </template>
+
+    <template id="blog_article" name="Article">
+        <div class="item">
+            <div class="row row-reset">
+                <div class="col-sm-6">
+                    <a href="" class="thumb ratio-box-hd half-square"
+                       t-attf-style="background-image:url(/web/image?model=jkv.blog&amp;id=#{blog['id']}&amp;field=blog_image);">
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <div class="inner-cont">
+                        <h3 class="tit">
+                            <t t-esc="blog['blog_title']"/>
+                        </h3>
+                        <div class="sub-tit">
+                            <h4>BY
+                                <t t-esc="blog['blog_author']['display_name']"/>
+                            </h4>
+                            |
+                            <a href="#" class="btn btn-link">
+                                <t t-if="tags">
+                                    <t t-if="blog['blog_tags']">
+                                        <t t-call="jkv_theme.tag_section">
+                                             <t t-set="blog_tags" t-value="blog['blog_tags']"/>
+                                        </t>
+                                    </t>
+                                </t>
+                            </a>
+                        </div>
+                        <div class="cont">
+                            <div class="line-camp-5">
+                                <t t-raw="blog['blog_content']"/>
+                            </div>
+                        </div>
+                        <a  t-att-href="keep('/blog/article/%s' % slug(blog))"
+                           class="btn btn-link">
+                            LEARN MORE »
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

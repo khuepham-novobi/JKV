@@ -1,0 +1,428 @@
+<odoo>
+    <template id="jkv_purchased_video" name="Purchased Video">
+        <div class="fullscale">
+            <div class="video-thumb purchased_video_thumb">
+                <div class="scope">
+                    <img t-attf-src="/web/image/product.template/#{record.product_id.id}/image" class="img-responsive"/>
+                </div>
+            </div>
+            <div class="tit-spacing" >
+                <a t-attf-href="/shop/product/#{ slug(record.product_id) }" class="purchased-video-info">
+                    <h4 class="video-tit">
+                        <t t-esc="record.product_id.show_name or record.show_name"/>
+                    </h4>
+                    <div class="cont">
+                        <p>
+                            <t t-esc="record.product_id.class_name or record.class_id.name"/>
+                            | Ride #
+                            <t t-esc="record.product_id.ride_number or record.ride_number"/>
+                        </p>
+                        <p>
+                            <t t-esc="record.product_id.horse_name"/>
+                            #
+                            <t t-esc="record.product_id.rider_number or record.rider_number"/>
+                        </p>
+                    </div>
+                </a>
+                <div>
+                    <a t-att-href="'/thank_you?token=%s'%record.token" class="btn btn-link">
+                        Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="jkv_my_home" name="Account Videos" inherit_id="website_portal.portal_layout" priority="999">
+        <xpath expr="//div[hasclass('container')]" position="replace"/>
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <t t-set="additional_title">My Account</t>
+            <section class="top-content">
+                <div class="main-banner"></div>
+                <div class="container child-banner">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="flex-col flex-auto">
+                                <div class="flex-item">
+                                    <h4 class="breadcrumbs">
+                                        <a href="">HOME »</a>
+                                        <span>My Account</span>
+                                    </h4>
+                                    <h2>HELLO, <t t-esc="user.partner_id.jkv_first_name"/></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="main-content account-page nav-tabs-cs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-push-6">
+                            <div class="top-right-corner">
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-2">
+                                        <div class="box-form has-pattern">
+                                            <div class="box-tit">
+                                                <h3 class="tit">ACCOUNT DETAILS</h3>
+                                                <a href="/my/account" class="pull-right">
+                                                    <svg version="1.1" x="0px" y="0px" width="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve"><path fill="none" stroke="#152A31" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="   M21,11.998V21c0,1.098-0.898,1.998-1.998,1.998L2.998,23C1.899,23,1,22.1,1,21.002L1.002,4.998C1.002,3.899,1.901,3,3,3h9.002"></path><path
+                                                            fill="none" stroke="#152A31" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-miterlimit="10"
+                                                            d="M6,18l4.703-0.941c0.194-0.039,0.372-0.135,0.512-0.273L23,5c-0.242-2.101-1.898-3.758-4-4L7.215,12.786   c-0.14,0.139-0.235,0.316-0.274,0.512L6,18z"></path></svg>
+                                                </a>
+                                            </div>
+                                            <div class="detail-info">
+                                                    <h4 class="tit"><t t-esc="user.partner_id.name"/></h4>
+                                                    <div><t t-esc="user.partner_id.street"/></div>
+                                                    <div><t t-esc="user.partner_id.city"/>,
+                                                        <t t-esc="user.partner_id.state_id.code"/>
+                                                        <t t-esc="user.partner_id.zip"/></div>
+                                                    <div><t t-esc="user.partner_id.phone"/></div>
+                                                    <div><t t-esc="user.partner_id.email"/></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-md-pull-6">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" t-att-class=" 'active' if not is_subscription and not is_livestream_subscription else None ">
+                                    <a href="#myVideos" aria-controls="myVideos" role="tab" data-toggle="tab">Videos</a>
+                                </li>
+                                <li role="presentation" t-att-class=" 'active' if is_subscription else None ">
+                                    <a href="#mySubscriptions" aria-controls="mySubscriptions" role="tab"
+                                       data-toggle="tab">SUBSCRIPTIONS
+                                    </a>
+                                </li>
+                                <li role="livestream" t-att-class=" 'active' if is_livestream_subscription else None ">
+                                    <a href="#myLivestreams" aria-controls="myLivestreams" role="tab"
+                                       data-toggle="tab">Livestreams
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <t t-if="not videos and not subscriptions">
+                        <p>You have no purchased videos or subscriptions.
+                                <a style="font-family: Oswald,Helvetica, Arial, sans-serif;font-weight: 400;color:#333;" href="/shop">SHOP NOW »</a>
+                        </p>
+                    </t>
+                    <t t-else="">
+                        <p>All purchased videos and subscriptions can be viewed/downloaded here.</p>
+                    </t>
+                    <div class="tab-content">
+                        <div role="tabpanel" t-attf-class="tab-pane #{not is_subscription and not is_livestream_subscription and 'active' or ''}" id="myVideos">
+                            <div class="row flex-col">
+                                <t t-foreach="videos" t-as="record">
+                                    <div class="col-sm-4 video-item">
+                                        <t t-call="jkv_theme.jkv_purchased_video"/>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                        <div role="tabpanel" t-attf-class="tab-pane #{is_subscription and 'active' or ''}" id="mySubscriptions">
+                            <div class="fullscale">
+                                <t t-if="subscriptions">
+                                    <h3 class="text-center btn btn-link">
+                                        <a href="/purchase_subscription" style="color:black;">Subscribe a new show</a>
+                                    </h3>
+
+                                    <table class="table table-striped table_subscription o_my_status_table">
+                                        <thead>
+                                            <tr class="active">
+                                                <th style="width:60%">Show</th>
+                                                <th style="text-align:center;width:25%">Type</th>
+                                                <th style="text-align:right;width:25%">Expiry date</th>
+                                                <th style="width:15%"></th>
+                                            </tr>
+                                        </thead>
+                                        <t t-foreach="subscriptions" t-as="subscription">
+                                            <t t-if="subscription.expiried">
+                                                <tr style="background-color: #ff4d4d;color:white">
+                                                    <t t-if="subscription.all_shows">
+                                                        <td>All shows</td>
+                                                        <td>
+                                                            <span t-field="subscription.expiry_date"/>
+                                                        </td>
+                                                        <td>
+                                                            <a style="background-color:white;"
+                                                               t-att-data-id="subscription.id"
+                                                               class="btn renew_button">Renew
+                                                            </a>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="not subscription.all_shows">
+                                                        <td>
+                                                            <span t-field="subscription.show_id.name"/>
+                                                        </td>
+                                                        <td style="text-align:center">
+                                                            <span t-field="subscription.type"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="subscription.expiry_date"/>
+                                                        </td>
+                                                        <td>
+                                                            <a style="background-color:white;"
+                                                               t-att-data-id="subscription.id"
+                                                               class="btn renew_button">Renew
+                                                            </a>
+                                                        </td>
+                                                    </t>
+                                                </tr>
+                                            </t>
+                                            <t t-if="not subscription.expiried">
+                                                <tr>
+                                                    <t t-if="subscription.all_shows">
+                                                        <td>All shows</td>
+                                                        <td>
+                                                            <span t-field="subscription.expiry_date"/>
+                                                        </td>
+                                                        <td>
+                                                            <a t-att-data-id="subscription.id"
+                                                               class="btn renew_button">
+                                                                Renew
+                                                            </a>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="not subscription.all_shows">
+                                                        <td>
+                                                            <span t-field="subscription.show_id.name"/>
+                                                        </td>
+                                                        <td style="text-align:center">
+                                                            <span t-field="subscription.type"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="subscription.expiry_date"/>
+                                                        </td>
+                                                        <td>
+                                                            <a t-att-data-id="subscription.id"
+                                                               class="btn renew_button">
+                                                                Renew
+                                                            </a>
+                                                        </td>
+                                                    </t>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                    </table>
+
+                                    <div t-if="pager" class="o_portal_pager text-center">
+                                        <t t-call="website.pager"/>
+                                    </div>
+                                    <div class="modal fade" id="renewModal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"></button>
+                                                </div>
+                                                <form class="form-horizontal" role="form" action="/renew" method="post">
+                                                    <div class="modal-body">
+                                                        <input type="hidden" id="renew_subscription_id"
+                                                               name="subscription_id"/>
+                                                        <input type="hidden" name="csrf_token"
+                                                               t-att-value="request.csrf_token()"/>
+                                                        <div>
+                                                            <h3>Duration</h3>
+                                                        </div>
+                                                        <div>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="duration" value="365"
+                                                                       checked="true"/>1 year
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div style="margin-top:10px;padding:5px 5px 5px 5px"
+                                                             class="pull-right">
+                                                            <button type="submit" id="submit_form_renew"
+                                                                    class="btn btn-primary">Renew
+                                                            </button>
+                                                            <button type="button" class="btn btn-default"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                                <t t-if="not subscriptions">
+                                    <a href="/purchase_subscription" class="no-content ratio-box-hd">
+                                        <div class="bg ratio-box-inside">
+                                            <svg version="1.1" x="0px" y="0px" width="350px"
+                                                 viewBox="-176 -235.11 388.493 500"
+                                                 enable-background="new -176 -235.11 388.493 500" xml:space="preserve">
+												<path d="M-20.089,113.487c0,21.873-17.803,39.676-39.689,39.676h-8.455v61.039       c0,15.728-10.778,28.952-25.337,32.719v-11.603c0-9.321-7.561-16.882-16.896-16.882v46.453h8.455       c27.935,0,50.674-22.752,50.674-50.688V169.44c27.206-4.097,48.144-27.633,48.144-55.953V96.605       c0-9.334-7.561-16.91-16.896-16.91V113.487z"></path>
+                                                <path d="M113.633,6.779c-9.32,0-16.881,7.561-16.881,16.896h27.068       c9.321,0,16.896,7.575,16.896,16.882v29.571c0,6.214-3.409,11.685-8.454,14.613V74.335c-0.056-9.28-7.59-16.8-16.896-16.8       v46.37h8.455c18.614,0,33.792-15.163,33.792-33.777V40.557c0-18.629-15.178-33.777-33.792-33.777H113.633z"></path>
+                                                <path d="M74.028,40.158l-61.989,62.001c6.585,6.586,17.295,6.586,23.88,0       c0.247-0.261,15.782-15.796,15.782-15.796v10.242c0,21.872-17.803,39.675-39.69,39.675H3.557v61.04       c0,15.699-10.778,28.952-25.337,32.705v-11.589c0-9.335-7.561-16.896-16.896-16.896v46.453h8.455       c27.935,0,50.674-22.738,50.674-50.674v-44.775c27.206-4.083,48.129-27.619,48.129-55.939V69.481l28.939-28.925l-5.98-5.966       C71.057,14.093,66.48-16.263,77.821-41.188C56.842-18.462,55.591,16.017,74.028,40.158"></path>
+                                                <path d="M18.982-65.218l-98.996,99.01c-30.919,1.87-55.499,27.619-55.499,58.991       c0,26.918-16.8,49.904-40.487,59.074c31.798-0.921,57.382-27.055,57.382-59.074c0-16.909,9.981-31.496,24.361-38.246       c-4.812,12.607-4.66,26.85,0.949,39.635c-0.605,46.783-31.62,86.211-74.182,99.45c51.099-5.169,91.091-48.405,91.091-100.839       h-0.192l0.192-0.013v-2.338l-0.852-1.745c-6.613-13.583-3.877-29.915,6.832-40.611L30.929-53.271l11.946-11.947       c-3.299-3.286-7.616-4.949-11.933-4.949C26.612-70.167,22.295-68.504,18.982-65.218"></path>
+                                                <path d="M102.471-235.11c-41.917,0-76.024,34.107-76.024,76.024v56.063       c0,11.025-7.053,20.401-16.896,23.894c2.653,0.921,5.485,1.442,8.455,1.442c13.555,0,24.622-10.64,25.309-24.03       c0.014-0.439,0.014-0.866,0.014-1.306v-56.063c0-29.736,22.079-54.413,50.688-58.523v19.906l59.431,59.417       c6.571,6.599,6.571,17.309,0,23.907c-6.599,6.585-17.322,6.585-23.893,0c-1.65-1.663-3.822-2.488-5.98-2.488       c-13.968,0-25.337-11.355-25.337-25.323c-2.159,4.014-3.382,8.62-3.382,13.5c0,12.923,8.536,23.853,20.276,27.454v82.665       h63.583c9.321,0,16.896,7.588,16.896,16.896v29.558c0,6.255-3.409,11.713-8.455,14.627V32.115       c0-9.335-7.561-16.896-16.882-16.896v46.439h8.44c18.629,0,33.778-15.15,33.778-33.777V-1.676       c0-18.629-15.149-33.778-33.778-33.778h-46.687v-58.454c11.452,3.326,24.334,0.48,33.352-8.538       c13.185-13.17,13.185-34.602,0-47.773l-54.481-54.467v-30.424H102.471z"></path>
+							            </svg>
+                                        </div>
+                                        <div class="ratio-box-inside">
+                                            <h2 class="main-tit">NO SUBSCRIPTIONS</h2>
+                                            <p>You don’t have any subscriptions currently.<br/>Click here to add some.
+                                            </p>
+                                            <i>
+                                                <svg version="1.1" x="0px" y="0px" width="80px" viewBox="0 0 80 80"
+                                                     enable-background="new 0 0 80 80" xml:space="preserve"><path fill="#826A45" d="M40,0C18,0,0,18,0,40s18,40,40,40s40-18,40-40S62,0,40,0 M40,70   c-16.5,0-30-13.5-30-30s13.5-30,30-30s30,13.5,30,30S56.5,70,40,70"></path>
+                                                    <line
+                                                            fill="none" stroke="#826A45" stroke-width="10"
+                                                            stroke-miterlimit="10" x1="40" y1="55" x2="40"
+                                                            y2="25"></line>
+                                                    <line
+                                                            fill="none" stroke="#826A45" stroke-width="10"
+                                                            stroke-miterlimit="10" x1="55" y1="40" x2="25"
+                                                            y2="40"></line></svg>
+                                            </i>
+                                        </div>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" t-attf-class="tab-pane #{is_livestream_subscription and 'active' or ''}" id="myLivestreams">
+                            <div class="fullscale">
+                                <t t-if="livestream_subscription">
+                                    <table class="table table-striped table_subscription o_my_status_table">
+                                        <thead>
+                                            <tr class="active">
+                                                <th style="width:60%">Type</th>
+                                                <th style="text-align:right;width:25%">Expiry date</th>
+                                                <th style="width:15%"/>
+                                            </tr>
+                                        </thead>
+                                        <t t-if="livestream_subscription.is_expired">
+                                            <tr style="background-color: #ff4d4d;color:white">
+                                                <td>All shows</td>
+                                                <td>
+                                                    <span t-field="livestream_subscription.expiry_date"/>
+                                                </td>
+                                                <td>
+                                                    <a style="background-color:white;"
+                                                       t-att-data-id="livestream_subscription.id"
+                                                       class="btn renew_livestream_button">Renew
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-else="">
+                                            <tr>
+                                                <td>All shows</td>
+                                                <td>
+                                                    <span t-field="livestream_subscription.expiry_date"/>
+                                                </td>
+                                                <td>
+                                                    <a t-att-data-id="livestream_subscription.id"
+                                                       class="btn renew_livestream_button">
+                                                        Renew
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </table>
+
+                                    <div class="modal fade" id="renewLivestreamModal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"/>
+                                                </div>
+                                                <form class="form-horizontal" role="form" action="/renew_livestream_subscription" method="post">
+                                                    <div class="modal-body">
+                                                         <input type="hidden" id="renew_livestream_subscription_id" name="livestream_subscription_id"/>
+                                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                                        <div>
+                                                            <h3>Duration</h3>
+                                                        </div>
+                                                        <div>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="duration" value="365" checked="true"/>1 year
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div style="margin-top:10px;padding:5px 5px 5px 5px"
+                                                             class="pull-right">
+                                                            <button type="submit" id="submit_form_renew_livestream" class="btn btn-primary">Renew</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                                <t t-if="not livestream_subscription">
+                                    <a href="/purchase_subscription?is_livestream_subscription=1" class="no-content ratio-box-hd">
+                                        <div class="bg ratio-box-inside">
+                                            <svg version="1.1" x="0px" y="0px" width="350px"
+                                                 viewBox="-176 -235.11 388.493 500"
+                                                 enable-background="new -176 -235.11 388.493 500" xml:space="preserve">
+                                                    <path d="M-20.089,113.487c0,21.873-17.803,39.676-39.689,39.676h-8.455v61.039       c0,15.728-10.778,28.952-25.337,32.719v-11.603c0-9.321-7.561-16.882-16.896-16.882v46.453h8.455       c27.935,0,50.674-22.752,50.674-50.688V169.44c27.206-4.097,48.144-27.633,48.144-55.953V96.605       c0-9.334-7.561-16.91-16.896-16.91V113.487z"></path>
+                                                <path d="M113.633,6.779c-9.32,0-16.881,7.561-16.881,16.896h27.068       c9.321,0,16.896,7.575,16.896,16.882v29.571c0,6.214-3.409,11.685-8.454,14.613V74.335c-0.056-9.28-7.59-16.8-16.896-16.8       v46.37h8.455c18.614,0,33.792-15.163,33.792-33.777V40.557c0-18.629-15.178-33.777-33.792-33.777H113.633z"></path>
+                                                <path d="M74.028,40.158l-61.989,62.001c6.585,6.586,17.295,6.586,23.88,0       c0.247-0.261,15.782-15.796,15.782-15.796v10.242c0,21.872-17.803,39.675-39.69,39.675H3.557v61.04       c0,15.699-10.778,28.952-25.337,32.705v-11.589c0-9.335-7.561-16.896-16.896-16.896v46.453h8.455       c27.935,0,50.674-22.738,50.674-50.674v-44.775c27.206-4.083,48.129-27.619,48.129-55.939V69.481l28.939-28.925l-5.98-5.966       C71.057,14.093,66.48-16.263,77.821-41.188C56.842-18.462,55.591,16.017,74.028,40.158"></path>
+                                                <path d="M18.982-65.218l-98.996,99.01c-30.919,1.87-55.499,27.619-55.499,58.991       c0,26.918-16.8,49.904-40.487,59.074c31.798-0.921,57.382-27.055,57.382-59.074c0-16.909,9.981-31.496,24.361-38.246       c-4.812,12.607-4.66,26.85,0.949,39.635c-0.605,46.783-31.62,86.211-74.182,99.45c51.099-5.169,91.091-48.405,91.091-100.839       h-0.192l0.192-0.013v-2.338l-0.852-1.745c-6.613-13.583-3.877-29.915,6.832-40.611L30.929-53.271l11.946-11.947       c-3.299-3.286-7.616-4.949-11.933-4.949C26.612-70.167,22.295-68.504,18.982-65.218"></path>
+                                                <path d="M102.471-235.11c-41.917,0-76.024,34.107-76.024,76.024v56.063       c0,11.025-7.053,20.401-16.896,23.894c2.653,0.921,5.485,1.442,8.455,1.442c13.555,0,24.622-10.64,25.309-24.03       c0.014-0.439,0.014-0.866,0.014-1.306v-56.063c0-29.736,22.079-54.413,50.688-58.523v19.906l59.431,59.417       c6.571,6.599,6.571,17.309,0,23.907c-6.599,6.585-17.322,6.585-23.893,0c-1.65-1.663-3.822-2.488-5.98-2.488       c-13.968,0-25.337-11.355-25.337-25.323c-2.159,4.014-3.382,8.62-3.382,13.5c0,12.923,8.536,23.853,20.276,27.454v82.665       h63.583c9.321,0,16.896,7.588,16.896,16.896v29.558c0,6.255-3.409,11.713-8.455,14.627V32.115       c0-9.335-7.561-16.896-16.882-16.896v46.439h8.44c18.629,0,33.778-15.15,33.778-33.777V-1.676       c0-18.629-15.149-33.778-33.778-33.778h-46.687v-58.454c11.452,3.326,24.334,0.48,33.352-8.538       c13.185-13.17,13.185-34.602,0-47.773l-54.481-54.467v-30.424H102.471z"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="ratio-box-inside">
+                                            <h2 class="main-tit">NO LIVESTREAM SUBSCRIPTION</h2>
+                                            <p>You don’t have livestream subscription currently.<br/>Click here to add one.
+                                            </p>
+                                            <i>
+                                                <svg version="1.1" x="0px" y="0px" width="80px" viewBox="0 0 80 80"
+                                                     enable-background="new 0 0 80 80" xml:space="preserve"><path fill="#826A45" d="M40,0C18,0,0,18,0,40s18,40,40,40s40-18,40-40S62,0,40,0 M40,70   c-16.5,0-30-13.5-30-30s13.5-30,30-30s30,13.5,30,30S56.5,70,40,70"></path>
+                                                    <line
+                                                            fill="none" stroke="#826A45" stroke-width="10"
+                                                            stroke-miterlimit="10" x1="40" y1="55" x2="40"
+                                                            y2="25"></line>
+                                                    <line
+                                                            fill="none" stroke="#826A45" stroke-width="10"
+                                                            stroke-miterlimit="10" x1="55" y1="40" x2="25"
+                                                            y2="40"></line></svg>
+                                            </i>
+                                        </div>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <t t-if="call_to_action">
+                <section class="pre-foot">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="tit-spacing">
+                                    <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                    <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                    <i class="pull-right">
+                                        <svg version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208" enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                                            <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                                      points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                            </svg>
+                                    </i>
+                                    Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </t>
+        </xpath>
+    </template>
+</odoo>

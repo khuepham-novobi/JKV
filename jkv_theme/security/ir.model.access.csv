@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_jkv_blog,jkv.blog,model_jkv_blog,,1,1,1,1
+access_jkv_tag,jkv.tag,model_jkv_tag,,1,1,1,1
+access_jkv_service,jkv.service,model_jkv_service,,1,1,1,1
+access_jkv_calltoaction,jkv.calltoaction,model_jkv_calltoaction,,1,1,1,1

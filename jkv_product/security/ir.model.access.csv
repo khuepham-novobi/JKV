@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_jkv_filename_base_user,jkv.filename.base.user,jkv_product.model_jkv_filename,base.group_user,1,1,1,1
+access_jkv_filename_public,jkv.filename.public,jkv_product.model_jkv_filename,,1,0,0,0
+access_jkv_subscription_base_user,jkv.subscription.base.user,jkv_product.model_jkv_subscription,base.group_user,1,1,1,1
+access_jkv_subscription_public,jkv.filename.public,jkv_product.model_jkv_subscription,,1,0,0,0
+access_jkv_livestream_subscription_base_user,jkv.livestream.subscription.base.user,jkv_product.model_jkv_livestream_subscription,base.group_user,1,1,1,1
+access_jkv_livestream_subscription_public,jkv.livestream.subscription.public,jkv_product.model_jkv_livestream_subscription,,1,0,0,0
+access_jkv_livestream_show_user,jkv_livestream_show.user,jkv_product.model_jkv_livestream_show,base.group_user,1,1,1,1
+access_jkv_livestream_show_public,jkv_livestream_show.public,jkv_product.model_jkv_livestream_show,,1,0,0,0
+access_jkv_livestream_class_user,jkv_livestream_class.user,jkv_product.model_jkv_livestream_class,base.group_user,1,1,1,1
+access_jkv_livestream_class_public,jkv_livestream_class.public,jkv_product.model_jkv_livestream_class,,1,0,0,0

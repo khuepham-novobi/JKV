@@ -1,0 +1,799 @@
+<odoo>
+    <template id="jkv_login_layout" inherit_id="website.login_layout" name="Login" priority="999">
+        <xpath expr="//div[@class='oe_website_login_container']" position="replace">
+            <section class="top-content">
+                <div class="main-banner"></div>
+                <div class="container child-banner">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="flex-col flex-auto">
+                                <div class="flex-item">
+                                    <h4 class="breadcrumbs">
+                                        <a href="">HOME »</a>
+                                        <span>Create Account/Login</span>
+                                    </h4>
+                                    <h2>Create Account/Login</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="main-content sign-page nav-tabs-cs">
+                <div class="container">
+
+                    <ul class="nav nav-tabs visible-sm visible-xs" role="tablist">
+                        <li role="presentation" t-att-class="'active' if not error and not first_load else ''">
+                            <a href="#boxSignup" aria-controls="boxSignup" role="tab" data-toggle="tab">Sign up</a>
+                        </li>
+                        <li role="presentation" t-att-class="'active' if error or first_load else ''">
+                            <a href="#boxLogin" aria-controls="boxLogin" role="tab" data-toggle="tab">Login</a>
+                        </li>
+                    </ul>
+                    <div class="box-form">
+                        <div class="tab-content">
+                            <div role="tabpanel" t-att-class="'col-md-6 tab-pane active' if not error and not first_load else 'col-md-6 tab-pane'" id="boxSignup">
+                                <div class="tit-page-spacing">
+                                    <div class="box-tit">
+                                        <h3 class="tit">Create Account</h3>
+                                        <span class="required">*Required</span>
+                                    </div>
+                                    <hr class="dark"/>
+                                </div>
+                                <form class="form-horizontal s_website_form" id="jkv_form_signup"
+                                      t-attf-action="/web/signup{{ '?debug' if debug else '' }}" role="form"
+                                      method="post" t-if="not message">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label for="login1" class="col-sm-3 control-label">
+                                            Username<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="login" t-att-value="login"
+                                                   class="form-control o_website_form_input" id="login1"
+                                                   autocapitalize="off" required="required"
+                                                   style="text-transform: none;"/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">
+                                            Name<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control o_website_form_input"
+                                                               placeholder="First" name="jkv_first_name"
+                                                               t-att-value="jkv_first_name" id="jkv_first_name"
+                                                               required="required" style="text-transform: none;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control o_website_form_input"
+                                                               placeholder="Last" name="jkv_last_name"
+                                                               t-att-value="jkv_last_name" id="jkv_last_name"
+                                                               required="required" style="text-transform: none;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">
+                                            Password<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="password" name="password" id="password1"
+                                                   class="form-control o_website_form_input" required="required"
+                                                   style="text-transform: none;"/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">
+                                            Confirm<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="password" name="confirm_password" id="confirm_password"
+                                                   class="form-control o_website_form_input" required="required"
+                                                   style="text-transform: none;"/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">
+                                            Address<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <input type="text" name="street" id="street"
+                                                               class="form-control o_website_form_input"
+                                                               placeholder="Street" required="True"
+                                                               style="text-transform: none;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input type="text" name="city" id="city"
+                                                               class="form-control o_website_form_input"
+                                                               placeholder="City" required="True"
+                                                               style="text-transform: none;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input type="text" name="zip_code" id="zip_code" minlength="5"
+                                                               class="form-control o_website_form_input"
+                                                               placeholder="Zip code" required="True"
+                                                               style="text-transform: none;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <select name="country_id"
+                                                                class="form-control o_website_form_input"
+                                                                required="True" style="text-transform: none;">
+                                                            <option value="">Country</option>
+                                                            <t t-foreach="countries or []" t-as="country">
+                                                                <option t-att-value="country.id" t-att-data-code="country.code">
+                                                                    <t t-esc="country.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <select name="state_id"
+                                                                class="form-control o_website_form_input"
+                                                                required="True" style="text-transform: none;">
+                                                            <option value="">State</option>
+                                                            <t t-foreach="states or []" t-as="state">
+                                                                <option t-att-value="state.id" style="display:none;"
+                                                                        t-att-data-country_id="state.country_id.id">
+                                                                    <t t-esc="state.name" />
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">
+                                            Phone<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="tel" name="phone" id="phone"
+                                                   class="form-control o_website_form_input" required="required"
+                                                   style="text-transform: none;"/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">
+                                            Email<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="email" name="email" id="email"
+                                                   class="form-control o_website_form_input" required="required"
+                                                   style="text-transform: none;"/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label class="col-sm-3 control-label">Usef #</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="customer_usef_number" id="customer_usef_number"
+                                                   class="form-control" autocapitalize="off"
+                                                   style="text-transform: none;"/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <hr class="light-dark"/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label class="col-sm-3 control-label">Type</label>
+                                        <div class="col-sm-9">
+                                            <div class="tit-page-spacing">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           id="chk_rider" name="type_rider" value="rider"/>
+                                                    <label class="form-check-label" for="chk_rider">
+                                                        Rider
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           id="chk_trainer" name="type_trainer" value="trainer"/>
+                                                    <label class="form-check-label" for="chk_trainer">
+                                                        Trainer
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="type_owner"
+                                                           value="owner"
+                                                           id="chk_owner"/>
+                                                    <label class="form-check-label" for="chk_owner">
+                                                        Owner
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <hr class="light-dark"/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-9 col-sm-offset-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="receive_email" id="receive_email"/>
+                                                <label class="form-check-label" for="receive_email">
+                                                    I WOULD LIKE TO RECEIVE PROMOTIONS, NEWS, AND INFORMATION VIA EMAIL.
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <hr class="light-dark"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <label class="col-sm-3 control-label">Captcha</label>
+                                            <div class="col-sm-9">
+                                                <div class="tit-page-spacing">
+                                                    <div class="form-check">
+                                                        <div class="o_website_form_recaptcha" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <hr class="light-dark"/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-9 col-sm-offset-3">
+                                            <a href="javascript:{}" class="btn btn-block btn-form o_website_form_send">
+                                                <i class="pull-right">
+                                                    <svg version="1.1" x="0px" y="0px" width="6px"
+                                                         viewBox="0 0 12.13 22.208"
+                                                         enable-background="new 0 0 12.13 22.208" xml:space="preserve"><polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline></svg>
+                                                </i>
+                                                Submit
+                                            </a>
+<!--                                            <span id="o_website_form_result"></span>-->
+                                            <span id="signup_login_result" class="text-danger ml8" t-if="signup_error">
+                                                <i class="fa fa-close mr4"></i>
+                                                <t t-esc="signup_error"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!--<p class="alert alert-danger" t-if="error">
+                                        <t t-esc="error"/>
+                                    </p>-->
+                                    <input type="hidden" name="redirect" t-att-value="redirect"/>
+                                    <input type="hidden" name="token" t-att-value="token"/>
+                                </form>
+
+                            </div>
+
+                            <div role="tabpanel" t-att-class="'col-md-5 col-md-offset-1 tab-pane active' if error or first_load else 'col-md-5 col-md-offset-1 tab-pane'" id="boxLogin">
+                                <div class="tit-page-spacing">
+                                    <div class="box-tit">
+                                        <h3 class="tit">Login</h3>
+                                        <span class="required">*Required</span>
+                                    </div>
+                                    <hr class="dark"/>
+                                </div>
+                                <form class="form-horizontal oe_login_form s_website_form" role="form"
+                                      id="jkv_form_login"
+                                      t-attf-action="/web/login{{ '?debug' if debug else '' }}" method="post"
+                                      onsubmit="this.action = this.action + location.hash">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label for="login" class="col-sm-3 control-label">Username<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="login" t-att-value="login" id="login"
+                                                   class="form-control o_website_form_input" required="required"
+                                                   autofocus="autofocus"
+                                                   autocapitalize="off" style="text-transform: none;"/>
+                                            <input type="hidden" name="productId" t-att-value="productId" id="productId"/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group form-field o_website_form_required_custom field_password">
+                                        <label for="password" class="col-sm-3 control-label">Password<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="password" name="password" id="password"
+                                                   class="form-control o_website_form_input"
+                                                   required="required"
+                                                   autocomplete="current-password"
+                                                   t-att-autofocus="'autofocus' if login else None" maxlength="4096"/>
+                                        </div>
+                                        <span class="toggle_invisible_password">
+                                            <img class="show_icon" src="/jkv_theme/static/src/imgs/show_pwd.svg"/>
+                                            <img class="hide_icon" src="/jkv_theme/static/src/imgs/hide_pwd.svg"/>
+                                        </span>
+                                    </div>
+                                    <!--<p class="alert alert-danger" t-if="error">
+                                        <t t-esc="error"/>
+                                    </p>-->
+                                    <p class="alert alert-success" t-if="message">
+                                        <t t-esc="message"/>
+                                    </p>
+
+                                    <input type="hidden" name="redirect" t-att-value="redirect"/>
+                                    <div class="row form-group">
+                                        <div class="col-sm-9 col-sm-offset-3">
+                                            <a href="javascript:{}" class="btn btn-block btn-form o_website_form_send"
+                                               id="btn_submit_login">
+                                                <i class="pull-right">
+                                                    <svg version="1.1" x="0px" y="0px" width="6px"
+                                                         viewBox="0 0 12.13 22.208"
+                                                         enable-background="new 0 0 12.13 22.208" xml:space="preserve"><polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline></svg>
+                                                </i>
+                                                Submit
+                                            </a>
+                                            <a style="font-size: 13px;color: #152A31;float: right;"
+                                               href="/web/reset_password">Reset password
+                                            </a>
+                                            <br/>
+                                            <a style="font-size: 13px;color: #152A31;float: right;"
+                                               href="/web/reset_username">Reset username
+                                            </a>
+<!--                                            <span id="o_website_form_result"></span>-->
+                                            <span id="signup_login_result" class="text-danger ml8" t-if="error">
+                                                <i class="fa fa-close mr4"></i>
+                                                <t t-esc="error"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <t t-if="call_to_action">
+                <section class="pre-foot">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="tit-spacing">
+                                    <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                    <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                    <i class="pull-right">
+                                        <svg version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                             enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+		<polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                  points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+		</svg>
+                                    </i>
+                                    Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="jkv_reset_password"  name="Reset Password">
+        <t t-set="additional_title">Reset Password</t>
+        <t t-call="website.layout">
+            <main>
+                <section class="top-content">
+                    <div class="main-banner"></div>
+                    <div class="container child-banner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="flex-col flex-auto">
+                                    <div class="flex-item">
+                                        <h4 class="breadcrumbs">
+                                            <a href="/">HOME »</a>
+                                            <span>Signup/Login</span>
+                                        </h4>
+                                        <h2>Reset Password</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-content">
+                    <div class="container">
+                        <div class="box-form">
+                            <div class="tit-page-spacing">
+                                <div class="box-tit">
+                                    <h3 class="tit">Reset Password</h3>
+                                    <span class="required">*Required</span>
+                                </div>
+                                <hr class="dark"/>
+                            </div>
+
+                            <form class="form-horizontal oe_reset_password_form s_website_form" action="/web/reset_password"
+                                  t-if="not message" id="jkv_form_reset_password" role="form" method="post">
+
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="redirect" value="/my/home"/>
+                                <input type="hidden" name="token" t-att-value="token"/>
+
+                                <t t-if="token and not invalid_token">
+
+                                    <div class="row form-group form-field">
+                                        <label class="col-sm-3 control-label">Your email
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9 field-login">
+                                            <input type="text" name="login" t-att-value="login" id="login"
+                                                   class="form-control o_website_form_input"
+                                                   required="required"
+                                                   readonly="readonly"
+                                                   autocapitalize="off"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group form-field">
+                                        <label class="col-sm-3 control-label">Your name
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9 field-name">
+                                            <input type="text" name="name" t-att-value="name" id="name"
+                                                   class="form-control o_website_form_input"
+                                                   placeholder="e.g. John Doe"
+                                                   required="required"
+                                                   readonly="readonly"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">Password
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9 field-password">
+                                            <input type="password" name="password" id="password"
+                                                   class="form-control o_website_form_input"
+                                                   autofocus="autofocus" required="required" autocapitalize="off"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">Confirm Password
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9 field-confirm_password">
+                                            <input type="password" name="confirm_password" id="confirm_password"
+                                                   class="form-control o_website_form_input"
+                                                   autofocus="autofocus" required="required" autocapitalize="off"/>
+                                        </div>
+                                    </div>
+                                </t>
+
+                                <t t-if="not token">
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">Your email
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="login" t-att-value="login" id="login"
+                                                   class="form-control o_website_form_input"
+                                                   autofocus="autofocus" required="required" autocapitalize="off"/>
+                                        </div>
+                                    </div>
+                                </t>
+
+                                <t t-if="invalid_token">
+                                    <div class="row form-group">
+                                        <div class="col-sm-12" style="color:red">
+                                            <t t-esc="error"/>
+                                        </div>
+                                    </div>
+                                </t>
+
+                                <div class="row form-group">
+                                    <div class="col-sm-12">
+                                        <hr/>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <a href="javascript:{}" class="btn btn-block btn-form o_website_form_send"
+                                           id="btn_submit_reset_password">
+                                            <i class="pull-right">
+                                                <svg version="1.1" x="0px" y="0px" width="6px"
+                                                     viewBox="0 0 12.13 22.208"
+                                                     enable-background="new 0 0 12.13 22.208" xml:space="preserve"><polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline></svg>
+                                            </i>
+                                            Submit
+                                        </a>
+                                        <t t-if="not token or invalid_token">
+                                            <a style="font-size: 13px;color: #152A31;float: right;"
+                                               href="/web/login">Back to login
+                                            </a>
+                                        </t>
+                                        <span id="o_website_form_result"></span>
+                                        <span id="reset_password_result" class="text-danger ml8" t-if="error and not invalid_token">
+                                            <i class="fa fa-close mr4"></i>
+                                            <t t-esc="error"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <t t-if="message">
+                                <div class="row form-group">
+                                    <div class="col-sm-12" style="color:green">
+                                        <t t-esc="message"/>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <a style="font-size: 13px;color: #152A31;float: right;"
+                                           href="/web/login">Back to login
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+
+                        </div>
+                    </div>
+                </section>
+                <t t-if="call_to_action">
+                    <section class="pre-foot">
+                        <div class="container">
+                            <div class="row text-center">
+                                <div class="col-md-12">
+                                    <div class="tit-spacing">
+                                        <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                        <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                    <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                        <i class="pull-right">
+                                            <svg xml="http://www.w3.org/2000/svg"
+                                                 xml:xlink="http://www.w3.org/1999/xlink"
+                                                 version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                                 enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                                            <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                      stroke-linejoin="round" stroke-miterlimit="10"
+                                                      points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                        </svg>
+                                        </i>
+                                        Contact Us
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </t>
+            </main>
+        </t>
+    </template>
+
+    <template id="jkv_reset_username"  name="Reset Username">
+        <t t-set="additional_title">Reset Username</t>
+        <t t-call="website.layout">
+            <main>
+                <section class="top-content">
+                    <div class="main-banner"></div>
+                    <div class="container child-banner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="flex-col flex-auto">
+                                    <div class="flex-item">
+                                        <h4 class="breadcrumbs">
+                                            <a href="/">HOME »</a>
+                                            <span>Signup/Login</span>
+                                        </h4>
+                                        <h2>Reset Username</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-content">
+                    <div class="container">
+                        <div class="box-form">
+                            <div class="tit-page-spacing">
+                                <div class="box-tit">
+                                    <h3 class="tit">Reset Username</h3>
+                                    <span class="required">*Required</span>
+                                </div>
+                                <hr class="dark"/>
+                            </div>
+
+                            <form class="form-horizontal oe_reset_password_form s_website_form" action="/web/reset_username"
+                                  t-if="not message" id="jkv_form_reset_password" role="form" method="post">
+
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="redirect" value="/my/home"/>
+                                <input type="hidden" name="token" t-att-value="token"/>
+
+                                <t t-if="token and not invalid_token">
+
+                                    <div class="row form-group form-field">
+                                        <label class="col-sm-3 control-label">Your email
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9 field-login">
+                                            <input type="text" name="email" t-att-value="email" id="email"
+                                                   class="form-control o_website_form_input"
+                                                   required="required"
+                                                   readonly="readonly"
+                                                   style="text-transform:none;"
+                                                   autocapitalize="off"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group form-field">
+                                        <label class="col-sm-3 control-label">Your name
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9 field-name">
+                                            <input type="text" name="name" t-att-value="name" id="name"
+                                                   class="form-control o_website_form_input"
+                                                   placeholder="e.g. John Doe"
+                                                   required="required"
+                                                   style="text-transform:none;"
+                                                   readonly="readonly"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">Username
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9 field-password">
+                                            <input type="text" name="login" id="login"
+                                                   class="form-control o_website_form_input"
+                                                   style="text-transform:none;"
+                                                   autofocus="autofocus" required="required" autocapitalize="off"/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">Confirmed Username
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9 field-password">
+                                            <input type="text" name="confirm_login" id="confirm_login"
+                                                   class="form-control o_website_form_input"
+                                                   style="text-transform:none;"
+                                                   autofocus="autofocus" required="required" autocapitalize="off"/>
+                                        </div>
+                                    </div>
+                                </t>
+
+                                <t t-if="not token">
+                                    <div class="row form-group form-field o_website_form_required_custom">
+                                        <label class="col-sm-3 control-label">Your email
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="login" t-att-value="login" id="login"
+                                                   class="form-control o_website_form_input"
+                                                   style="text-transform:none;"
+                                                   autofocus="autofocus" required="required" autocapitalize="off"/>
+                                        </div>
+                                    </div>
+                                </t>
+
+                                <t t-if="invalid_token">
+                                    <div class="row form-group">
+                                        <div class="col-sm-12" style="color:red">
+                                            <t t-esc="error"/>
+                                        </div>
+                                    </div>
+                                </t>
+
+                                <div class="row form-group">
+                                    <div class="col-sm-12">
+                                        <hr/>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <a href="javascript:{}" class="btn btn-block btn-form o_website_form_send"
+                                           id="btn_submit_reset_password">
+                                            <i class="pull-right">
+                                                <svg version="1.1" x="0px" y="0px" width="6px"
+                                                     viewBox="0 0 12.13 22.208"
+                                                     enable-background="new 0 0 12.13 22.208" xml:space="preserve"><polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline></svg>
+                                            </i>
+                                            Submit
+                                        </a>
+                                        <t t-if="not token or invalid_token">
+                                            <a style="font-size: 13px;color: #152A31;float: right;"
+                                               href="/web/login">Back to login
+                                            </a>
+                                        </t>
+                                        <span id="o_website_form_result"></span>
+                                        <span id="reset_password_result" class="text-danger ml8" t-if="error and not invalid_token">
+                                            <i class="fa fa-close mr4"></i>
+                                            <t t-esc="error"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <t t-if="message">
+                                <div class="row form-group">
+                                    <div class="col-sm-12" style="color:green">
+                                        <t t-esc="message"/>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <a style="font-size: 13px;color: #152A31;float: right;"
+                                           href="/web/login">Back to login
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+
+                        </div>
+                    </div>
+                </section>
+                <t t-if="call_to_action">
+                    <section class="pre-foot">
+                        <div class="container">
+                            <div class="row text-center">
+                                <div class="col-md-12">
+                                    <div class="tit-spacing">
+                                        <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                        <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                    <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                        <i class="pull-right">
+                                            <svg xml="http://www.w3.org/2000/svg"
+                                                 xml:xlink="http://www.w3.org/1999/xlink"
+                                                 version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                                 enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                                            <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                                      stroke-linejoin="round" stroke-miterlimit="10"
+                                                      points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                        </svg>
+                                        </i>
+                                        Contact Us
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </t>
+            </main>
+        </t>
+    </template>
+
+
+</odoo>

@@ -1,0 +1,29 @@
+.div-confirm-change-user-details-popup {
+    position: fixed;
+    left: 50%;
+    top: 15%;
+    background-color: white;
+    border: 2px solid rgb(90, 158, 181);
+    border-radius: 5px;
+    padding: 10px 10px;
+    box-shadow: 0 0 15px;
+    font-size: 14px;
+    float: left;
+}
+
+@media(min-width:768px){
+    .div-confirm-change-user-details-popup{
+        margin-left: -350px;
+        width: 699px;
+    }
+}
+@media(min-width:320px) and (max-width:767px){
+    .div-confirm-change-user-details-popup{
+        margin-left: -150px;
+        width: 300px;
+    }
+}
+
+@media(min-width:768px){
+    .media-control-signup{width:768px !important;}
+}

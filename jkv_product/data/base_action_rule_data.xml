@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_task_action" model="ir.cron">
+            <field name="name">Check File on S3 Bucket</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'jkv.filename'" name="model"/>
+            <field eval="'check_video_filename_url'" name="function"/>            
+            <field name="active" eval="True" />        	
+        </record>
+        <record id="ir_cron_get_file" model="ir.cron">
+            <field name="name">Get File on S3</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'jkv.filename'" name="model"/>
+            <field eval="'get_file_on_s3'" name="function"/>            
+            <field name="active" eval="True" />        	
+        </record>
+        <record id="ir_cron_get_livestream_file" model="ir.cron">
+            <field name="name">Get Live Stream File on S3</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'product.template'" name="model"/>
+            <field eval="'get_livestream_file_on_s3'" name="function"/>
+            <field name="active" eval="True" />
+        </record>
+        <record id="ir_cron_check_subscription" model="ir.cron">
+            <field name="name">Check Subscription</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'jkv.subscription'" name="model"/>
+            <field eval="'_check_subscription'" name="function"/>            
+            <field name="active" eval="True" />        	
+        </record>
+        <record id="ir_cron_check_livestream_subscription" model="ir.cron">
+            <field name="name">Check Livestream Subscription</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'jkv.livestream.subscription'" name="model"/>
+            <field eval="'_check_livestream_subscription'" name="function"/>
+            <field name="active" eval="True" />
+        </record>
+    </data>
+</odoo>

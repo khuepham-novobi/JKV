@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>       
+        <record forcecreate="1" id="customer_number" model="ir.sequence">
+			<field name="name">Customer Number</field>
+			<field name="code">customer.number</field>
+			<field name="padding" eval="6"/>
+		</record>
+    </data>
+</odoo>    

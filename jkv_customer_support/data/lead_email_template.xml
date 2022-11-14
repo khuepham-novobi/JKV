@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+        <!-- Email template 1: When user Submit Expense to Approver -->
+        <record id="template_jkv_customer_support" model="mail.template">
+            <field name="name">JKV Customer Support</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="email_from"><![CDATA[${object.company_id.name} <${(object.company_id.email or user.email)|safe}>]]></field>
+            <field name="email_to">jkvideohelp@gmail.com</field>
+            <field name="email_cc">${object.email|safe}</field>
+            <field name="subject"><![CDATA[You have received a message from a customer]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        ${ctx.get('jkv_sent_date')}
+                    </p>
+
+                    <p>Dear ${ctx.get('jkv_user_name')}</p>
+
+                    <p>You have received a message from a customer</p>
+
+                    <p>Customer's name: ${ctx.get('contact_name')}</p>
+
+                    <p>Customer's email: ${ctx.get('email_from')}</p>
+
+                    <p>Customer's phone: ${ctx.get('phone')}</p>
+
+                    <p>Subject: ${ctx.get('subject')}</p>
+
+                    <p>Question: ${ctx.get('question')}</p>
+
+                    <p> Sincerely, </p>
+
+                    <p> ${user.company_id.name | safe}  </p>
+                ]]>
+            </field>
+        </record>
+  </data>
+</odoo>

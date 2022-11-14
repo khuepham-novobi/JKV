@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="jkv_find_download_form" model="ir.ui.view">
+			<field name="name">JKV Find Downloaded Videos Form</field>
+			<field name="model">jkv.download.report</field>
+			<field name="arch" type="xml">
+				<form string="Downloaded Videos">
+					<group string="Downloaded Videos">
+						<field name="user_id"/>
+						<field name="show_id"/>
+						<field name="downloaded_date"/>
+						<field name="token"/>
+					</group>
+					<footer>
+						<button name="find_downloaded_videos" string="Find" type="object" class="oe_highlight"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="jkv_find_download_action" model="ir.actions.act_window">
+			<field name="name">JKV Find Downloaded Videos</field>
+			<field name="res_model">jkv.download.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="jkv_find_download_form"/>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem id="menu_jkv_download_report" name="Report" parent="jkv_report.menu_jkv_download_report_root" action="jkv_find_download_action" sequence="23"/>
+        
+        <record id="download_report_confirm_view" model="ir.ui.view">
+            <field name="name">download.report.confirm.form</field>
+            <field name="model">download.report.confirm</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="is_exported" invisible="1"/>
+                    <p>
+                        <label string="Do you want to export selected data record(s)?" attrs="{'invisible':[('is_exported','=',True)]}"/>
+                        <label string="You have successfully exported data." attrs="{'invisible':[('is_exported','=',False)]}"/>
+                    </p>
+                    <footer>
+                        <button string="Export" name="download_report" type="object" default_focus="1" class="btn-primary"
+                            attrs="{'invisible':[('is_exported','=',True)]}"/>                        
+                    </footer>
+                </form>
+            </field>
+        </record>    
+        
+        <act_window id="action_download_report_confirm"
+            multi="True"
+            key2="client_action_multi" name="Download .xls"
+            res_model="download.report.confirm" src_model="jkv.download"
+            view_mode="form" target="new" view_type="form"/>
+	</data>
+</odoo>

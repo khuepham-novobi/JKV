@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="jkv_theme.filter_shows">
+       <ul class="cat-list subscription-list">
+            <t t-foreach="shows" t-as="show">
+                <li class="show_name_subscription">
+                    <input type="checkbox" name="shows" t-attf-value="{{show.id}}"/>
+                    <t t-esc="show.name"/>
+                </li>
+            </t>
+        </ul>
+    </t>
+</templates>

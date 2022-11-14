@@ -1,0 +1,272 @@
+<odoo>
+    <template id="website.pager" name="Pager">
+        <nav class="paging">
+            <ul class="pagination" t-if="pager['page_count'] > 1" t-attf-class="#{ classname or '' } pagination"
+                t-att-style="style or None">
+                <li t-att-class=" 'disabled' if pager['page']['num'] == 1 else None ">
+                    <a t-att-href=" pager['page_previous']['url'] if pager['page']['num'] != 1 else None">
+                        <span>« PREV</span>
+                    </a>
+                </li>
+                <t t-foreach="pager['pages']" t-as="page">
+                    <li t-att-class=" 'active' if page['num'] == pager['page']['num'] else None ">
+                        <a t-att-href="page['url']" t-raw="page['num']"></a>
+                    </li>
+                </t>
+                <li t-att-class=" 'disabled' if pager['page']['num'] == pager['page_count'] else None ">
+                    <a t-att-href="pager['page_next']['url'] if pager['page']['num'] != pager['page_count'] else None">
+                        <span>NEXT »</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </template>
+
+    <template id="jkv_purchase_video" inherit_id="jkv_website_sale.jkv_product_inherit_add_product_video" priority="999">
+        <xpath expr="//section[@id='product_detail']//div[@class='col-sm-7']//div//div/p" position="replace">
+            <p>FREE WATCHING PERIOD HAS ENDED FOR THIS VIDEO. PLEASE PURCHASE VIDEO IN ORDER TO DOWNLOAD/WATCH/SHARE.</p>
+        </xpath>
+        <xpath expr="//section[@id='product_detail']//div[@class='col-sm-7']//div//div/div/button" position="replace">
+            <button type="button" class="btn btn-primary btn_confirm_purchase" data-dismiss="modal">ADD VIDEO TO CART</button>
+        </xpath>
+    </template>
+
+    <template id="product_box_item" name="Product Box Item">
+        <div class="col-sm-4 video-item">
+            <form action="/shop/cart/update" method="post" class="video_form">
+                <input name="csrf_token" t-att-value="request.csrf_token()" type="hidden"/>
+                <div class="fullscale">
+                    <div class="video-thumb">
+                        <div class="scope">
+                            <a itemprop="url"
+                               t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))">
+
+                                <img t-attf-src="/web/image/product.template/#{product.id}/image"
+                                     itemprop="image" t-att-alt="product.name" class="img-responsive product-img"/>
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="tit-spacing">
+                        <h4 class="video-tit">
+                            <a itemprop="url" style="color:#333;"
+                               t-att-href="keep('/shop/product/%s' % slug(product))">
+                                <t t-esc="product.show_name"/>
+                                <t t-if="product.livestream_show_id">
+                                    <t t-esc="product.livestream_show_id.name"/>
+                                </t>
+                            </a>
+                        </h4>
+                        <div class="cont">
+                            <t t-if="not is_livestream_product">
+                                 <a itemprop="url"
+                               t-att-href="keep('/shop/product/%s' % slug(product))">
+                                <p style="color:#333;">
+                                    <t t-esc="product.class_name"/>
+                                    | Ride #
+                                    <t t-esc="product.ride_number"/>
+                                </p>
+                                <p style="color:#333;">
+                                    <t t-esc="product.horse_name"/>
+                                    #
+                                    <t t-esc="product.rider_number"/>
+                                </p>
+                            </a>
+                            </t>
+                            <t t-else="">
+                                <p style="color:#333;">
+                                    <t t-esc="product.livestream_class_id.name"/>
+                                </p>
+                                <p style="color:#333;">
+                                    <t t-esc="product.livestream_date"/>
+                                </p>
+                            </t>
+                        </div>
+                        <input name="product_id" t-att-value="product.product_variant_id.id" type="hidden"/>
+                        <t t-if="not is_livestream_product">
+                            <a href="" class="btn btn-link fa fa-play jkv_sample_video" data-toggle="modal"
+                               t-attf-data-target="#jkv_sample_video" t-attf-source="{{product.sample_file_url}}">Play
+                                sample
+                            </a>
+                            |
+
+                            <t t-if="len(product.product_variant_ids) == 1">
+                                <a href="javascript:void(0)" class="btn btn-link a-submit">Add to Cart</a>
+                            </t>
+                            <t t-if="len(product.product_variant_ids) &gt; 1">
+                                <a t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))"
+                                   class="btn btn-link a-submit">Add to Cart
+                                </a>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </template>
+
+    <template id="product_box_homepage" name="Product Box Item">
+        <div class="col-sm-4 video-item">
+            <form action="/shop/cart/update" method="post" class="video_form">
+                <input name="csrf_token" t-att-value="request.csrf_token()" type="hidden"/>
+                <div class="fullscale">
+                    <div class="video-thumb">
+                        <div class="scope">
+                            <a itemprop="url" t-att-href="keep('/shop/product/%s' % slug(product))">
+                                <img t-attf-src="/web/image/product.template/#{product.id}/image" itemprop="image" t-att-alt="product.name" class="img-responsive product-img"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="tit-spacing">
+                        <h4 class="video-tit">
+                            <a itemprop="url" style="color:#333;"
+                               t-att-href="keep('/shop/product/%s' % slug(product))">
+                                <t t-if="product.is_livestream_product">
+                                    <t t-esc="product.livestream_show_number"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="product.show_name"/>
+                                </t>
+                            </a>
+                        </h4>
+                        <div class="cont">
+                            <t t-if="product.is_livestream_product">
+                                <a itemprop="url" style="color:#333;"
+                                   t-att-href="keep('/shop/product/%s' % slug(product))">
+                                    <p>
+                                        <t t-esc="product.livestream_class_number"/>
+                                    </p>
+                                    <p>
+                                        <t t-esc="product.livestream_date"/>
+                                    </p>
+                                </a>
+                            </t>
+                            <t t-else="">
+                                <a itemprop="url" style="color:#333;"
+                                   t-att-href="keep('/shop/product/%s' % slug(product))">
+                                    <p>
+                                        <t t-esc="product.class_name"/>
+                                        | Ride #
+                                        <t t-esc="product.ride_number"/>
+                                    </p>
+                                    <p>
+                                        <t t-esc="product.horse_name"/>
+                                        #
+                                        <t t-esc="product.rider_number"/>
+                                    </p>
+                                </a>
+                            </t>
+                        </div>
+                        <input name="product_id" t-att-value="product.product_variant_id.id" type="hidden"/>
+                        <t t-if="not product.is_livestream_product">
+                            <a href="" class="btn btn-link fa fa-play jkv_sample_video" data-toggle="modal"
+                               t-attf-data-target="#jkv_sample_video" t-attf-source="{{product.sample_file_url}}">Play
+                                sample
+                            </a>
+                            |
+                            <t t-if="len(product.product_variant_ids) == 1">
+                                <a href="javascript:void(0)" class="btn btn-link a-submit">Add to Cart</a>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </template>
+
+    <template id="jkv_product_details" inherit_id="theme_furnito.theme_furnito_product_details" name="Product Details"
+              priority="999">
+        <xpath expr="//section[@class='page-title']" position="attributes">
+            <attribute name="style">display:none;</attribute>
+        </xpath>
+        <xpath expr="//section[@id='product_detail']" position="before">
+            <section class="top-content">
+                <div class="main-banner"></div>
+                <div class="container child-banner">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="flex-col flex-auto">
+                                <div class="flex-item">
+                                    <h4 class="breadcrumbs">
+                                        <a href="/page/website.homepage">HOME »</a>
+                                        <span>Video</span>
+                                    </h4>
+                                    <h2>Video</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="main-content" style="padding:0px;">
+                <t t-call="jkv_theme.hello_section"/>
+            </section>
+        </xpath>
+        <xpath expr="//section[@id='product_detail']" position="after">
+            <t t-if="call_to_action">
+                <section class="pre-foot">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <div class="tit-spacing">
+                                <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                            <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                <i class="pull-right">
+                                    <svg
+                                            version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                            enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+                                    <polyline fill="none" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round" stroke-miterlimit="10"
+                                              points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                    </svg>
+                                </i>
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </t>
+        </xpath>
+        <xpath expr="//div[@class='col-xs-12 col-md-5 col-lg-5 col-sm-5 product-detail']//div[@class='product-title']"
+               position="replace">
+            <t t-if="product.video_filename_url">
+                <div class="product-title">
+                    <div class="box-tit">
+                        <h3 class="tit" itemprop="name" t-field="product.horse_name">Rider Name</h3>
+                    </div>
+                    <div class="detail-info">
+                        <h4 class="tit">SHOW</h4>
+                        <div>
+                            <t t-esc="product.show_name"/>
+                        </div>
+                        <h4 class="tit">CLASS</h4>
+                        <div>
+                            <t t-esc="product.class_name"/>
+                        </div>
+                    </div>
+                    <div style="color:green" class="hidden">
+                        <t t-call="website_sale.product_price"/>
+                    </div>
+                    <span itemprop="url" style="display:none;" t-esc="'/shop/product/%s' % slug(product)"/>
+                </div>
+            </t>
+        </xpath>
+        <xpath expr="//div[@class='col-xs-12 col-md-5 col-lg-5 col-sm-5 product-detail']" position="attributes">
+            <attribute name="class">col-xs-12 col-md-5 col-lg-5 col-sm-5 product-detail box-form has-pattern</attribute>
+        </xpath>
+        <xpath expr="//section[@id='product_detail']//div[@class='col-sm-7']//div//div" position="attributes">
+            <attribute name="id">popup_purchase_video</attribute>
+        </xpath>
+        <xpath expr="//section[@id='product_detail']//div[@class='col-sm-7']" position="attributes">
+            <attribute name="class">col-xs-12 col-md-7 col-lg-7 col-sm-7</attribute>
+        </xpath>
+    </template>
+
+</odoo>

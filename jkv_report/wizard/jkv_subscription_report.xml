@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="jkv_find_subscription_form" model="ir.ui.view">
+			<field name="name">JKV Find Subscription Form</field>
+			<field name="model">jkv.subscription.report</field>
+			<field name="arch" type="xml">
+				<form string="Subscription Data">
+					<group string="Subscrition">
+						<field name="user_id"/>
+						<field name="show_id"/>
+						<field name="all_shows"/>
+						<field name="subscribed_date"/>
+					</group>
+					<footer>
+						<button name="find_subscription" string="Find" type="object" class="oe_highlight"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="jkv_find_subscription_action" model="ir.actions.act_window">
+			<field name="name">JKV Find Subscription</field>
+			<field name="res_model">jkv.subscription.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="jkv_find_subscription_form"/>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem id="menu_jkv_subscription_report" name="Report" parent="jkv_report.menu_jkv_subscription_report_root" action="jkv_find_subscription_action" sequence="23"/>
+        
+        <record id="subscription_report_confirm_view" model="ir.ui.view">
+            <field name="name">subcription.report.confirm.form</field>
+            <field name="model">subcription.report.confirm</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="is_exported" invisible="1"/>
+                    <p>
+                        <label string="Do you want to export selected data record(s)?" attrs="{'invisible':[('is_exported','=',True)]}"/>
+                        <label string="You have successfully exported data." attrs="{'invisible':[('is_exported','=',False)]}"/>
+                    </p>
+                    <footer>
+                        <button string="Export" name="download_report" type="object" default_focus="1" class="btn-primary"
+                            attrs="{'invisible':[('is_exported','=',True)]}"/>                        
+                    </footer>
+                </form>
+            </field>
+        </record>    
+        
+        <act_window id="action_subscription_report_confirm"
+            multi="True"
+            key2="client_action_multi" name="Download .xls"
+            res_model="subcription.report.confirm" src_model="jkv.subscription"
+            view_mode="form" target="new" view_type="form"/>
+    
+    </data>
+</odoo>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<!-- Action a nd View for Class -->
+		<record id="jkv_show_event_action_class" model="ir.actions.act_window">
+			<field name="name">JKV Class</field>
+			<field name="res_model">jkv.class</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Create a Class
+				</p>
+			</field>
+		</record>
+
+		<record id="jkv_view_form_class" model="ir.ui.view">
+			<field name="name">Class Form</field>
+			<field name="model">jkv.class</field>
+			<field name="arch" type="xml">
+				<form string="JKV Class">
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="name" placeholder="Class name"/>
+							</h1>
+						</div>
+						<group string="Class">
+							<field name="class_number"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="jkv_view_tree_class" model="ir.ui.view">
+			<field name="name">Class Tree</field>
+			<field name="model">jkv.class</field>
+			<field name="arch" type="xml">
+				<tree string="JKV Class">					
+					<field name="name"/>
+					<field name="class_number"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="jkv_search_view_class" model="ir.ui.view">
+			<field name="name">Class Search</field>
+			<field name="model">jkv.class</field>
+			<field name="arch" type="xml">
+				<search string="Class">
+					<field name="name" string="Class Name" filter_domain="[('name','ilike',self)]"/>
+					<field name="class_number" string="Class Number" filter_domain="[('class_number','=',self)]"/>
+				</search>
+			</field>
+		</record>
+
+		<menuitem id="menu_class_root" name="Class" parent="menu_inventory_management_root" sequence="2"/>
+		<menuitem id="menu_jkv_show_class" parent="menu_class_root" name="Class" sequence="1" action ="jkv_show_event_action_class"/>
+
+	</data>
+</odoo>

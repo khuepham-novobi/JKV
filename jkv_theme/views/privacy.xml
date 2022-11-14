@@ -1,0 +1,109 @@
+<odoo>
+    <template id="jkv_privacy">
+        <t t-call="website.layout">
+            <div id="wrap" class="wrap-manual">
+                <div class="title-manual">
+                    <h3>Privacy Policy</h3>
+                </div>
+                <div class="content-manual">
+                    <p>JK Videography LLC takes your privacy seriously. Please read the following Privacy Policy carefully to learn more about JKV’s use of your personal identifying information that JKV’s may collect when you visit JKV’s official website and/or applications (hereinafter referred to as: the "Website(s)"). JKV reserves the right to change this Privacy Policy at any time without notice to you. You are therefore responsible for regularly reviewing this Privacy Policy.</p>
+                    <br/>
+                    <h5 class="sub-title-manual">1. WHAT THIS PRIVACY POLICY COVERS</h5>
+                    <ul>
+                        <li>
+                            <p>This Privacy Policy covers JKV’s treatment of personal identifying information that JKV may collect when you are on the Website(s) and when you use services on the Website(s). This Privacy Policy also covers JKV’s treatment of any personal identifying information that JKV’s business partners share with JKV unless otherwise stated.</p>
+                        </li>
+                        <li>
+                            <p>This Privacy Policy does not apply to the practices of any companies or legal entities that JKV does not own or control or to any persons that JKV does not employ.</p>
+                        </li>
+                    </ul>
+                    <br/>
+                    <h5 class="sub-title-manual">2. INFORMATION COLLECTION AND USE</h5>
+                    <ul>
+                        <li>
+                            <p>JKV does not collect personal identifying information when you access the Website(s) homepage and browse the Website(s) without disclosing your personal data (except cookies; please see the Cookies Policy).</p>
+                        </li>
+                        <li>
+                            <p>JKV collects personal identifying information when you register for certain sections of the Website(s), when you use certain products or services on the Website(s) and when you enter promotions, sweepstakes or similar services sponsored by JKV or its business partners. JKV may also receive personal identifying information from its business partners.</p>
+                        </li>
+                        <li>
+                            <p>When you register JKV asks for your name, e-mail address, and some other personal information. Once you register with JKV and/or sign in to our products or services, you are not anonymous to JKV.</p>
+                        </li>
+                        <li>
+                            <p>JKV also automatically receives and records information on our server logs from your browser including your Internet Protocol address (IP address), which identifies your computer, JKV’s cookies information and the page you requested.</p>
+                        </li>
+                        <li>
+                            <p>JKV uses information collected for three general purposes: for technical administration of the Website(s), for research and development to achieve and maintain a high service level and for customer information (to customize the content you see, to fulfill your request for certain products and services and to contact you about specials and new products and services).</p>
+                        </li>
+                    </ul>
+                    <br/>
+                    <h5 class="sub-title-manual">3. INFORMATION SHARING AND DISCLOSURE</h5>
+                    <ul>
+                        <li>
+                            <p>JKV will not sell or rent your personal identifying information without your consent. JKV may send personal identifying information about you to third parties when:</p>
+                        </li>
+                        <li>
+                            <p>JKV has your consent to share the information;</p>
+                        </li>
+                        <li>
+                            <p>JKV needs to share your information to provide the product or service you have requested;</p>
+                        </li>
+                        <li>
+                            <p>JKV needs to send the information to third parties who work on behalf of JKV to provide a product or service to you (unless otherwise stated, these third parties do not have any rights to use the personal identifying information JKV provides to them beyond what is necessary to provide a product or service to you);</p>
+                        </li>
+                        <li>
+                            <p>JKV is required by law to provide such information to the to courts or other competent authorities; or</p>
+                        </li>
+                        <li>
+                            <p>JKV finds that your actions on the Website(s) violate JKV Website(s) Terms and Conditions or any other JKV ‘s guidelines or rules applicable for specific services.</p>
+                        </li>
+                    </ul>
+                    <br/>
+                    <h5 class="sub-title-manual">4. CHILDREN'S PRIVACY</h5>
+                    <ul>
+                        <li>
+                            <p>JKV does not knowingly collect personal data from children;</p>
+                        </li>
+                        <li>
+                            <p>JKV does not take specific steps to protect the privacy of children who disclose their personal identifying information to JKV.</p>
+                        </li>
+                    </ul>
+                    <br/>
+                    <h5 class="sub-title-manual">5. ACCESS TO YOUR PERSONAL IDENTIFYING INFORMATION</h5>
+                    <ul>
+                        <li>
+                            <p>JKV gives you the ability to access your personal identifying information by sending us an e-mail including in the title of the e-mail the reference to personal identifying information at jkvideohelp@gmail.com;</p>
+                        </li>
+                        <li>
+                            <p>JKV allows you to challenge the data that it holds about you and you may have such data rectified, amended or completed.</p>
+                        </li>
+                    </ul>
+                    <br/>
+                    <h5 class="sub-title-manual">6. SECURITY</h5>
+                    <ul>
+                        <li>
+                            <p>If you communicate with JKV by e-mail, you should note that the secrecy of Internet e- mail is uncertain. By sending sensitive or confidential e-mail messages or information, which are not encrypted, you accept the risk of such uncertainty and possible lack of confidentiality over the Internet.</p>
+                        </li>
+                        <li>
+                            <p>In certain areas, JKV uses industry standard SSL encryption to protect data transmissions.</p>
+                        </li>
+                    </ul>
+                    <br/>
+                    <h5 class="sub-title-manual">7. PRIVACY COMPLIANCE</h5>
+                    <ul>
+                        <li>
+                            <p> JKV is subject to United States data protection laws when collecting and processing personal identifying information.</p>
+                        </li>
+                    </ul>
+                    <br/>
+                    <h5 class="sub-title-manual">8. QUESTIONS OR SUGGESTIONS</h5>
+                    <ul>
+                        <li>
+                            <p>If you have any questions or suggestions regarding this Privacy Policy, please send an e-mail to jkvideohelp@gmail.com</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

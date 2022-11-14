@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Action a nd View for Class -->
+		<record id="jkv_subscription_action" model="ir.actions.act_window">
+			<field name="name">JKV Subscription</field>
+			<field name="res_model">jkv.subscription</field>
+			<field name="view_mode">tree,form,pivot</field>
+			<field name="help" type="html">
+				<p>
+					Create a Subscription
+				</p>
+			</field>
+		</record>
+
+		<record id="view_jkv_subscription_tree" model="ir.ui.view">
+			<field name="name">jkv.subscription.tree</field>
+			<field name="model">jkv.subscription</field>
+			<field name="arch" type="xml">
+				<tree string="Subscription">  
+					<field name="user_id" />
+					<field name="show_id" />            
+					<field name="create_date" string="Date Of Subscription"/>
+					<field name="expiry_date" />
+					<field name="type" />    
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_jkv_subscription_form" model="ir.ui.view">
+			<field name="name">jkv.subscription.form</field>
+			<field name="model">jkv.subscription</field>
+			<field name="arch" type="xml">
+				<form string="Subscription">
+					<sheet>
+						<group>
+							<group string="USer">
+								<field name="user_id" />
+								<field name="show_id" />        
+							</group>
+							<group string="Info">       
+								<field name="create_date"  string="Date Of Subscription"/>
+								<field name="expiry_date" />
+								<field name="type" />  
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_jkv_subscription_pivot" model="ir.ui.view">
+			<field name="name">jkv.subscription.pivot</field>
+			<field name="model">jkv.subscription</field>
+			<field name="arch" type="xml">
+				<pivot string="Subscription">  
+					<field name="create_date" string="Date Of Subscription" type="col" interval="week"/>
+					<field name="show_id" type="row"/>
+				</pivot>
+			</field>
+		</record>
+
+		<!--Livestream subscription-->
+		<record id="jkv_subscription_livestream_action" model="ir.actions.act_window">
+			<field name="name">JKV Subscription Livestream</field>
+			<field name="res_model">jkv.livestream.subscription</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Create a Subscription
+				</p>
+			</field>
+		</record>
+
+		<record id="view_jkv_livestream_subscription_tree" model="ir.ui.view">
+			<field name="name">jkv.livestream.subscription.tree</field>
+			<field name="model">jkv.livestream.subscription</field>
+			<field name="arch" type="xml">
+				<tree string="Subscription">
+					<field name="user_id" />
+					<field name="create_date" string="Date Of Subscription"/>
+					<field name="expiry_date"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_jkv_livestream_subscription_form" model="ir.ui.view">
+			<field name="name">jkv.livestream.subscription.form</field>
+			<field name="model">jkv.livestream.subscription</field>
+			<field name="arch" type="xml">
+				<form string="Subscription">
+					<sheet>
+						<group>
+							<field name="user_id" />
+							<field name="create_date" string="Date Of Subscription"/>
+							<field name="expiry_date"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<menuitem id="menu_jkv_report_root" name="JKV Report" sequence="2" web_icon="jkv_report,static/description/icon.png"/>
+		<menuitem id="menu_jkv_subscription_report_root" name="Subscription" parent="menu_jkv_report_root" sequence="1"/>
+		<menuitem id="menu_jkv_subscription" parent="menu_jkv_subscription_report_root" name="Subscription" sequence="1" action ="jkv_subscription_action"/>
+		<menuitem id="menu_jkv_subscription_livestream" parent="menu_jkv_subscription_report_root" name="Livestream Subscription" sequence="2" action ="jkv_subscription_livestream_action"/>
+	</data>
+</odoo>

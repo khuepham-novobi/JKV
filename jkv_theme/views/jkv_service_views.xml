@@ -1,0 +1,57 @@
+<odoo>
+
+<!--    <act_window id="jkv_service_action"-->
+<!--                name="Services"-->
+<!--                res_model="jkv.service" />-->
+
+<!--    <menuitem name="Services"-->
+<!--              id="menu_website_service_root"-->
+<!--              sequence="21"-->
+<!--              action="jkv_service_action"-->
+<!--              groups="base.group_user"-->
+<!--              parent="website.menu_website_configuration"/>-->
+
+<!--&lt;!&ndash;    <menuitem name="Services"&ndash;&gt;-->
+<!--&lt;!&ndash;          id="menu_website_service"&ndash;&gt;-->
+<!--&lt;!&ndash;          sequence="22"&ndash;&gt;-->
+<!--&lt;!&ndash;          groups="base.group_user"&ndash;&gt;-->
+<!--&lt;!&ndash;          action="jkv_service_action"&ndash;&gt;-->
+<!--&lt;!&ndash;          parent="menu_website_service_root"/>&ndash;&gt;-->
+
+<!--    <record id="jkv_service_view_form" model="ir.ui.view">-->
+<!--        <field name="name">jkv.service.form</field>-->
+<!--        <field name="model">jkv.service</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form create="false">-->
+<!--                <sheet>-->
+<!--                    <field name="is_general_service" invisible="1"/>-->
+<!--                    <field name="image" widget='image' attrs="{'invisible': [('is_general_service','=',True)]}" class="oe_avatar" options='{"preview_image":"image_medium"}'/>-->
+<!--                    <div class="oe_title">-->
+<!--                        <label for="title" class="oe_edit_only"/>-->
+<!--                        <h1>-->
+<!--                           <field name="title" placeholder="Title" required="True"/>-->
+<!--                        </h1>-->
+<!--                    </div>-->
+<!--                    <field name="service_name" readonly="1" invisible="1"/>-->
+<!--                    <group name="content">-->
+<!--                        <separator string="Description for Service" colspan="4"/>-->
+<!--                        <field name="content" colspan="4" nolabel="1" required="True"-->
+<!--                            placeholder="This is the content of server"/>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="jkv_service_view_tree" model="ir.ui.view">-->
+<!--        <field name="name">jkv.service.tree</field>-->
+<!--        <field name="model">jkv.service</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree create="false">-->
+<!--                <field name="service_name"/>-->
+<!--                <field name="title"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+</odoo>

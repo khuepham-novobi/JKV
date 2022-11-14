@@ -1,0 +1,292 @@
+<odoo>
+    <template id="jkv_calendar" inherit_id="jkv_events_calendar.theme_events_calencar" priority="999">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <t t-set="additional_title">Event Calendar</t>
+            <div id="wrap">
+                <section class="top-content">
+                    <div class="main-banner"></div>
+                    <div class="container child-banner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="flex-col flex-auto">
+                                    <div class="flex-item">
+                                        <h4 class="breadcrumbs">
+                                            <a href="/page/website.homepage">HOME »</a>
+                                            <span>Calendar</span>
+                                        </h4>
+                                        <h2>Calendar</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-content">
+                    <t t-call="jkv_theme.hello_section"/>
+                    <div class="video-archive">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9 col-md-push-3">
+                                    <div class="event-detail">
+                                        <div class="flex-col">
+                                            <t t-if="shows">
+                                                <t t-foreach="shows" t-as="show">
+                                                    <div class="flex-auto IndividualSlideShow fadeSliderCalendar">
+                                                        <h3>
+                                                            <t t-if="show['start_date_format']">
+                                                                <t t-esc="show['start_date_format'] + ' - '"/>
+                                                            </t>
+                                                            <t t-if="show['end_date_format']">
+                                                                <t t-esc="show['end_date_format']"/>
+                                                            </t>
+                                                        </h3>
+                                                        <h2>
+                                                            <t t-esc="show['name']"/>
+                                                        </h2>
+                                                    </div>
+                                                </t>
+                                                <div class="slider-nav">
+                                                    <a class="snav snav-prev o_prev_slides">
+                                                        <svg version="1.1" x="0px"
+                                                             y="0px" width="5.5px" viewBox="0 0 12.13 22.208"
+                                                             enable-background="new 0 0 12.13 22.208"
+                                                             xml:space="preserve">
+                            <polyline fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-miterlimit="10"
+                                      points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                            </svg>
+                                                    </a>
+                                                    <a class="snav snav-next o_next_slides">
+                                                        <svg version="1.1" x="0px"
+                                                             y="0px" width="5.5px" viewBox="0 0 12.13 22.208"
+                                                             enable-background="new 0 0 12.13 22.208"
+                                                             xml:space="preserve">
+                                            <polyline fill="none" stroke-width="4" stroke-linecap="round"
+                                                      stroke-linejoin="round"
+                                                      stroke-miterlimit="10"
+                                                      points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                            </svg>
+                                                    </a>
+                                                </div>
+                                            </t>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <t t-if="shows">
+                                                    <t t-foreach="shows" t-as="show">
+                                                        <div class="row group-btn IndividualSlidesCalendarButton">
+                                                            <div class="col-xs-6">
+                                                                <t t-if="show['gsec_schedule']">
+                                                                    <a t-att-href="show['gsec_schedule']"
+                                                                       class="btn btn-block btn-form text-center"
+                                                                       target="_blank">GSEC
+                                                                        SCHEDULE
+                                                                    </a>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <a href=""
+                                                                       class="btn btn-block btn-form text-center">GSEC
+                                                                        SCHEDULE
+                                                                    </a>
+                                                                </t>
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                <t t-if="show['prize_list']">
+                                                                    <a t-att-href="show['prize_list']"
+                                                                       class="btn btn-block btn-logo btn-form text-center"
+                                                                       target="_blank">
+                                                                        PRIZE
+                                                                        LIST
+                                                                    </a>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <a href=""
+                                                                       class="btn btn-block btn-logo btn-form text-center">
+                                                                        PRIZE
+                                                                        LIST
+                                                                    </a>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+                                                    </t>
+                                                </t>
+                                            </div>
+                                        </div>
+                                            <div class="holder-banner">
+                                                <div class="panel panel-default o_panel s_panel">
+                                                  <div class="panel-heading">
+                                                    <h3 class="panel-title">JK Live 2020 Schedule</h3>
+                                                  </div>
+                                                  <div class="panel-body">
+                                                    <div class="well s_well clearfix">
+                                                      <p>
+                                                          <b>
+                                                              <span style="background-color: rgb(245, 245, 245); color: rgb(156, 0, 0); font-size: 18px;">
+                                                                  ALL TIMES CAN BE FOUND ON THE PIN OAK APP
+                                                              </span>
+                                                          </b>
+                                                          <br/>
+                                                          <b>1/31 FRI *</b>
+                                                          $10,000 USHJA INTERNATIONAL HUNTER DERBY
+                                                      </p>
+                                                      <p>2/1 SAT * $25,000 GSEC GRAND PRIX</p>
+                                                      <p>2/8 SAT * $50,000 GSEC GRAND PRIX</p>
+                                                      <p>2/14 FRI * $10,000 USHJA INTERNATIONAL HUNTER DERBY</p>
+                                                      <p>2/15 SAT * $50,000 GSEC GRAND PRIX</p>
+                                                      <p>2/22 SAT * $100,000 GSEC GRAND PRIX</p>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <img src="/jkv_theme/static/src/imgs/Links/157375.png" alt="" class="m-auto img-responsive"/>
+                                            </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 col-md-pull-9">
+                                    <form id="form-panel-search-result" action='/search_videos/results'
+                                          method="get">
+                                        <div class="video-filter">
+                                                <h3>Event Archive</h3>
+                                            <div id="collapseResp" class="collapse-resp collapse in">
+                                                <a class="collapse-header" role="button" data-toggle="collapse"
+                                                   data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+                                                   aria-controls="collapseOne">
+                                                    <t t-esc="currentyear"/>
+                                                    Shows
+                                                    <i class="pull-right">
+                                                        <svg version="1.1" x="0px"
+                                                             y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                                             enable-background="new 0 0 12.13 22.208"
+                                                             xml:space="preserve">
+                            <polyline fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-miterlimit="10"
+                                      points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+                                                </svg>
+                                                    </i>
+                                                </a>
+
+                                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                                                     aria-labelledby="headingOne">
+                                                    <div class="search-bar">
+                                                        <a class="search-btn">
+                                                            <svg version="1.1"
+                                                                 x="0px"
+                                                                 y="0px" width="20px" viewBox="0 0 30.001 30"
+                                                                 enable-background="new 0 0 30.001 30"
+                                                                 xml:space="preserve">
+                                        <g>
+                                    <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                            <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12.666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                            <path d="M14.233,9c2.891,0,5.233,2.343,5.233,5.233c0,2.891-2.342,5.234-5.233,5.234   c-2.89,0-5.233-2.344-5.233-5.234C9,11.342,11.343,9,14.233,9"></path>
+                                            <path d="M21.333,0H8.667C3.867,0,0,3.866,0,8.667v12 .666C0,26.1,3.867,30,8.667,30   h12.666C26.1,30,30,26.133,30,21.332V8.667C30,3.866,26.133,0,21.333,0 M23.266,23.266c-0.267,0.268-0.6,0.4-0.934,0.4   c-0.333,0-0.666-0.133-0.932-0.4l-2.635-2.6c-1.299,0.9-2.867,1.467-4.565,1.467c-4.334,0-7.901-3.533-7.901-7.9   c0-4.367,3.567-7.899,7.934-7.899s7.9,3.532,7.9,7.899c0,1.701-0.533,3.268-1.467,4.566l2.633,2.635   C23.799,21.9,23.799,22.766,23.266,23.266"></path>
+                                        </g>
+                                                    </svg>
+                                                        </a>
+                                                        <div class="form-group search_input" id="search_show_name"
+                                                             data-model="jkv.show.venue"
+                                                             data-label="show_name_search_result">
+                                                            <input class="form-control" placeholder="Search"/>
+                                                        </div>
+                                                    </div>
+                                                    <ul class="cat-list search-max-size">
+                                                        <t t-foreach="showcurrentyears" t-as="showcurrentyear">
+                                                            <t t-if="showcurrentyear['id']">
+                                                                <li class="show_name_search_result">
+                                                                    <input type="checkbox"
+                                                                           class="show_name_search_result"
+                                                                           name="show_number"
+                                                                           t-attf-value="{{showcurrentyear['id']}}"/>
+                                                                    <t t-esc="showcurrentyear['name']"/>
+                                                                </li>
+                                                            </t>
+                                                        </t>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <t t-if="call_to_action">
+                    <section class="pre-foot">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="tit-spacing">
+                                    <h4 class="pre-tit">SCHEDULE A CONSULTATION</h4>
+                                    <h2 class="main-tit">BRING THE POWER OF VIDEO TO YOUR SHOW</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                                <a href="/page/contactus" class="btn btn-main btn-white btn-block">
+                                    <i class="pull-right">
+                                        <svg
+                                                version="1.1" x="0px" y="0px" width="6px" viewBox="0 0 12.13 22.208"
+                                                enable-background="new 0 0 12.13 22.208" xml:space="preserve">
+        <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                  points="  1.095,1.133 11.095,11.133 1.095,21.135 "></polyline>
+        </svg>
+                                    </i>
+                                    Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </t>
+            </div>
+        </xpath>
+    </template>
+
+    <record id="jkv_view_form_show_event_calendar" model="ir.ui.view">
+        <field name="name">Events Calendar Form</field>
+        <field name="model">jkv.events.calendar</field>
+        <field name="inherit_id" ref="jkv_events_calendar.jkv_view_form_events_calendar"/>
+        <field name="arch" type="xml">
+            <field name="event_description" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="event_file" position="replace">
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="gsec_schedule" invisible="0" string="Gsec Schedule"/>
+                <field name="prize_list" invisible="0" string="Prize List"/>
+            </field>
+            <field name="filename" position="replace">
+
+            </field>
+            <field name="event_date" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="jkv_view_tree_show_event_calendar" model="ir.ui.view">
+        <field name="name">Events Calendar Tree</field>
+        <field name="model">jkv.events.calendar</field>
+        <field name="inherit_id" ref="jkv_events_calendar.jkv_view_tree_events_calendar"/>
+        <field name="arch" type="xml">
+            <field name="event_date" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="event_description" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <tree>
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
+
+
+
+

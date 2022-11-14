@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="jkv_view_form_show_event_venue" model="ir.ui.view">
+			<field name="name">Show Event Venue Form</field>
+			<field name="model">jkv.show.venue</field>
+			<field name="inherit_id" ref="jkv_show_event.jkv_view_form_show_event_venue" />
+			<field name="arch" type="xml">
+                <xpath expr="//field[@name='show_number']/.." position="after">
+                    <group string="Set Price">
+                        <field name="is_set_price_default" widget="radio"/>
+                        <group>
+                            <div>
+                                <table class="table table-bordered table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th class="o_td_label">Item</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="o_td_label"><b>Product</b></td>
+                                            <td><field name="product_price" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="o_td_label"><b>Subscription - My Videos</b></td>
+                                            <td><field name="subscription_my_video" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="o_td_label"><b>Subscription - Entire show</b></td>
+                                            <td><field name="subscription_all_videos" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </group>
+                    </group>
+                </xpath>
+			</field>
+		</record>
+    </data>
+</odoo>

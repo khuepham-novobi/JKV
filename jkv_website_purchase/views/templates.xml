@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <template id="footer_copyright" inherit_id="theme_furnito.footer_copyright">
+            <xpath expr="//div[@class='col-md-6 col-sm-6'][1]" position="replace">
+                <div class="col-md-6 col-sm-6">
+                    <div class="col-md-6 col-sm-6">
+                        <p style="font-size:10pt;color:black">Payment Methods</p>
+                        <img class="footer-cards img img-responsive" src="/theme_furnito/static/src/img/footer-cards.png"/>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <p style="font-size:10pt;color:black">Follow Us</p>
+                        <a href="https://www.facebook.com/jkvideography" style="margin-right:5px">
+                            <i class="fa fa-facebook-official" style="font-size:30px"></i>
+                        </a>
+                        <a href="https://www.instagram.com/jkvideographytx" style="margin-right:5px">
+                            <i class="fa fa-instagram" style="font-size:30px"></i>
+                        </a>                                        
+                    </div>
+                </div>
+            </xpath>
+        </template>
+        <template id="assets_frontend" inherit_id="website.assets_frontend">
+            <xpath expr="." position="inside">                
+                <script type="text/javascript" src="/jkv_website_purchase/static/src/js/script.js"></script>
+                <script type="text/javascript" src="/jkv_website_purchase/static/src/js/share_button.js"></script>
+                <script type="text/javascript" src="/jkv_website_purchase/static/src/js/add_cart_manually.js"></script>
+            </xpath>
+        </template>
+        <!--<template id="btn_subscription" name="Subscription menu" inherit_id="theme_furnito.theme_furnito_header_layout" priority="25">
+            <xpath expr="//ul[contains(@class,'hm-cart')]/li[1]" position="attributes">
+                <attribute name="style">display:inline</attribute>
+            </xpath>
+            <xpath expr="//ul[contains(@class,'hm-cart')]/li[1]" position="before">
+                <li class="homepage_btn" style="display:inline;border-radius:5px;padding:10px;position:relative;top:-10px;font-size:12pt">
+                    <a href="/my/subscriptions">Subscriptions to show</a>
+                </li>
+            </xpath>
+        </template>-->
+        <template id="my_home_menu_subscription" name="Subscription menu" inherit_id="website_portal.portal_layout" priority="25">
+            <xpath expr="//ul[contains(@class,'o_portal_submenu')]" position="inside">
+                <li>
+                    <a href="/my/subscriptions">Subscriptions</a>
+                </li>
+                <li>
+                    <a href="/my/purchased_videos">Videos Purchased</a>
+                </li>
+            </xpath>
+        </template>
+        <template id="my_home_subscription" name="Subscription entries" inherit_id="website_portal.portal_my_home" priority="25">
+            <xpath expr="//div[contains(@class,'o_my_home_content')]" position="inside">
+                <h3 class="page-header">
+                    <a href="/my/purchased_videos">Videos Purchased
+                        <small class="ml8">
+                            <t t-if="download_count">
+                                <span class='badge'><t t-esc="download_count"/></span>
+                            </t>
+                            <t t-if="not download_count">
+                                You have not purchased any videos
+                            </t>
+                        </small>
+                    </a>
+                </h3>
+                <h3 class="page-header">
+                    <a href="/my/subscriptions">Your subscriptions
+                        <small class="ml8">
+                            <t t-if="subscription_count">
+                                <span class='badge'><t t-esc="subscription_count"/></span>
+                            </t>
+                            <t t-if="not subscription_count">
+                                You have not purchased any subscriptions
+                            </t>
+                        </small>
+                    </a>
+                </h3>
+            </xpath>
+            <xpath expr="//div[contains(@class,'o_my_home_content')]/.." position="attributes">
+                <attribute name="class">col-md-8 oe_cart</attribute>
+            </xpath>
+        </template>
+        <template id="portal_my_home_menu_sale" inherit_id="website_portal_sale.portal_my_home_menu_sale">
+            <xpath expr="//a[contains(@href,'/my/quotes')]/.." position="attributes">
+                <attribute name="style">display:none</attribute>
+            </xpath>
+            <xpath expr="//a[contains(@href,'/my/orders')]/.." position="attributes">
+                <attribute name="style">display:none</attribute>
+            </xpath>
+            <xpath expr="//a[contains(@href,'/my/invoices')]/.." position="attributes">
+                <attribute name="style">display:none</attribute>
+            </xpath>
+        </template>
+        <template id="portal_my_home_sale_custom" inherit_id="website_portal_sale.portal_my_home_sale">
+            <xpath expr="//a[contains(@href,'/my/quotes')]/.." position="attributes">
+                <attribute name="style">display:none</attribute>
+            </xpath>
+            <xpath expr="//a[contains(@href,'/my/orders')]/.." position="attributes">
+                <attribute name="style">display:none</attribute>
+            </xpath>
+            <xpath expr="//a[contains(@href,'/my/invoices')]/.." position="attributes">
+                <attribute name="style">display:none</attribute>
+            </xpath>
+        </template>
+        
+        <template id="renew_subscription" name="Renew subscription">
+            <t t-call="website.layout">
+            </t>
+        </template>
+        <template id="my_purchased_videos" name="My Videos Purchased">
+            <t t-call="website_portal.portal_layout">
+                <t t-if="not records">
+                    <p>There are currently no videos for your account.</p>
+                </t>
+                <t t-if="records">
+                    <div class="col-md-12 text-right">
+                        <t t-call="website.pager"/>
+                    </div>
+                    <table class="table table-hover o_my_status_table" style="background:#f1efe8;margin-top:50px">
+                        <thead>
+                            <tr class="active">
+                                <th>Videos</th>
+                                <th></th>
+                                <th>Downloaded</th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="records" t-as="record">
+                            <tr>
+                                <td>
+                                    <div>
+                                        <a t-attf-href="/shop/product/#{ slug(record.product_id) }">
+                                            <strong><span>Show: </span><span t-esc="record.product_id.show_name" /></strong><br/>
+                                            <strong><span>Class: </span><span t-esc="record.product_id.class_name" /></strong><br/>
+                                            <strong><span>Rider: </span><span t-esc="record.product_id.rider_number" /><span> | Ride:</span><span t-esc="record.product_id.ride_number" /></strong>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <a target="_blank" t-att-href="'/thank_you?token=%s'%record.token"> <i class="fa fa-download"/></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="checkbox" disabled="disabled" t-att-checked="'checked' if record.downloaded else None"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                    <div class="col-md-12 text-right">
+                        <t t-call="website.pager"/>
+                    </div>
+                </t>
+            </t>
+        </template>
+    <template id="my_subscriptions" name="My Subscriptions">
+        <t t-call="website_portal.portal_layout">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-xs-6">
+                    <h3 class="text-center">Your Subscriptions</h3>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xs-6">
+                    <h3 class="text-center btn btn-primary">
+                        <a href="/purchase_subscription" style="color:black;">Subscribe a new show</a>
+                    </h3>
+                </div>
+            </div><br/>
+            <t t-if="subscriptions">
+                <table class="table table-hover o_my_status_table" style="background:#f1efe8">
+                    <thead>
+                        <tr class="active">
+                          <th>Show</th>
+                          <th style="text-align:center">Type</th>
+                          <th>Expiry date</th>
+                          <th></th>
+                      </tr>
+                  </thead>
+                  <t t-foreach="subscriptions" t-as="subscription">
+                    <t t-if="subscription.expiried">
+                        <tr style="background-color: #ff4d4d;color:white">
+                            <t t-if="subscription.all_shows">
+                                <td>All shows</td>
+                                <td><span t-field="subscription.expiry_date"/></td>
+                                <td><a style="background-color:white;" t-att-data-id="subscription.id" class="btn btn-default renew_button">Renew</a></td>
+                            </t>
+                            <t t-if="not subscription.all_shows">
+                                <td><span t-field="subscription.show_id.name"/></td>
+                                <td style="text-align:center"><span t-field="subscription.type"/></td>
+                                <td><span t-field="subscription.expiry_date"/></td>
+                                <td><a style="background-color:white;" t-att-data-id="subscription.id" class="btn btn-default renew_button">Renew</a></td>
+                            </t>
+                        </tr>
+                    </t>
+                    <t t-if="not subscription.expiried">
+                        <tr>
+                            <t t-if="subscription.all_shows">
+                                <td>All shows</td>
+                                <td><span t-field="subscription.expiry_date"/></td>
+                                <td><a t-att-data-id="subscription.id" class="btn btn-default renew_button">Renew</a></td>
+                            </t>
+                            <t t-if="not subscription.all_shows">
+                                <td><span t-field="subscription.show_id.name"/></td>
+                                <td style="text-align:center"><span t-field="subscription.type"/></td>
+                                <td><span t-field="subscription.expiry_date"/></td>
+                                <td><a t-att-data-id="subscription.id" class="btn btn-default renew_button">Renew</a></td>
+                            </t>
+                        </tr>
+                    </t>
+                </t>
+            </table>
+            <div t-if="pager" class="o_portal_pager text-center">
+                <t t-call="website.pager"/>
+            </div>
+            <div class="modal fade" id="renewModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal"></button>                          
+                  </div>
+                  <form class="form-horizontal" role="form" action="/renew" method="post">
+                    <div class="modal-body">
+                        <input type="hidden" id="renew_subscription_id" name="subscription_id"/>
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div>
+                            <h3>Duration</h3>
+                        </div>
+                        <div>
+                          <label class="radio-inline">
+                              <input type="radio" name="duration" value="365" checked="true"/>1 year
+                          </label>
+                      </div>
+                  </div>    
+                  <div class="modal-footer">
+                    <div style="margin-top:10px;padding:5px 5px 5px 5px" class="pull-right">
+                        <button type="submit" id="submit_form_renew" class="btn btn-primary">Renew</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>   
+            </form>                
+        </div>
+    </div>
+</div>
+</t>
+</t>
+</template>
+
+        <template id="purchase_video_button" name="Purchase Video" inherit_id="theme_furnito.theme_furnito_product_details">
+            <xpath expr="//a[@id='add_to_cart']" position="replace">
+                <t t-if="not download and not product.is_livestream_product">
+                    <a class="btn cart-btn btn-lg js_check_product a-submit" href="#" id="add_to_cart">
+                        <i class="fa fa-shopping-cart"/>
+                        Add to Cart
+                    </a>
+                </t>
+            </xpath>
+            <xpath expr="//section[@id='product_detail']//div[@class='product-options-bottom']//div[@class='add-to-cart']" position="inside">
+                <input type="hidden" t-att-value="product.id" id="purchase_product_id"/>
+                <t t-if="download">
+                    <a target="_blank" t-att-href="download" class="btn cart-btn btn-lg">Download</a>
+                </t>
+            </xpath>
+            <xpath expr="//section[@id='product_detail']//div[@class='product-options-bottom']//div[@class='js_product']" position="inside">
+                <div class="clearfix"/>
+            </xpath>
+            <xpath expr="//section[@id='product_detail']//div[@class='product-options-bottom']//form" position="after">
+                <div class="modal fade video_form_notification" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <strong />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div t-if="share_link" class="add-to-cart share_link_div">
+                    <!--<button class="share_btn btn cart-btn btn-lg" t-att-link="share_link">Share</button>-->
+                    <div class="modal fade col-sm-8 col-md-4" id="share_modal" role="dialog" style="margin: auto; top: 30%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&amp;times;</button>
+                                <h4 class="modal-title">Share Video Link</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group">
+                                    <input id="share_link_input" class="form-control" t-att-value="share_link"/>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-success copy_btn">
+                                            <i class="fa fa-clipboard" /> Copy
+                                        </button>
+                                    </div>
+                                </div>
+                                <div style="text-align: center; margin: 5px">
+                                    <strong class="notification_div" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+    <template id="sent_email" name="Thank you">		
+        <t t-call="website.layout">
+           <t t-set="additional_title">Thank you for your purchase</t>
+           <div id="wrap">                    
+            <div class="container">
+                <div class="row">
+                    <h1>Thank you for your purchase</h1>
+                </div>
+                <div class="row">
+                    <p>An email has been sent with the link to dowload your video</p>
+                </div>
+            </div>
+        </div>
+    </t>
+</template>
+
+<template id="thank_you" name="Thank you">		
+    <t t-call="website.layout">
+        <t t-set="additional_title">Thank you for your purchase</t>
+        <div id="wrap">
+            <input type="hidden" t-att-value="token" id="purchase_token"/>
+            <input type="hidden" t-att-value="from_ios_page" id="from_ios_page"/>
+            <div class="container">
+                <div class="row">
+                    <h1>Thank you for your purchase</h1>
+                </div>
+                <div class="row">
+                    <h2>Downloading....</h2>
+                    <p id="download_msg">Your download should begin shortly.</p>
+                </div>
+            </div>
+        </div>
+    </t>
+</template>
+
+<template id="purchase_subscription" name="Select subscription">		
+    <t t-call="website.layout">
+        <t t-set="additional_title">Subscription</t>
+        <div id="wrap">
+            <div class="container">
+                <form class="jkv_form_box" id="purchase_subscription_form" method="get">
+                    <input type="hidden" name="submit" id="submit_purchase_subcription" value="False"/>
+                    <div class="row">
+                        <h2>Duration</h2>
+                    </div>
+                    <div class="row">
+                        <!--
+                        <label class="radio-inline">
+                          <input type="radio" name="duration" value="7"/>7 days
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="duration" value="30"/>30 days
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="duration" value="90"/>90 days
+                      </label>                  -->
+
+                      <label class="radio-inline">
+                          <input type="radio" checked="true" name="duration" value="365"/>1 year
+                      </label>
+                  </div>
+                  <div class="row">
+                    <h2>Pick shows</h2>                            
+                </div>
+                <div class="row">
+                    <label class="radio-inline">
+                      <input class="radio_duration" t-att-checked="'checked' if type_video == 'my_video' else None" type="radio" name="type_video" value="my_video" id="my_video"/>My video
+                  </label>
+                  <label class="radio-inline">
+                      <input class="radio_duration" t-att-checked="'checked' if type_video == 'all_videos' else None" type="radio" name="type_video" value="all_videos" id="all_videos"/>Entire Show
+                  </label>
+              </div>
+              <br/>
+              <t t-if="shows">
+                <div class="row table_responsive" style="height:300px;overflow-y:scroll" id="shows_for_purchase_subscription">
+                    <table class="table">
+                        <thead>
+                            <th style="width:10px"></th>
+                            <th style="text-align:left">Show name</th>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="shows" t-as="show">
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="shows" t-attf-value="{{show.id}}"/>
+                                    </td>
+                                    <td>
+                                        <span><t t-esc="show.name"/></span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>                    
+                    </table>        
+                </div>
+            </t>
+            <t t-if="not shows">
+                <p>You don't have any videos</p>
+            </t>
+                            <!--<div class="row form-group" id="div_shows_uid">
+                                <div class="panel panel-info">
+                                    <div id="collapse1" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <ul style="max-height: 300px;overflow-x:hidden;overflow-y:scroll;">
+                                                <t t-foreach="shows_uid" t-as="show">
+                                                    <li>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" name="shows_uid" t-attf-value="{{show.id}}"/> <t t-esc="show.name"/>
+                                                        </label>
+                                                    </li>
+                                                </t>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>          
+                            </div>
+                            <div class="row form-group" id="div_shows" style="display:none;">
+                                <div class="panel panel-info">
+                                    <div id="collapse2" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <ul style="max-height: 300px;overflow-x:hidden;overflow-y:scroll;">
+                                                <t t-foreach="shows" t-as="show">
+                                                    <li>
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" name="shows" t-attf-value="{{show.id}}"/> <t t-esc="show.name"/>
+                                                        </label>
+                                                    </li>
+                                                </t>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>          
+                            </div>-->
+                            <div class="row form-group">
+                                <div class="col-sm-8 col-sm-offset-4">
+                                    <button type="submit" id="submit_form" style="display:none">Confirm <span class="fa fa-long-arrow-right"></span></button>
+                                    <a id="confirm_purchase_subscription" class="btn btn-primary">
+                                        Confirm
+                                        <span class="fa fa-long-arrow-right"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!--<div class="modal fade" id="modal_confirm_purchase_subscription">
+                                <div class="modal-dialog modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><p>x</p></button> 
+                                        <h4 class="modal-title">Warning</h4>
+                                    </div>
+                                    <div class="modal-body">                                    
+                                        <p id="content_warning_subscription">You have no specific video for that show</p>
+                                        <p>Do you want to continue?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="submit" id="submit_purchase" class="btn btn-primary">Yes</button>
+                                      <a class="btn btn-default" data-dismiss="modal">No</a>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </form>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <!--Shopping Cart-->
+        <template id="cart" name="Shopping Cart" inherit_id="website_sale.cart">
+            <xpath expr="//div[@id='right_column']" position="replace">
+                <div class="col-lg-3 col-lg-offset-1 col-sm-3 col-md-3 text-muted" style="background:white;box-shadow: 1px 10px 26px rgba(57, 57, 57, 0.41)" id="right_column">
+                    <h4 style="color:#c38647">Policies</h4>
+                    <ul class="list-unstyled mb32">
+                        <li>☑ 30-days money-back guarantee</li>
+                        <li>☑ Invoice sent by e-Mail</li>
+                    </ul>
+                    <h4 style="color:#c38647">Secure Payment</h4>
+                    <ul class="list-unstyled mb32">
+                        <li>☑ 256 bit encryption</li>
+                        <li>☑ Processed by Ogone</li>
+                    </ul>
+                </div>                
+            </xpath>
+        </template>
+        
+        <!--Carr line-->
+        <template id="cart_lines" name="Shopping Cart Lines" inherit_id="website_sale.cart_lines">
+            <xpath expr="//table" position="replace">
+                <table class="table table-striped table-condensed js_cart_lines" id="cart_products" t-if="website_sale_order and website_sale_order.website_order_line">
+                    <thead>
+                        <tr>
+                            <th width="100">Product</th>
+                            <th width="100" class="text-center">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="website_sale_order.website_order_line" t-as="line">
+                            <tr>
+                                <td colspan="2" t-if="not line.product_id.product_tmpl_id"></td>                                
+                                <td t-if="line.product_id.product_tmpl_id">
+                                    <t t-if="not line.is_subscription">
+                                        <div>
+                                            <a t-attf-href="/shop/product/#{ slug(line.product_id.product_tmpl_id) }">                                            
+                                                <strong><span>Show: </span><span t-esc="line.product_id.show_name" /></strong><br/>
+                                                <strong><span>Class: </span><span t-esc="line.product_id.class_name" /></strong><br/>
+                                                <strong><span>Rider: </span><span t-esc="line.product_id.rider_number" /><span> | Ride:</span><span t-esc="line.product_id.ride_number" /></strong>
+                                            </a>
+                                        </div>
+                                    </t>
+                                    <t t-if="line.is_subscription">
+                                        <div>
+                                            <a>
+                                                <strong>Subscription: </strong>
+                                                <t t-if="line.all_shows">
+                                                    <strong><span>All shows</span></strong>
+                                                </t>
+                                                <t t-if="not line.subscription_id.all_shows">
+                                                    <strong><span t-esc="line.show_id.name" /></strong>
+                                                </t>
+                                                <br/>
+                                                <strong><span>Type: </span><span t-field="line.type_subscription" /></strong>
+                                                <br/>
+                                                <strong><span>Duration: 1 year</span></strong>
+                                                <!--<strong><span>Duration: </span><span t-esc="line.duration" /><span> days</span></strong>-->
+                                            </a>
+                                        </div>
+                                    </t>
+                                    <a href='#' class='js_delete_product no-decoration'> <small><i class='fa fa-trash-o'></i> Remove</small></a>
+                                </td>
+                                <td class="text-center" id="td-qty" style="display:none">
+                                    <div class="input-group oe_website_spinner">
+                                        <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json" data-no-instant="">
+                                            <i class="fa fa-minus"></i>
+                                        </a>
+                                        <input type="text" class="js_quantity form-control" t-att-data-line-id="line.id" t-att-data-product-id="line.product_id.id" t-att-value="int(line.product_uom_qty)" />
+                                        <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json" data-no-instant="">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center" id="td-price" name="price">
+                                    <t t-if="(compute_currency(line.product_id.lst_price) - line.price_reduce ) &gt; 0.01  and website.get_current_pricelist().discount_policy=='without_discount'">
+                                        <del t-attf-class="#{'text-danger mr8'}" style="white-space: nowrap;" t-esc="compute_currency(line.product_id.website_public_price)" t-options="{'widget': 'monetary', 'display_currency': website.get_current_pricelist().currency_id, 'from_currency': website.currency_id}" />
+                                    </t>
+                                    <span t-field="line.price_reduce_taxexcl" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'from_currency': website_sale_order.pricelist_id.currency_id, 'display_currency': website.currency_id}" groups="sale.group_show_price_subtotal" />
+                                    <span t-field="line.price_reduce_taxinc" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'from_currency': website_sale_order.pricelist_id.currency_id, 'display_currency': website.currency_id}" groups="sale.group_show_price_total" />
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>                
+            </xpath>
+            <xpath expr="//t[@t-call='website_sale.total']" position="before">
+                <a href="/purchase_subscription" style="color:#c38647;padding-left:15px">Subscribe a new show</a>
+            </xpath>
+        </template>
+        
+        <!--Payment-->
+        <template id="payment" name="Payment" inherit_id="website_sale.payment">
+            <xpath expr="//table" position="replace">
+                <table class="table table-striped table-condensed" id="cart_products" t-if="website_sale_order and website_sale_order.website_order_line">
+                    <thead>
+                        <tr>
+                            <th width="100">Product</th>                            
+                            <th width="100" class='text-center'>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="website_sale_order.website_order_line" t-as="line">
+                            <td colspan="2" t-if="not line.product_id.product_tmpl_id"></td>                            
+                            <td colspan="2" t-if="line.product_id.product_tmpl_id">
+                                <t t-if="not line.is_subscription">
+                                    <a t-attf-href="/shop/product/#{ slug(line.product_id.product_tmpl_id) }">                                            
+                                        <strong><span>Show: </span><span t-esc="line.product_id.show_name" /></strong><br/>
+                                        <strong><span>Class: </span><span t-esc="line.product_id.class_name" /></strong><br/>
+                                        <strong><span>Rider: </span><span t-esc="line.product_id.rider_number" /><span> | Ride:</span><span t-esc="line.product_id.ride_number" /></strong>
+                                    </a>
+                                </t>
+                                <t t-if="line.is_subscription">
+                                    <a>
+                                        <strong>Subscription: </strong>
+                                        <t t-if="line.all_shows">
+                                            <strong><span>All shows</span></strong>
+                                        </t>
+                                        <t t-if="not line.subscription_id.all_shows">
+                                            <strong><span t-esc="line.show_id.name" /></strong>
+                                        </t>
+                                        <br/>
+                                        <strong><span>Type: </span><span t-field="line.type_subscription" /></strong>
+                                        <br/>
+                                        <strong><span>Duration: 1 year</span></strong>
+                                    </a>
+                                </t>
+                            </td>                            
+                            <td class="text-center">
+                                <span t-field="line.price_unit" style="white-space: nowrap;" t-options="{'widget': 'monetary','from_currency': website_sale_order.pricelist_id.currency_id,'display_currency': website.currency_id}" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </xpath>
+        </template>
+        <!--Checkout-->
+        <template id="checkout" name="Checkout" inherit_id="website_sale.checkout">
+            <xpath expr="//t[@t-call='website_sale.total']/.." position="attributes">
+                <attribute name="style">background:white;box-shadow: 1px 10px 26px rgba(57, 57, 57, 0.41)</attribute>                
+            </xpath>
+        </template>
+        <!--Conformation-->
+        <template id="confirmation" name="Conformation" inherit_id="website_sale.confirmation">
+            <xpath expr="//div[@class='thanks_msg']" position="inside">
+                <div>
+                    <h3><t t-esc="new_message"/></h3>
+                </div>
+            </xpath>
+            <xpath expr="//div[@class='thanks_msg']/.." position="attributes">
+                <attribute name="style">background:white</attribute>
+            </xpath>
+        </template>
+        
+        <!--Remove payment method page-->
+        <template id="pay_meth_link_remove" inherit_id="website_payment.pay_meth_link">
+            <xpath expr="//a[@href='/my/payment_method']/.." position="attributes">
+                <attribute name="style">display:none</attribute>                
+            </xpath>
+        </template>
+
+        <!--Help page for downloading on iOS-->
+        <template id="help_download_on_iOS" name="How to download videos on iOS">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <div class="row" style="margin-top:50px">
+                            <div class="col-md-8 col-sm-8">
+                                <h2>I have the newest iOS "File Application" on my iPhone and/or I have an App that allows for video download ie.
+                                        Video Saver (Free in App Store)</h2>
+                            </div>
+                            <div class="col-md-4 col-sm-4 text-center btn btn-primary" style="width:200px;border-radius:10px;margin-top:5px;margin-left:20px">
+                                <a target="_top" t-att-href="'/thank_you?token=%s&amp;from_ios_page=true'%token" style="font-size:15pt;font-weight:bold;color:black;text-decoration:none"><p>Continue<br/>Download</p></a>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:30px">
+                            <div class="col-md-8 col-sm-8">
+                                <h2>I will download at a different time using a personal computer</h2>
+                            </div>
+                            <div class="col-md-4 col-sm-4 text-center btn btn-primary" style="width:200px;border-radius:10px;margin-top:5px;margin-left:20px">
+                                <a target="_top" href="/my/home" style="font-size:15pt;font-weight:bold;color:black;text-decoration:none"><p>Stop<br/>Download</p></a>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:60px;margin-bottom:30px">
+                            <div class="col-md-8 col-sm-8">
+                                <h2>I am not sure what to do next</h2>
+                            </div>
+                            <div class="col-md-4 col-sm-4 text-center btn btn-primary" style="width:200px;border-radius:10px;margin-top:5px;margin-left:20px">
+                                <a target="_top" href="/page/contactus" style="font-size:15pt;font-weight:bold;color:black;text-decoration:none"><p>Contact<br/>Support</p></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

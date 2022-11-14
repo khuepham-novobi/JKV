@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="jkv_view_partner_tree_inherit" model="ir.ui.view">
+            <field name="name">JKV View Tree Partner Inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <field name="display_name" position="after">
+                    <field name="jkv_customer_usef_number" widget="char"/>
+                    <!--<field name="jkv_type"/>-->
+                </field>
+            </field>
+        </record>
+		<record id="jkv_view_partner_form_inherit" model="ir.ui.view">
+			<field name="name">JKV View Form Partner Inherit</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<field name="category_id" position="after">
+                    <field name="jkv_customer_number" widget="char" required="1" readonly="1"/>
+					<field name="jkv_customer_usef_number" widget="char"/>
+                    <!--<field name="jkv_type" required="True"/>-->
+                </field>
+                <field name="name" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                </field>
+                <field name="name" position="after">
+					<field name="jkv_first_name" default_focus="1" placeholder="First Name" required="True"/>
+					<field name="jkv_last_name"  placeholder="Last Name" required="1"/>
+				</field>
+                <xpath expr="//notebook" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="website" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="function" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="fax" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="title" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="category_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+			</field>
+		</record>
+        <record id="action_customer_form" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>          
+        </record>
+
+        <menuitem id="menu_customer_management_root" name="Customer Management" sequence="1" web_icon="jkv_show_event,static/description/contacts.png"/>
+        <menuitem id="menu_customer_root" name="Customer" parent="menu_customer_management_root" sequence="1" action="action_customer_form"/>
+
+        <record id="action_user_form" model="ir.actions.act_window">
+            <field name="name">Users</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.users</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>          
+        </record>
+        <menuitem id="menu_user" name="Users" parent="menu_customer_management_root" sequence="2" action="action_user_form"/>
+	</data>
+</odoo>

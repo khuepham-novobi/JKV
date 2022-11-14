@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- Assets Frontend -->
+		<template id="jkv_assets_frontend" inherit_id="website.assets_frontend" name="Shop">
+			<xpath expr="link[last()]" position="inside">
+				<script type="text/javascript" src="/jkv_website_sale/static/src/js/jkv_product_multi_video.js"></script>
+				<script type="text/javascript" src="/jkv_website_sale/static/src/js/search_input.js"></script>
+            	<script type="text/javascript" src="/jkv_website_sale/static/src/js/add_cart_manually.js"></script>
+				<script type="text/javascript" src="/jkv_website_sale/static/src/js/share_button.js"></script>
+				<link href="/jkv_website_sale/static/src/css/website.css" rel="stylesheet" type="text/less"/>
+			</xpath>
+		</template>
+	</data>
+</openerp>
